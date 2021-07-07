@@ -17,7 +17,13 @@ const Logolink = styled(Link)`display: block; width: 200px; margin: 0 auto; font
 
 
 const Headernav = styled.div``
-const Allcategory = styled(Link)`float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px;`
+const Allcategorybarnav = styled.div`position: absolute; left: 151px; top:-1px; width: 150px; height: 100%; float: left; display: none; background: #fff; border: 1px solid black; border-left: none;`
+const Allcategorybarnavitem =styled.li`transition: .2s all ease; &:hover {background: #dbdbdb;}`
+const Allcategorybarnavitemlink =styled(Link)`padding: 10px`
+const Allcategorybar = styled.div`float: left; position: absolute; display: none; width: 150px; text-align: left; background: #fff; border: 1px solid black; transition: .3s all ease; &:hover ${Allcategorybarnav} {display: block;}`
+const Allcategoryitem = styled.li`transition: .2s all ease; &:hover {background: #dbdbdb;}`
+const Allcategoryitemlink = styled(Link)`padding:10px;`
+const Allcategory = styled(Link)`postion: relative; float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px; &:hover ${Allcategorybar} {display: block;}`
 const Category = styled.ul`float: left;`
 const Categoryitem = styled.li`float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px;`
 const Search = styled.div`position: relative; float: left; width:250px; height:30px; background: #f7f7f7; border-radius: 18px; margin: 15px 30px`
@@ -42,7 +48,36 @@ const Header = () => {
                         <Logolink to='/'>kurly</Logolink>
                     </Headerlogo>
                     <Headernav className='clearfix'>
-                        <Allcategory>전체 카테고리</Allcategory>
+                        <Allcategory className='clearfix'>
+                            <p>전체 카테고리</p>
+                            <Allcategorybar>
+                                <ul>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
+                                </ul>
+                                <Allcategorybarnav>
+                                <ul>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
+                                </ul>
+                                </Allcategorybarnav>
+                            </Allcategorybar>
+                        </Allcategory>
                         <Category className='clearfix'>
                             <Categoryitem><Link to='/list/new'>신상품</Link></Categoryitem>
                             <Categoryitem><Link to='/list/best'>베스트</Link></Categoryitem>
@@ -53,7 +88,7 @@ const Header = () => {
                             <Searchinput type='text' placeholder='건강 기원 새해맞이 보양식 레시피' />
                             <Serachsubmit>button</Serachsubmit>
                         </Search>
-                        <Shoppinglist>장바구니</Shoppinglist>
+                        <Shoppinglist><Link to='/shoppinglist'>장바구니</Link></Shoppinglist>
                     </Headernav>
                 </Row>
             </Container>

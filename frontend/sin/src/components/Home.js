@@ -7,7 +7,8 @@ const Row = styled.div``
 
 const Slide = styled.div`height: 300px; background: #999;`
 const Section1wrap = styled.div``
-const Section1 = styled.div`height: 300px; background: #888;`
+const Section1 = styled.div`height: 300px; background: #888;  overflow: hidden;`
+const Section1item = styled.div`float: left; width: 300px; height: 200px; margin: 10px;`
 const Section2wrap = styled.div``
 const Section2 = styled.div`height: 300px; background: #777;`
 const Section3wrap = styled.div``
@@ -22,8 +23,17 @@ const Home = () => {
             <Section1wrap>
                 <Container>
                     <Row>
-                        <Section1>
-                            <h2>section1</h2>
+                        <Section1 className='clearfix'>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
+                            <Section1item>item</Section1item>
                         </Section1>
                     </Row>
                 </Container>

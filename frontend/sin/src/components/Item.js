@@ -12,8 +12,7 @@ const Section2 = styled.div`height: 300px; background: #888;`
 const Section3 = styled.div`height: 300px; background: #777;`
 const Section4 = styled.div`height: 300px; background: #666;`
 
-const Item = ({match}) => {
-    const id = match.params.id
+const Item = () => {
     return (
         <Itemwrap>
             <Container>
