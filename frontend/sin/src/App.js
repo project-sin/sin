@@ -7,6 +7,7 @@ import Event from './components/Event';
 import Shoppinglist from './components/Shoppinglist';
 import List from './components/List';
 import Item from './components/Item';
+import Signup from './components/Signup';
 import Footer from './components/Footer';
 
 const GlobalStyle = createGlobalStyle`
@@ -30,6 +31,7 @@ function App() {
     <Route path='/shoppinglist' exact component={Shoppinglist} />
     <Route path='/list/:type' exact component={List} />
     <Route path='/item/:id' exact component={Item} />
+    <Route path='/signup' exact component={Signup} />
     <Footer />
     </>
   );
