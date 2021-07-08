@@ -9,6 +9,7 @@ import List from './components/List';
 import Item from './components/Item';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Notice from './components/Notice';
 import Footer from './components/Footer';
 
 const GlobalStyle = createGlobalStyle`
@@ -34,6 +35,7 @@ function App() {
     <Route path='/item/:id' exact component={Item} />
     <Route path='/signup' exact component={Signup} />
     <Route path='/login' exact component={Login} />
+    <Route path='/notice' exact component={Notice} />
     <Footer />
     </>
   );
