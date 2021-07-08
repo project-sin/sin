@@ -41,7 +41,7 @@ const Header = () => {
                         <Usermenuright>
                             <Link to='/signup'>회원가입</Link>
                             <Link to='/login'>로그인</Link>
-                            <Link to=''>고객센터</Link>
+                            <Link to='/notice'>고객센터</Link>
                         </Usermenuright>
                     </Usermenu>
                     <Headerlogo className='clearfix'>
