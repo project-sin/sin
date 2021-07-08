@@ -39,7 +39,7 @@ const Header = () => {
                     <Usermenu className='clearfix'>
                         <Usermenuleft>item</Usermenuleft>
                         <Usermenuright>
-                            <Link to=''>회원가입</Link>
+                            <Link to='/signup'>회원가입</Link>
                             <Link to=''>로그인</Link>
                             <Link to=''>고객센터</Link>
                         </Usermenuright>
