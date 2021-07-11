@@ -1,6 +1,8 @@
 package sin.sin.domain.privateQuestion;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +19,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.orders.Orders;
+import sin.sin.domain.privateQuestionImg.PrivateQuestionImg;
 
 @Entity
 @AllArgsConstructor
@@ -36,7 +40,7 @@ public class PrivateQuestion {
     private String title;
 
     @Column(nullable = false)
-    private String categoryName;
+    private String category;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -54,4 +58,8 @@ public class PrivateQuestion {
     @Lob
     @Column(nullable = false)
     private String content;
+
+    @OneToMany
+    @JoinColumn(name= "private_question_img_id")
+    private List<PrivateQuestionImg> privateQuestionImgList;
 }

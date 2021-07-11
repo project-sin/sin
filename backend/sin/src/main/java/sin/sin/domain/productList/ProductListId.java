@@ -27,5 +27,5 @@ public class ProductListId {
     private int stockQuantity;
 
     @Column(nullable = false)
-    private float price;
+    private int price;
 }
