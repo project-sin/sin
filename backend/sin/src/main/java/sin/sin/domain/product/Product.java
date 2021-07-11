@@ -35,7 +35,7 @@ public class Product {
     private String thumbnailPath;
 
     @Column(nullable = false)
-    private float price;
+    private int price;
 
     @ManyToOne
     @JoinColumn(nullable = false, name = "product_category_id")

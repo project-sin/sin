@@ -21,6 +21,6 @@ public class Level {
     private Long id;
 
     @Column(nullable = false)
-    private float salePercent;
+    private int salePercent;
 
 }

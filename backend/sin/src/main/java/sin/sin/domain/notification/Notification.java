@@ -10,6 +10,7 @@ import javax.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -37,5 +38,6 @@ public class Notification {
     private Timestamp createdDate;
 
     @Column(nullable = false)
+    @ColumnDefault("0")
     private int views;
 }
