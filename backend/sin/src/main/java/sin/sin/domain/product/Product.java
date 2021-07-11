@@ -1,8 +1,11 @@
 package sin.sin.domain.product;
 
+import com.sun.istack.NotNull;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,4 +49,8 @@ public class Product {
 
     @CreationTimestamp
     private Timestamp createdDate;
+
+    @NotNull
+    @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
+    private Status status;
 }
