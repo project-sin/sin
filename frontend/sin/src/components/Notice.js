@@ -44,10 +44,9 @@ const Notice = () => {
                         <Mainleft>
                             <Mainlefttitle>고객센터</Mainlefttitle>
                             <Mainleftul>
-                                <Mainleftli><Mainleftlilink to=''>공지사항</Mainleftlilink></Mainleftli>
-                                <Mainleftli><Mainleftlilink to=''>자주하는 질문</Mainleftlilink></Mainleftli>
-                                <Mainleftli><Mainleftlilink to=''>1:1문의</Mainleftlilink></Mainleftli>
-                                <Mainleftli><Mainleftlilink to=''>상품 제안</Mainleftlilink></Mainleftli>
+                                <Mainleftli><Mainleftlilink to='/shop/board/list?id=notice'>공지사항</Mainleftlilink></Mainleftli>
+                                <Mainleftli><Mainleftlilink to='/shop/sevice/faq'>자주하는 질문</Mainleftlilink></Mainleftli>
+                                <Mainleftli><Mainleftlilink to='/shop/mypage/mypage_qna'>1:1문의</Mainleftlilink></Mainleftli>
                             </Mainleftul>
                         </Mainleft>
                         <Mainright>

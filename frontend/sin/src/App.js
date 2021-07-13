@@ -9,6 +9,7 @@ import List from './components/List';
 import Item from './components/Item';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Mypage from './components/Mypage';
 import Notice from './components/Notice';
 import Footer from './components/Footer';
 
@@ -28,14 +29,15 @@ function App() {
     <>
     <GlobalStyle />
     <Header />
-    <Route path='/' exact component={Home} />
-    <Route path='/event' exact component={Event} />
-    <Route path='/shoppinglist' exact component={Shoppinglist} />
-    <Route path='/list/:type' exact component={List} />
-    <Route path='/item/:id' exact component={Item} />
-    <Route path='/signup' exact component={Signup} />
-    <Route path='/login' exact component={Login} />
-    <Route path='/notice' exact component={Notice} />
+    <Route path='/shop/main/index' exact component={Home} />
+    <Route path='/shop/goods/event' exact component={Event} />
+    <Route path='/shop/goods/goods_cart' exact component={Shoppinglist} />
+    <Route path='/shop/goods/goods_list' exact component={List} />
+    <Route path='/shop/goods/goods_view' exact component={Item} />
+    <Route path='/shop/member/join' exact component={Signup} />
+    <Route path='/shop/member/login' exact component={Login} />
+    <Route path='/shop/mypage/:mypageparams' component={Mypage} />
+    <Route path='/shop/board/list' exact component={Notice} />
     <Footer />
     </>
   );
