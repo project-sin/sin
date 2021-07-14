@@ -38,6 +38,7 @@ function App() {
     <Route path='/shop/member/login' exact component={Login} />
     <Route path='/shop/mypage/:mypageparams' component={Mypage} />
     <Route path='/shop/board/list' exact component={Notice} />
+    <Route path='/shop/service/faq' exact component={Notice} />
     <Footer />
     </>
   );
