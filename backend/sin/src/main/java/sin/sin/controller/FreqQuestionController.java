@@ -20,8 +20,6 @@ public class FreqQuestionController {
     @GetMapping("/faq")
     public ResponseEntity<List<FreqQuestionResponse>> findAllFaq(@RequestParam(value="page", defaultValue = "1") int page){
 
-        List<FreqQuestionResponse> freqQuestionResponse = freqQuestionService.findAllFaq(page);
-
-        return ResponseEntity.ok().body(freqQuestionResponse);
+        return ResponseEntity.ok().body(freqQuestionService.findAllFaq(page));
     }
 }
