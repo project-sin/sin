@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
+import findFaqApi from "./FindFaqApi";
+import queryString from "query-string";
 
 const Faqtitlewrap = styled.div``
 const Faqtitle = styled.span`font-size: 22px; font-weight: bold; padding-right: 20px;`
@@ -26,7 +28,20 @@ const Mainsectiontabletbodytdtitle = styled.td`text-align: left; padding: 20px 0
 const Answerwrap = styled.div`display: none; border-top: 1px solid #dbdbdb;`
 const Answer = styled.div`min-height: 30px; font-size: 12px; padding: 20px 10px 20px 40px;`
 
-const Faq = () => {
+const Faq = (props) => {
+
+    const page = queryString.parse(props.location.search).page;
+    const [openArticleNumber, setOpenArticleNumber] = useState(-1);
+    const [faqs,setFaqs] = useState(null);
+
+    useEffect(() => {
+        findFaqApi(page).then(faqPromise => {
+            setFaqs(faqPromise)
+        });
+    }, [page]);
+
+    console.log(faqs)
+
     const unfold = (id) => {
         const test = document.getElementById(id)
         if(test.style.display == 'block'){
