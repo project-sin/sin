@@ -13,7 +13,7 @@ import sin.sin.dto.FreqQuestionResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
-class SinApplicationTests {
+class FreqQuestionServiceTest {
 
     @Autowired
     private FreqQuestionRepository freqQuestionRepository;
