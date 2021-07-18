@@ -12,7 +12,7 @@ const Itemprice = styled.div`height: 7%; background: #777;`
 const Itemdesc = styled.div`height: 7%; background: #666;`
 const List = ({match,history}) => {
     const link = (itemid) => {
-        history.push(`/item/${itemid}`)
+        history.push(`/shop/goods/goods_view?goodsno=${itemid}`)
     }
     const type = match.params.type
     return (
