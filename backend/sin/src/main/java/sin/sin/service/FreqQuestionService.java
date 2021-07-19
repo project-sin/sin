@@ -34,4 +34,11 @@ public class FreqQuestionService {
             ))
             .collect(Collectors.toList());
     }
+
+    @Transactional
+    public Object findTotal() {
+
+        List<FreqQuestion> freqQuestions = freqQuestionRepository.findAll();
+        return freqQuestions.size();
+    }
 }
