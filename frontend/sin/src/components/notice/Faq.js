@@ -31,7 +31,6 @@ const Answer = styled.div`min-height: 30px; font-size: 12px; padding: 20px 10px 
 const Faq = (props) => {
 
     const page = queryString.parse(props.location.search).page;
-    const [openArticleNumber, setOpenArticleNumber] = useState(-1);
     const [faqs,setFaqs] = useState(null);
 
     useEffect(() => {
@@ -39,8 +38,6 @@ const Faq = (props) => {
             setFaqs(faqPromise)
         });
     }, [page]);
-
-    console.log(faqs)
 
     const unfold = (id) => {
         const test = document.getElementById(id)
@@ -50,7 +47,26 @@ const Faq = (props) => {
             test.style.display = 'block'
         }
     }
-    return (
+
+    const FaqSet = faqs ? (faqs.length>=1 ?faqs.map((faq)=>
+        <Question onClick={()=>unfold(faq.id)}>
+            <Mainsection>
+                <Mainsectiontable>
+                    <Mainsectiontabletbody>
+                        <Mainsectiontabletbodytr>
+                            <Mainsectiontabletbodytdnum>{faq.id}</Mainsectiontabletbodytdnum>
+                            <Mainsectiontabletbodytdcate>{faq.category}</Mainsectiontabletbodytdcate>
+                            <Mainsectiontabletbodytdtitle>{faq.title}</Mainsectiontabletbodytdtitle>
+                        </Mainsectiontabletbodytr>
+                    </Mainsectiontabletbody>
+                </Mainsectiontable>
+            </Mainsection>
+            <Answerwrap id={faq.id}>
+                <Answer>{faq.content}</Answer>
+            </Answerwrap>
+        </Question>) : "검색결과가 없습니다 다시 검색해주세요"
+    ):"";
+    return(
         <>
         <Faqtitlewrap><Faqtitle>자주하는 질문</Faqtitle><Faqdesc>고객님들께서 가장 자주하시는 질문을 모두 모았습니다.</Faqdesc></Faqtitlewrap>
         <Main>
@@ -65,41 +81,12 @@ const Faq = (props) => {
                     </Mainheadertabletbody>
                 </Mainheadertable>
             </Mainheader>
-            <Question onClick={()=>unfold('getidone')}>
-                <Mainsection>
-                    <Mainsectiontable>
-                        <Mainsectiontabletbody>
-                            <Mainsectiontabletbodytr>
-                                <Mainsectiontabletbodytdnum>66</Mainsectiontabletbodytdnum>
-                                <Mainsectiontabletbodytdcate>회원문의</Mainsectiontabletbodytdcate>
-                                <Mainsectiontabletbodytdtitle>아이디와 비밀번호가 생각나지 않아요. 어떻게 찾을 수 있나요?</Mainsectiontabletbodytdtitle>
-                            </Mainsectiontabletbodytr>
-                        </Mainsectiontabletbody>
-                    </Mainsectiontable>
-                </Mainsection>
-                <Answerwrap id='getidone'>
-                    <Answer>(PC) 오른쪽 위의 [로그인] &gt; 화면 아래 [아이디 찾기] [비밀번호 찾기]</Answer>
-                </Answerwrap>
-            </Question>
-            <Question onClick={()=>unfold('getidtwo')}>
-            <Mainsection>
-                <Mainsectiontable>
-                    <Mainsectiontabletbody>
-                        <Mainsectiontabletbodytr>
-                            <Mainsectiontabletbodytdnum>65</Mainsectiontabletbodytdnum>
-                            <Mainsectiontabletbodytdcate>주문/결제</Mainsectiontabletbodytdcate>
-                            <Mainsectiontabletbodytdtitle>(샛별배송) 어제 주문했는데 오늘 아침에 배송이 안 됐어요. 왜 그런가요?</Mainsectiontabletbodytdtitle>
-                        </Mainsectiontabletbodytr>
-                    </Mainsectiontabletbody>
-                </Mainsectiontable>
-            </Mainsection>
-            <Answerwrap id='getidtwo'>
-                    <Answer>샛별배송은 밤 11시 이후 주문건은 다다음날 새벽에 배송됩니다.</Answer>
-                </Answerwrap>
-            </Question>
+            {FaqSet}
+
         </Main>
+
         </>
     )
-}
+};
 
 export default Faq;
