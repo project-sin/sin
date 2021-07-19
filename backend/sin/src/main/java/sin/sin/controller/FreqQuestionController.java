@@ -25,6 +25,6 @@ public class FreqQuestionController {
 
     @GetMapping("/total")
     public ResponseEntity<Integer> findTotal(){
-        return ResponseEntity.ok().body((int) freqQuestionService.findTotal());
+        return ResponseEntity.ok().body(freqQuestionService.findTotal());
     }
 }
