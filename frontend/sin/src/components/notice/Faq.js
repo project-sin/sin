@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 import findFaqApi from "./FindFaqApi";
 import queryString from "query-string";
+import findTotalFaqsApi from "./FindTotalFaqsApi";
 
 const Faqtitlewrap = styled.div``
 const Faqtitle = styled.span`font-size: 22px; font-weight: bold; padding-right: 20px;`
@@ -27,17 +28,30 @@ const Mainsectiontabletbodytdcate = styled.td`padding: 20px 0; width: 135px;`
 const Mainsectiontabletbodytdtitle = styled.td`text-align: left; padding: 20px 0; width: 600px;`
 const Answerwrap = styled.div`display: none; border-top: 1px solid #dbdbdb;`
 const Answer = styled.div`min-height: 30px; font-size: 12px; padding: 20px 10px 20px 40px;`
+const NumberButton = styled.div`border: 2px solid black; width:20px; margin:5px; cursor:pointer`
+const PageChangeButtons = styled.div`padding-top:30px; display: flex; justify-content: center; text-align: center; `;
+const NextButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const PrevButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const FirstPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const LastPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 
 const Faq = (props) => {
 
     const page = queryString.parse(props.location.search).page;
     const [faqs,setFaqs] = useState(null);
+    const [totalfaqs,setTotalfaqs]= useState(null);
 
     useEffect(() => {
         findFaqApi(page).then(faqPromise => {
             setFaqs(faqPromise)
         });
     }, [page]);
+
+    useEffect(() => {
+        findTotalFaqsApi().then(faqsPromise => {
+            setTotalfaqs(faqsPromise)
+        });
+    }, []);
 
     const unfold = (id) => {
         const test = document.getElementById(id)
@@ -47,6 +61,12 @@ const Faq = (props) => {
             test.style.display = 'block'
         }
     }
+
+    const numbers = [...Array((parseInt(totalfaqs/10)+1)>=5 ? 5 : parseInt(totalfaqs/10)+1)].map((value, index)=>
+        <NumberButton onClick={()=>
+            page?props.history.push("/shop/service/faq?page="+(parseInt((page-1)/5)*5+index+1)) :props.history.push("/shop/service/faq?page="+(index+1)) }
+        >{page?parseInt((page-1)/5)*5+index+1 : index+1} </NumberButton>
+    );
 
     const FaqSet = faqs ? (faqs.length>=1 ?faqs.map((faq)=>
         <Question onClick={()=>unfold(faq.id)}>
@@ -82,9 +102,26 @@ const Faq = (props) => {
                 </Mainheadertable>
             </Mainheader>
             {FaqSet}
-
+            <PageChangeButtons>
+                <FirstPageButton onClick={()=>props.history.push("/shop/service/faq?page=1")}>
+                    〈〈
+                </FirstPageButton>
+                <PrevButton onClick={()=>
+                    (page <= 1)?props.history.push("/shop/service/faq?page=1"):props.history.push("/shop/service/faq?page="+ (page-1))}
+                >
+                    〈
+                </PrevButton>
+                {numbers}
+                <NextButton onClick={()=>
+                    (page > parseInt(totalfaqs/10))?props.history.push("/shop/service/faq?page="+parseInt(totalfaqs/10+1)):props.history.push("/shop/service/faq?page="+ (Number(page)+1))}
+                >
+                    〉
+                </NextButton>
+                <LastPageButton onClick={()=>props.history.push("/shop/service/faq?page="+ parseInt(totalfaqs/10+1))}>
+                    〉〉
+                </LastPageButton>
+            </PageChangeButtons>
         </Main>
-
         </>
     )
 };
