@@ -23,7 +23,7 @@ const Allcategorybarnavitemlink =styled(Link)`padding: 10px`
 const Allcategorybar = styled.div`float: left; position: absolute; display: none; width: 150px; text-align: left; background: #fff; border: 1px solid black; transition: .3s all ease; &:hover ${Allcategorybarnav} {display: block;}`
 const Allcategoryitem = styled.li`transition: .2s all ease; &:hover {background: #dbdbdb;}`
 const Allcategoryitemlink = styled(Link)`padding:10px;`
-const Allcategory = styled(Link)`postion: relative; float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px; &:hover ${Allcategorybar} {display: block;}`
+const Allcategory = styled.div`postion: relative; float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px; &:hover ${Allcategorybar} {display: block;}`
 const Category = styled.ul`float: left;`
 const Categoryitem = styled.li`float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px;`
 const Search = styled.div`position: relative; float: left; width:250px; height:30px; background: #f7f7f7; border-radius: 18px; margin: 15px 30px`
@@ -39,13 +39,14 @@ const Header = () => {
                     <Usermenu className='clearfix'>
                         <Usermenuleft>item</Usermenuleft>
                         <Usermenuright>
-                            <Link to='/signup'>회원가입</Link>
-                            <Link to='/login'>로그인</Link>
-                            <Link to='/notice'>고객센터</Link>
+                            <Link to='/shop/member/join'>회원가입</Link>
+                            <Link to='/shop/member/login'>로그인</Link> / 
+                            <Link to='/shop/mypage/mypage_orderlist'>로그인중</Link>
+                            <Link to='/shop/board/list?id=notice'>고객센터</Link>
                         </Usermenuright>
                     </Usermenu>
                     <Headerlogo className='clearfix'>
-                        <Logolink to='/'>kurly</Logolink>
+                        <Logolink to='/shop/main/index'>kurly</Logolink>
                     </Headerlogo>
                     <Headernav className='clearfix'>
                         <Allcategory className='clearfix'>
@@ -79,16 +80,16 @@ const Header = () => {
                             </Allcategorybar>
                         </Allcategory>
                         <Category className='clearfix'>
-                            <Categoryitem><Link to='/list/new'>신상품</Link></Categoryitem>
-                            <Categoryitem><Link to='/list/best'>베스트</Link></Categoryitem>
-                            <Categoryitem><Link to='/list/price'>알뜰쇼핑</Link></Categoryitem>
-                            <Categoryitem><Link to='/event'>특가/혜택</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/goods_list?category=new'>신상품</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/goods_list?category=best'>베스트</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/goods_list?list=sale'>알뜰쇼핑</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/event'>특가/혜택</Link></Categoryitem>
                         </Category>
                         <Search className='clearfix'>
                             <Searchinput type='text' placeholder='건강 기원 새해맞이 보양식 레시피' />
                             <Serachsubmit>button</Serachsubmit>
                         </Search>
-                        <Shoppinglist><Link to='/shoppinglist'>장바구니</Link></Shoppinglist>
+                        <Shoppinglist><Link to='/shop/goods/goods_cart'>장바구니</Link></Shoppinglist>
                     </Headernav>
                 </Row>
             </Container>

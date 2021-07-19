@@ -46,4 +46,23 @@ class FreqQuestionServiceTest {
         assertThat(faqs2.get(0).getId()).isEqualTo(14);
         assertThat(faqs3.get(0).getId()).isEqualTo(4);
     }
+
+    @Test
+    void findTotal(){
+        //given
+        for(int i=0;i<24;i++){
+            FreqQuestion freqQuestion=FreqQuestion.builder()
+                .category("테스트카테고리")
+                .title("문제번호"+i)
+                .content("이러이러한 문제때문에 그런 문제가 발샐할 수 있습니다")
+                .build();
+            freqQuestionRepository.save(freqQuestion);
+        }
+
+        //when
+        int totalFaqs = freqQuestionService.findTotal();
+
+        //then
+        assertThat(totalFaqs).isEqualTo(freqQuestionRepository.findAll().size());
+    }
 }

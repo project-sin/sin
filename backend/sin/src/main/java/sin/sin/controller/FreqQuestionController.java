@@ -11,17 +11,20 @@ import sin.sin.dto.FreqQuestionResponse;
 import sin.sin.service.FreqQuestionService;
 
 @RestController
-@RequestMapping("/shop/service")
+@RequestMapping("/shop/service/faq")
 @RequiredArgsConstructor
 public class FreqQuestionController {
 
     private final FreqQuestionService freqQuestionService;
 
-    @GetMapping("/faq")
+    @GetMapping
     public ResponseEntity<List<FreqQuestionResponse>> findAllFaq(@RequestParam(value="page", defaultValue = "1") int page){
 
-        List<FreqQuestionResponse> freqQuestionResponse = freqQuestionService.findAllFaq(page);
+        return ResponseEntity.ok().body(freqQuestionService.findAllFaq(page));
+    }
 
-        return ResponseEntity.ok().body(freqQuestionResponse);
+    @GetMapping("/total")
+    public ResponseEntity<Integer> findTotal(){
+        return ResponseEntity.ok().body(freqQuestionService.findTotal());
     }
 }
