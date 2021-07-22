@@ -1,0 +1,3 @@
+### 전체 멤버 불러오기
+GET http://localhost:8080/shop/board/list
+Content-Type: application/json
