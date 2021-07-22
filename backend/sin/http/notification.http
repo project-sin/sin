@@ -1,3 +1,23 @@
-### 전체 멤버 불러오기
-GET http://localhost:8080/shop/board/list
+### 전체 공지사항 불러오기
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+### 제목으로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1
+Content-Type: application/json
+
+### 제목으로 검색 -> 반환값 없읍
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=k
+Content-Type: application/json
+
+### 작성자로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+### 내용으로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[contents]=on&search[word]=내용3
+Content-Type: application/json
+
+### 제목과 작성자로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=제목1
 Content-Type: application/json
