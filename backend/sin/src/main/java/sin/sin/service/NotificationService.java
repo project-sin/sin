@@ -86,7 +86,6 @@ public class NotificationService {
     @Transactional
     public Map<String, Object> notificationView(Long id) {
         Map<String, Object> map = new HashMap<>();
-        String[] direction = {"prev", "cur", "next"};
 
         //save 연산
         int notificationFlag = notificationRepository.updateById(id);
