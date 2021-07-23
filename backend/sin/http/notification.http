@@ -21,3 +21,15 @@ Content-Type: application/json
 ### 제목과 작성자로 검색
 GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=제목1
 Content-Type: application/json
+
+### 상세 내용 조회
+GET http://localhost:8080/shop/board/view?id=notice&no=40
+Content-Type: application/json
+
+### 상세 내용 조회(다음글 x)
+GET http://localhost:8080/shop/board/view?id=notice&no=41
+Content-Type: application/json
+
+### 상세 내용 조회(id x)
+GET http://localhost:8080/shop/board/view?id=notice&no=42
+Content-Type: application/json

@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.domain.notification.Notification;
+import sin.sin.dto.NotificationResponse;
 import sin.sin.service.NotificationService;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -22,7 +28,7 @@ public class NotificationController {
 
     //TODO : PageableDefault sort createdDate순으로 하기
     @GetMapping("/list")
-    public ResponseEntity<Page<Notification>> searchList(@RequestParam(value="id", required=true) String a,
+    public ResponseEntity<Page<Notification>> searchList(@RequestParam String id,
                                                          @RequestParam(value="search[subject]", required=false) String subject,
                                                          @RequestParam(value="search[name]", required=false) String name,
                                                          @RequestParam(value="search[contents]", required=false) String contents,
@@ -31,5 +37,13 @@ public class NotificationController {
         Page<Notification> pagingNotification = notificationService.notificationList(subject, contents, name, word, pageable);
 
         return ResponseEntity.ok().body(pagingNotification);
+    }
+
+    @GetMapping("/view")
+    public ResponseEntity<Map<String, Object>> Notice(@RequestParam String id,
+                                                      @RequestParam Long no){
+        Map<String, Object> map = notificationService.notificationView(no);
+
+        return ResponseEntity.ok().body(map);
     }
 }
