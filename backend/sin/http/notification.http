@@ -2,6 +2,14 @@
 GET http://localhost:8080/shop/board/list?id=notice
 Content-Type: application/json
 
+### 전체 공지사항 불러오기(id x)
+GET http://localhost:8080/shop/board/list?id=
+Content-Type: application/json
+
+### 전체 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[word]=제목1
+Content-Type: application/json
+
 ### 제목으로 검색
 GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1
 Content-Type: application/json

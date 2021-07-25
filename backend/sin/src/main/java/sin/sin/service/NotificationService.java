@@ -83,7 +83,8 @@ public class NotificationService {
         return notifications.get();
     }
 
-    @Transactional
+    //TODO : FUNCTION 인터페이스 이용해보기기
+   @Transactional
     public Map<String, Object> notificationView(Long id) {
         Map<String, Object> map = new HashMap<>();
 
