@@ -22,16 +22,14 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    //TODO : PageableDefault sort createdDate순으로 하기
     //TODO : exception값 제대로 날려주기
+    //TODO : PageableDefault sort createdDate순으로 하기
     @GetMapping(value = "/list", params = {"id=notice"})
     public ResponseEntity<?> searchList(@RequestParam(value = "search[subject]", required = false) String subject,
                                         @RequestParam(value = "search[name]", required = false) String name,
                                         @RequestParam(value = "search[contents]", required = false) String contents,
                                         @RequestParam(value = "search[word]", required = false) String word,
                                         @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-
-        System.out.println(word);
 
         Page<Notification> pagingNotification = notificationService.notificationList(subject, contents, name, word, pageable);
         return ResponseEntity.ok().body(pagingNotification);

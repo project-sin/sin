@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.notification.Notification;
 import sin.sin.domain.notification.NotificationRepository;
+import sin.sin.domain.notification.SearchNotificationRepository;
 import sin.sin.dto.NotificationRequest;
 import sin.sin.dto.NotificationResponse;
 
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final SearchNotificationRepository searchNotificationRepository;
 
     /**
      * 공지사항 쓰기
@@ -44,37 +46,9 @@ public class NotificationService {
     /**
      * 공지사항 검색
      */
-    //TODO : 공지사항 검색 리팩토링 필요
     @Transactional(readOnly = true)
     public Page<Notification> notificationList(String title, String content, String writer, String word, Pageable pageable) {
-        int notEqualCnt = 0;
-
-        if ("on".equals(title)) {
-            title = word;
-        } else {
-            title = "null";
-            notEqualCnt += 1;
-        }
-        if ("on".equals(content)) {
-            content = word;
-        } else {
-            content = "null";
-            notEqualCnt += 1;
-        }
-
-        if ("on".equals(writer)) {
-            writer = word;
-        } else {
-            writer = "null";
-            notEqualCnt += 1;
-        }
-
-        Optional<Page<Notification>> notifications;
-        if (notEqualCnt == 3) {
-            notifications = Optional.of(notificationRepository.findAll(pageable));
-        } else {
-            notifications = notificationRepository.findByTitleOrContentOrWriter(title, content, writer, pageable);
-        }
+        Optional<Page<Notification>> notifications = searchNotificationRepository.searchNotification(title, content, writer, word, pageable);
 
         if (notifications.isEmpty()) {
             return Page.empty();
@@ -83,7 +57,10 @@ public class NotificationService {
         return notifications.get();
     }
 
-    //TODO : FUNCTION 인터페이스 이용해보기기
+    /**
+     * 상세 내용 검색
+     */
+    //TODO : refactor -> FUNCTION 인터페이스 이용해보기기
    @Transactional
     public Map<String, Object> notificationView(Long id) {
         Map<String, Object> map = new HashMap<>();
