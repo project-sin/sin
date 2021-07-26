@@ -35,11 +35,14 @@ const PrevButton = styled.div`font-weight:bold; border: 1px solid black; width:2
 const FirstPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 const LastPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 
+const Testdivtitle = styled.div`padding: 10px; border-bottom: 1px solid black;`
+const Testdiv = styled.div`display:none; margin-top: 5px; &:hover {cursor:pointer}`
 const Faq = (props) => {
 
     const page = queryString.parse(props.location.search).page;
     const [faqs,setFaqs] = useState(null);
-    const [totalfaqs,setTotalfaqs]= useState(null);
+    const [totalfaqs,setTotalfaqs] = useState(null);
+    const [viewnum,setViewnum] = useState(-1);
 
     useEffect(() => {
         findFaqApi(page).then(faqPromise => {
@@ -54,11 +57,19 @@ const Faq = (props) => {
     }, []);
 
     const unfold = (id) => {
-        const test = document.getElementById(id)
-        if(test.style.display == 'block'){
-            test.style.display = 'none'
+        const now = document.getElementById(id)
+        if(viewnum === id) {
+            now.style.display = 'none'
+            setViewnum(-1)
         } else {
-            test.style.display = 'block'
+            if(viewnum === -1) {
+                now.style.display = 'block'
+            } else {
+                const prev = document.getElementById(viewnum)
+                prev.style.display = 'none'
+                now.style.display = 'block'
+            }
+            setViewnum(id)
         }
     }
 
