@@ -2,8 +2,20 @@
 GET http://localhost:8080/shop/board/list?id=notice
 Content-Type: application/json
 
+### 전체 공지사항 불러오기 / 다음페이지 보기(page는 0부터 시작)
+GET http://localhost:8080/shop/board/list?id=notice&page=1
+Content-Type: application/json
+
+### 전체 공지사항 불러오기(id x)
+GET http://localhost:8080/shop/board/list?id=
+Content-Type: application/json
+
+### 전체 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[word]=제목1
+Content-Type: application/json
+
 ### 제목으로 검색
-GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=0
 Content-Type: application/json
 
 ### 제목으로 검색 -> 반환값 없읍
@@ -19,7 +31,11 @@ GET http://localhost:8080/shop/board/list?id=notice&search[contents]=on&search[w
 Content-Type: application/json
 
 ### 제목과 작성자로 검색
-GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=제목1
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
+Content-Type: application/json
+
+### 제목과 작성자, 내용으로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[contents]=on&search[word]=4
 Content-Type: application/json
 
 ### 상세 내용 조회
