@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Mypage from './components/Mypage';
 import Notice from './components/Notice';
 import Footer from './components/Footer';
+import Noticepage from './components/Noticepage';
 
 const GlobalStyle = createGlobalStyle`
 * {padding: 0; margin: 0;}
@@ -39,6 +40,7 @@ function App() {
     <Route path='/shop/mypage/:mypageparams' component={Mypage} />
     <Route path='/shop/board/list' exact component={Notice} />
     <Route path='/shop/service/faq' exact component={Notice} />
+    <Route path='/test' exact component={Noticepage} />
     <Footer />
     </>
   );

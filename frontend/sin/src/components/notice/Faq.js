@@ -35,8 +35,6 @@ const PrevButton = styled.div`font-weight:bold; border: 1px solid black; width:2
 const FirstPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 const LastPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 
-const Testdivtitle = styled.div`padding: 10px; border-bottom: 1px solid black;`
-const Testdiv = styled.div`display:none; margin-top: 5px; &:hover {cursor:pointer}`
 const Faq = (props) => {
 
     const page = queryString.parse(props.location.search).page;
