@@ -34,6 +34,10 @@ Content-Type: application/json
 GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
 Content-Type: application/json
 
+### 제목과 작성자, 내용으로 검색
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[contents]=on&search[word]=4
+Content-Type: application/json
+
 ### 상세 내용 조회
 GET http://localhost:8080/shop/board/view?id=notice&no=40
 Content-Type: application/json
