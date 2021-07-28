@@ -3,6 +3,7 @@ package sin.sin.domain.productQuestionReply;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class ProductQuestionReply {
     @Column(name="product_question_reply_id", nullable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "product_question_id")
     private ProductQuestion productQuestion;
 

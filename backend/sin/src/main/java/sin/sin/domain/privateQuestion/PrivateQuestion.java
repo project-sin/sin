@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class PrivateQuestion {
     @Column(name="private_question_id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "member_id")
     private  Member member;
 
@@ -48,7 +49,7 @@ public class PrivateQuestion {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "orders_id")
     private Orders orders;
 
@@ -59,7 +60,7 @@ public class PrivateQuestion {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name= "private_question_img_id")
     private List<PrivateQuestionImg> privateQuestionImgList;
 }
