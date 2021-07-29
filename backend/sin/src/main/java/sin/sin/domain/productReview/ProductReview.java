@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.product.Product;
-import sin.sin.domain.roductReviewImg.ProductReviewImg;
+import sin.sin.domain.productReviewImg.ProductReviewImg;
 
 @Entity
 @AllArgsConstructor
@@ -38,11 +39,11 @@ public class ProductReview {
     @Column(nullable = false)
     private String Content;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "product_id")
     private Product product;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "member_id")
     private Member member;
 

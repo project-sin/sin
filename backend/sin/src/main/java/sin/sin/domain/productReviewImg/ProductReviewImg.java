@@ -1,4 +1,4 @@
-package sin.sin.domain.roductReviewImg;
+package sin.sin.domain.productReviewImg;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
