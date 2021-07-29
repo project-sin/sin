@@ -43,7 +43,7 @@ const List = ({history,location}) => {
             document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('lifou').style.color = '#5f0080'
             setSelectedli('lifou')
-            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?list=sale').then((res)=>{
                 items.concat(res)
             })
         } else if(category==='038') {
@@ -55,7 +55,7 @@ const List = ({history,location}) => {
             document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('litwo').style.color = '#5f0080'
             setSelectedli('litwo')
-            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
                 items.concat(res)
             })
         } else {
@@ -67,7 +67,7 @@ const List = ({history,location}) => {
             document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('lione').style.color = '#5f0080'
             setSelectedli('lione')
-            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
                 items.concat(res)
             })
         }
@@ -101,7 +101,6 @@ const List = ({history,location}) => {
         <Listwrap>
             <Container>
                 <Row>
-                    <button onClick={()=>console.log(pageinfo)}>adlkfajlsekjflkasej</button>
                     <Title>
                         <Category>{pageinfo.kor}</Category>
                     </Title>
