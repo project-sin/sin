@@ -2,6 +2,8 @@ import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import query from 'query-string';
+import axios from 'axios';
+import {BACKEND_ADDRESS} from "../constants/ADDRESS";
 
 const Listwrap = styled.div`margin-top: 50px;`
 const Container = styled.div`width:1050px; margin: 0 auto;`
@@ -23,21 +25,53 @@ const Orderbylistli = styled.li`font-size: 12px; font-weight: bold; color: gray;
 
 const List = ({history,location}) => {
     const [selectedli,setSelectedli] = useState('')
+    const [pageinfo,setPageinfo] = useState({
+        kor:'',
+        orderby:''
+    })
+    const [items,setItems] = useState([])
+    
     const category = query.parse(location.search).category
 
-    if(!category) {
-        var korcategory = '알뜰쇼핑'
-        // var init = 'lifou'
-        var orderby = '혜택순'
-    } else if(category==='new') {
-        var korcategory = '신상품'
-        // var init = 'litwo'
-        var orderby = '신상품순'
-    } else {
-        var korcategory = '베스트'
-        // var init = 'lione'
-        var orderby = '추천순'
-    }
+    useEffect(()=>{
+        if(!category) {
+            setPageinfo({
+                ...pageinfo,
+                kor: '알뜰쇼핑',
+                orderby: '혜택순'
+            })
+            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
+            document.getElementById('lifou').style.color = '#5f0080'
+            setSelectedli('lifou')
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+                items.concat(res)
+            })
+        } else if(category==='038') {
+            setPageinfo({
+                ...pageinfo,
+                kor: '신상품',
+                orderby: '신상품순'
+            })
+            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
+            document.getElementById('litwo').style.color = '#5f0080'
+            setSelectedli('litwo')
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+                items.concat(res)
+            })
+        } else {
+            setPageinfo({
+                ...pageinfo,
+                kor: '베스트',
+                orderby: '추천순'
+            })
+            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
+            document.getElementById('lione').style.color = '#5f0080'
+            setSelectedli('lione')
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list/category='+category).then((res)=>{
+                items.concat(res)
+            })
+        }
+    },[category])
 
     const link = (itemid) => {
         history.push(`/shop/goods/goods_view?goodsno=${itemid}`)
@@ -49,7 +83,7 @@ const List = ({history,location}) => {
         else {nav.style.display='block'}
     }
 
-    const test = e => {
+    const selectorderby = e => {
         e.target.style.color = '#5f0080'
         if(!selectedli) {
             setSelectedli(e.target.id)
@@ -67,19 +101,20 @@ const List = ({history,location}) => {
         <Listwrap>
             <Container>
                 <Row>
+                    <button onClick={()=>console.log(pageinfo)}>adlkfajlsekjflkasej</button>
                     <Title>
-                        <Category>{korcategory}</Category>
+                        <Category>{pageinfo.kor}</Category>
                     </Title>
                     <Nav>
                         <Navtype>전체보기</Navtype>
-                        <Orderby onClick={togglenav}>{orderby}</Orderby>
+                        <Orderby onClick={togglenav}>{pageinfo.orderby}</Orderby>
                         <Orderbylistul id='nav'>
-                            <Orderbylistli id='lione' onClick={test}>추천순</Orderbylistli>
-                            <Orderbylistli id='litwo' onClick={test}>신상품순</Orderbylistli>
-                            <Orderbylistli id='lithr' onClick={test}>인기상품순</Orderbylistli>
-                            <Orderbylistli id='lifou' onClick={test}>혜택순</Orderbylistli>
-                            <Orderbylistli id='lifiv' onClick={test}>낮은 가격순</Orderbylistli>
-                            <Orderbylistli id='lisix' onClick={test}>높은 가격순</Orderbylistli>
+                            <Orderbylistli id='lione' onClick={selectorderby}>추천순</Orderbylistli>
+                            <Orderbylistli id='litwo' onClick={selectorderby}>신상품순</Orderbylistli>
+                            <Orderbylistli id='lithr' onClick={selectorderby}>인기상품순</Orderbylistli>
+                            <Orderbylistli id='lifou' onClick={selectorderby}>혜택순</Orderbylistli>
+                            <Orderbylistli id='lifiv' onClick={selectorderby}>낮은 가격순</Orderbylistli>
+                            <Orderbylistli id='lisix' onClick={selectorderby}>높은 가격순</Orderbylistli>
                         </Orderbylistul>
                     </Nav>
                     <ul>
