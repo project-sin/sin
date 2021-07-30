@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import axios from 'axios';
+import qs from 'query-string';
 
 const Mainrighttitle = styled.div`padding: 20px 0;`
 const Mainrighttitlestrong = styled.strong`display: inline-block; font-size: 24px; font-weight: bold; padding-right: 10px;`
@@ -9,22 +10,87 @@ const Mainrighttitlespan = styled.span`font-size:14px; font-weight:bold; color: 
 
 const Mainrightlisttable = styled.table`border-collapse: collapse; border-spacing: 0; border-top: 2px solid #522772;`
 const Thead = styled.thead``
-const Tr = styled.tr`font-size: 12px; text-align: center;`
+const Tr = styled.tr`font-size: 12px; text-align: center; cursor: pointer;`
 const Th = styled.th`padding: 20px 0;`
 const Tdorder = styled.td`width:50px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
 const Tdtitle = styled.td`text-align: left; padding: 20px 0px 20px 10px; border-bottom: 1px solid #f4f4f4;`
 const Tdwriter = styled.td`width:100px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
 const Tddate = styled.td`width:100px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
 const Tdview = styled.td`width:30px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
+
+const Pagenav = styled.div`text-align: center; margin-top: 50px;`
+const Pagebtn = styled.button`padding: 8px 13px; margin-left: -1px; background: none; border: 1px solid gray;`
+const Pagebtnl = styled.button`padding: 8px 8px; margin-left: -1px; background: none; border: 1px solid gray;`
+
 const Mainrightfooter = styled.div`border-top : 1px solid black; padding: 20px 0; margin-top: 20px;`
 const Mainrightfooterleft = styled.div`float: left;`
 const Mainrightfooterleftspan = styled.span`font-size:12px; padding-right: 20px;`
 const Mainrightfooterleftlabel = styled.label`font-size:12px; padding: 0 5px;`
-const Mainrightfooterright = styled.div`float: right`
-const Mainrightfooterrightinput = styled.input`width:200px; height: 20px; padding: 5px 10px;`
-const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#fff; background: #5f0080;`
+const Mainrightfooterright = styled.div`float: right;`
+const Mainrightfooterrightinput = styled.input`width:200px; height: 20px; padding: 6px 10px 3px 10px;`
+const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#fff; background: #5f0080; border: none; cursor: pointer;`
 
-const Noticesection = () => {
+const Noticesection = (props) => {
+    const page = parseInt(qs.parse(props.location.search).page)
+    const searchquery = qs.parse(props.location.search).search
+    
+    const [pageinfo,setpageinfo] = useState({
+        totalpages: 5,
+        currentpage: page
+    })
+    const [list,setLists] = useState([])
+
+    const [searchopt,setSearchopt] = useState({
+        name:false,
+        title:false,
+        contents:false,
+        word:''
+    })
+
+    useEffect(()=>{
+        if(!searchquery) {
+            axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
+                const prevarray = [...list]
+                prevarray.splice(0)
+                list.concat(res.data.content)
+                setpageinfo({
+                    ...pageinfo,
+                    totalpages: res.data.totalpages
+                })
+            })
+        } else {
+            axios.get(`http://localhost:8080/shop/board/list?id=notice&search=on&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=`+page).then((res)=>{
+                const prevarray = [...list]
+                prevarray.splice(0)
+                list.concat(res.data.content)
+                setpageinfo({
+                    ...pageinfo,
+                    totalpages: res.data.totalpages
+                })
+            })
+        }
+    },[page])
+
+    const checkboxhandler = e => {
+        const {value,checked} = e.target
+        setSearchopt({
+            ...searchopt,
+            [value]: checked
+        })
+    }
+
+    const getword = e => {
+        setSearchopt({
+            ...searchopt,
+            word: e.target.value
+        })
+    }
+
+    const search = () => {
+        props.history.push(`/shop/board/list?id=notice&search=on&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=0`)
+    }
+    
+
     return (
         <>
         <Mainrighttitle>
@@ -48,28 +114,41 @@ const Noticesection = () => {
                     <Tddate>2021-07-08</Tddate>
                     <Tdview>55</Tdview>
                 </Tr>
-                <Tr>
-                    <Tdorder>999</Tdorder>
-                    <Tdtitle><Link to=''>[가격인상공지][훕훕베이글]시그니처 베이글 6종</Link></Tdtitle>
-                    <Tdwriter>marketkurly</Tdwriter>
-                    <Tddate>2021-07-06</Tddate>
-                    <Tdview>555</Tdview>
-                </Tr>
+                {list.map(post =>
+                    <Tr onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${post.id}`)}>
+                        <Tdorder>{post.id}</Tdorder>
+                        <Tdtitle>{post.title}</Tdtitle>
+                        <Tdwriter>{post.writer}</Tdwriter>
+                        <Tddate>{post.createdDate}</Tddate>
+                        <Tdview>{post.views}</Tdview>
+                    </Tr>
+                )}
             </tbody>
         </Mainrightlisttable>
+        <Pagenav>
+            <Pagebtnl onClick={()=>props.history.push(`/shop/board/list?id=notice&page=1`)}>&lt;&lt;</Pagebtnl>
+            <Pagebtn onClick={()=>(page >1)? props.history.push(`/shop/board/list?id=notice&page=${page-1}`):null}>&lt;</Pagebtn>
+            {[...Array(pageinfo.totalpages)].map((n,idx)=>{
+                return (
+                    <Pagebtn onClick={()=>props.history.push(`/shop/board/list?id=notice&page=${idx+1}`)}>{idx+1}</Pagebtn>
+                )
+            })}
+            <Pagebtn onClick={()=>(page <pageinfo.totalpages)?props.history.push(`/shop/board/list?id=notice&page=${page+1}`):null}>&gt;</Pagebtn>
+            <Pagebtnl onClick={()=>props.history.push(`/shop/board/list?id=notice&page=${pageinfo.totalpages}`)}>&gt;&gt;</Pagebtnl>
+        </Pagenav>
         <Mainrightfooter className='clearfix'>
             <Mainrightfooterleft>
                 <Mainrightfooterleftspan>검색어</Mainrightfooterleftspan>
-                <input type='radio' name='search' id='name' />
+                <input type='checkbox' name='search' id='name' value='name' onChange={checkboxhandler} />
                 <Mainrightfooterleftlabel htmlFor='name'>이름</Mainrightfooterleftlabel>
-                <input type='radio' name='search' id='title' />
+                <input type='checkbox' name='search' id='title' value='title' onChange={checkboxhandler} />
                 <Mainrightfooterleftlabel htmlFor='title'>제목</Mainrightfooterleftlabel>
-                <input type='radio' name='search' id='content' />
-                <Mainrightfooterleftlabel htmlFor='content'>내용</Mainrightfooterleftlabel>
+                <input type='checkbox' name='search' id='contents' value='contents' onChange={checkboxhandler} />
+                <Mainrightfooterleftlabel htmlFor='contents'>내용</Mainrightfooterleftlabel>
                 </Mainrightfooterleft>
             <Mainrightfooterright>
-                <Mainrightfooterrightinput type='text' />
-                <Mainrightfooterrightbtn>btn</Mainrightfooterrightbtn>
+                <Mainrightfooterrightinput type='text' name='word' value={searchopt.word} onChange={getword} />
+                <Mainrightfooterrightbtn onClick={search}>검색</Mainrightfooterrightbtn>
             </Mainrightfooterright>
         </Mainrightfooter>
         </>

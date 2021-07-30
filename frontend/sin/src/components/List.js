@@ -1,5 +1,4 @@
 import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import query from 'query-string';
 import axios from 'axios';
@@ -34,13 +33,13 @@ const List = ({history,location}) => {
     const category = query.parse(location.search).category
 
     useEffect(()=>{
+        document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
         if(!category) {
             setPageinfo({
                 ...pageinfo,
                 kor: '알뜰쇼핑',
                 orderby: '혜택순'
             })
-            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('lifou').style.color = '#5f0080'
             setSelectedli('lifou')
             axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?list=sale').then((res)=>{
@@ -52,7 +51,6 @@ const List = ({history,location}) => {
                 kor: '신상품',
                 orderby: '신상품순'
             })
-            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('litwo').style.color = '#5f0080'
             setSelectedli('litwo')
             axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
@@ -64,7 +62,6 @@ const List = ({history,location}) => {
                 kor: '베스트',
                 orderby: '추천순'
             })
-            document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
             document.getElementById('lione').style.color = '#5f0080'
             setSelectedli('lione')
             axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
@@ -85,9 +82,7 @@ const List = ({history,location}) => {
 
     const selectorderby = e => {
         e.target.style.color = '#5f0080'
-        if(!selectedli) {
-            setSelectedli(e.target.id)
-        } else if(e.target.id === selectedli) {
+        if(e.target.id === selectedli) {
             console.log('same')
         } else {
             document.getElementById(selectedli).style.color = 'gray'
