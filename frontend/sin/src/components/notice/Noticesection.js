@@ -32,7 +32,7 @@ const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#
 
 const Noticesection = (props) => {
     const page = parseInt(qs.parse(props.location.search).page)
-    const searchquery = qs.parse(props.location.search).search
+    const searchquery = qs.parse(props.location.search).title
     
     const [pageinfo,setpageinfo] = useState({
         totalpages: 5,
@@ -41,9 +41,9 @@ const Noticesection = (props) => {
     const [list,setLists] = useState([])
 
     const [searchopt,setSearchopt] = useState({
-        name:false,
-        title:false,
-        contents:false,
+        name:'off',
+        title:'off',
+        contents:'off',
         word:''
     })
 
@@ -59,7 +59,7 @@ const Noticesection = (props) => {
                 })
             })
         } else {
-            axios.get(`http://localhost:8080/shop/board/list?id=notice&search=on&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=`+page).then((res)=>{
+            axios.get(`http://localhost:8080/shop/board/list?id=notice&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=`+page).then((res)=>{
                 const prevarray = [...list]
                 prevarray.splice(0)
                 list.concat(res.data.content)
@@ -73,9 +73,11 @@ const Noticesection = (props) => {
 
     const checkboxhandler = e => {
         const {value,checked} = e.target
+        if(checked===true) {var rename = 'on'}
+        else {var rename = 'off'}
         setSearchopt({
             ...searchopt,
-            [value]: checked
+            [value]: rename
         })
     }
 
@@ -87,7 +89,7 @@ const Noticesection = (props) => {
     }
 
     const search = () => {
-        props.history.push(`/shop/board/list?id=notice&search=on&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=0`)
+        props.history.push(`/shop/board/list?id=notice&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=0`)
     }
     
 
