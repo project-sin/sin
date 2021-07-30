@@ -32,23 +32,17 @@ const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#
 
 const Noticesection = (props) => {
     const page = parseInt(qs.parse(props.location.search).page)
-    const searchquery = qs.parse(props.location.search).title
     
     const [pageinfo,setpageinfo] = useState({
         totalpages: 5,
         currentpage: page
     })
     const [list,setLists] = useState([])
-
-    const [searchopt,setSearchopt] = useState({
-        name:'off',
-        title:'off',
-        contents:'off',
-        word:''
-    })
+    const [searchopt,setSearchopt] = useState([])
+    const [searchword,setSearchword] = useState('')
 
     useEffect(()=>{
-        if(!searchquery) {
+        if(!searchword) {
             axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
                 const prevarray = [...list]
                 prevarray.splice(0)
@@ -59,7 +53,9 @@ const Noticesection = (props) => {
                 })
             })
         } else {
-            axios.get(`http://localhost:8080/shop/board/list?id=notice&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=`+page).then((res)=>{
+            var url = ``
+            searchopt.map(item=> url += `&search[${item}]=on`)
+            axios.get(`http://localhost:8080/shop/board/list?id=notice${url}&word=${searchword}&page=`+page).then((res)=>{
                 const prevarray = [...list]
                 prevarray.splice(0)
                 list.concat(res.data.content)
@@ -67,29 +63,28 @@ const Noticesection = (props) => {
                     ...pageinfo,
                     totalpages: res.data.totalpages
                 })
+                //배열 초기화 코드 수정필요
             })
         }
     },[page])
 
     const checkboxhandler = e => {
         const {value,checked} = e.target
-        if(checked===true) {var rename = 'on'}
-        else {var rename = 'off'}
-        setSearchopt({
-            ...searchopt,
-            [value]: rename
-        })
+        if(checked===true) {
+            setSearchopt([...searchopt, value])
+        } else {
+            setSearchopt(searchopt.filter(opt=>opt!==value))
+        }
     }
 
     const getword = e => {
-        setSearchopt({
-            ...searchopt,
-            word: e.target.value
-        })
+        setSearchword(e.target.value)
     }
 
     const search = () => {
-        props.history.push(`/shop/board/list?id=notice&title=${searchopt.title}&name=${searchopt.name}&contents=${searchopt.contents}&word=${searchopt.word}&page=0`)
+        var url = ``
+        searchopt.map(item=> url += `&search[${item}]=on`)
+        props.history.push(`/shop/board/list?id=notice${url}&word=${searchword}&page=0`)
     }
     
 
@@ -149,7 +144,7 @@ const Noticesection = (props) => {
                 <Mainrightfooterleftlabel htmlFor='contents'>내용</Mainrightfooterleftlabel>
                 </Mainrightfooterleft>
             <Mainrightfooterright>
-                <Mainrightfooterrightinput type='text' name='word' value={searchopt.word} onChange={getword} />
+                <Mainrightfooterrightinput type='text' name='word' value={searchword}  onChange={getword} />
                 <Mainrightfooterrightbtn onClick={search}>검색</Mainrightfooterrightbtn>
             </Mainrightfooterright>
         </Mainrightfooter>
