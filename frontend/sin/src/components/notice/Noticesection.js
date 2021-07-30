@@ -32,7 +32,7 @@ const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#
 
 const Noticesection = (props) => {
     const page = parseInt(qs.parse(props.location.search).page)
-    
+    const word = qs.parse(props.location.search).word
     const [pageinfo,setpageinfo] = useState({
         totalpages: 5,
         currentpage: page
@@ -48,8 +48,8 @@ const Noticesection = (props) => {
     }
 
     useEffect(()=>{
-        if(!searchword) {
-            axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
+        if(word===undefined) {
+            axios.get(`http://localhost:8080/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+page).then((res)=>{
                 setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
@@ -58,7 +58,8 @@ const Noticesection = (props) => {
                 })
             })
         } else {
-            axios.get(`http://localhost:8080/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+page).then((res)=>{
+            
+            axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
                 setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
@@ -84,6 +85,15 @@ const Noticesection = (props) => {
 
     const search = () => {
         props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=0`)
+    }
+
+    const pagebtnurl = (pagen) => {
+        const pagenum = pagen
+        if(word===undefined) {
+            return props.history.push(`/shop/board/list?id=notice&page=`+pagenum)
+        } else {
+            return props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+pagenum)
+        }
     }
     
 
@@ -122,15 +132,15 @@ const Noticesection = (props) => {
             </tbody>
         </Mainrightlisttable>
         <Pagenav>
-            <Pagebtnl onClick={()=>props.history.push(`/shop/board/list?id=notice&page=1`)}>&lt;&lt;</Pagebtnl>
-            <Pagebtn onClick={()=>(page >1)? props.history.push(`/shop/board/list?id=notice&page=${page-1}`):null}>&lt;</Pagebtn>
+            <Pagebtnl onClick={()=>pagebtnurl(1)}>&lt;&lt;</Pagebtnl>
+            <Pagebtn onClick={()=>(page >1)? pagebtnurl(page-1) :null}>&lt;</Pagebtn>
             {[...Array(pageinfo.totalpages)].map((n,idx)=>{
                 return (
-                    <Pagebtn onClick={()=>props.history.push(`/shop/board/list?id=notice&page=${idx+1}`)}>{idx+1}</Pagebtn>
+                    <Pagebtn onClick={()=>pagebtnurl(idx+1)}>{idx+1}</Pagebtn>
                 )
             })}
-            <Pagebtn onClick={()=>(page <pageinfo.totalpages)?props.history.push(`/shop/board/list?id=notice&page=${page+1}`):null}>&gt;</Pagebtn>
-            <Pagebtnl onClick={()=>props.history.push(`/shop/board/list?id=notice&page=${pageinfo.totalpages}`)}>&gt;&gt;</Pagebtnl>
+            <Pagebtn onClick={()=>(page <pageinfo.totalpages)? pagebtnurl(page+1):null}>&gt;</Pagebtn>
+            <Pagebtnl onClick={()=> pagebtnurl(pageinfo.totalpages)}>&gt;&gt;</Pagebtnl>
         </Pagenav>
         <Mainrightfooter className='clearfix'>
             <Mainrightfooterleft>
