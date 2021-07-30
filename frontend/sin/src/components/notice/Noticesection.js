@@ -41,11 +41,16 @@ const Noticesection = (props) => {
     const [searchopt,setSearchopt] = useState([])
     const [searchword,setSearchword] = useState('')
 
+    const geturl = () => {
+        var url = ``
+        searchopt.map(item=> url += `&search[${item}]=on`)
+        return url
+    }
+
     useEffect(()=>{
         if(!searchword) {
             axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
-                const prevarray = [...list]
-                prevarray.splice(0)
+                setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
                     ...pageinfo,
@@ -53,17 +58,13 @@ const Noticesection = (props) => {
                 })
             })
         } else {
-            var url = ``
-            searchopt.map(item=> url += `&search[${item}]=on`)
-            axios.get(`http://localhost:8080/shop/board/list?id=notice${url}&word=${searchword}&page=`+page).then((res)=>{
-                const prevarray = [...list]
-                prevarray.splice(0)
+            axios.get(`http://localhost:8080/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+page).then((res)=>{
+                setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
                     ...pageinfo,
                     totalpages: res.data.totalpages
                 })
-                //배열 초기화 코드 수정필요
             })
         }
     },[page])
@@ -82,9 +83,7 @@ const Noticesection = (props) => {
     }
 
     const search = () => {
-        var url = ``
-        searchopt.map(item=> url += `&search[${item}]=on`)
-        props.history.push(`/shop/board/list?id=notice${url}&word=${searchword}&page=0`)
+        props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=0`)
     }
     
 
