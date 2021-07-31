@@ -32,21 +32,24 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    //TODO : 주석 풀기
+
+//    @Column(nullable = false)
     private String thumbnailName;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String thumbnailPath;
 
     @Column(nullable = false)
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name = "product_category_id")
+//    @JoinColumn(nullable = false, name = "product_category_id")
+    @JoinColumn(name="product_category_id")
     private ProductCatogory productCategory;
 
     @Column(nullable = false)
-    private float discountPercent;
+    private int discountPercent;
 
     @CreationTimestamp
     private Timestamp createdDate;
