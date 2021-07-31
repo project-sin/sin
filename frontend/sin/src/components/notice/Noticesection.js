@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import qs from 'query-string';
+import GetNoticeApi from '../api/GetNoticeApi';
+import GetSearchedNoticeApi from '../api/GetSearchedNoticeApi';
 
 const Mainrighttitle = styled.div`padding: 20px 0;`
 const Mainrighttitlestrong = styled.strong`display: inline-block; font-size: 24px; font-weight: bold; padding-right: 10px;`
@@ -49,7 +51,7 @@ const Noticesection = (props) => {
 
     useEffect(()=>{
         if(word===undefined) {
-            axios.get(`http://localhost:8080/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+page).then((res)=>{
+            GetNoticeApi(page).then((res)=>{
                 setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
@@ -58,8 +60,7 @@ const Noticesection = (props) => {
                 })
             })
         } else {
-            
-            axios.get(`http://localhost:8080/shop/board/list?id=notice&page=`+page).then((res)=>{
+            GetSearchedNoticeApi(geturl(),searchword,page).then((res)=>{
                 setLists(list.filter(post=> post.id === -1))
                 list.concat(res.data.content)
                 setpageinfo({
