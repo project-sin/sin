@@ -2,7 +2,9 @@ package sin.sin.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.member.Member;
@@ -47,7 +49,8 @@ public class NotificationService {
      * 공지사항 검색
      */
     @Transactional(readOnly = true)
-    public Page<Notification> notificationList(String title, String content, String writer, String word, Pageable pageable) {
+    public Page<Notification> notificationList(String title, String content, String writer, String word, int page) {
+        PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("id").descending());
         Optional<Page<Notification>> notifications = searchNotificationRepository.searchNotification(title, content, writer, word, pageable);
 
         if (notifications.isEmpty()) {
