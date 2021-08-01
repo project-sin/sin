@@ -13,7 +13,7 @@ import Mypage from './components/Mypage';
 import Notice from './components/Notice';
 import Footer from './components/Footer';
 import Noticepage from './components/Noticepage';
-import EventDetails from "./components/event/EventDetails";
+import NonProductEvent from "./components/event/NonProductEvent";
 
 const GlobalStyle = createGlobalStyle`
 * {padding: 0; margin: 0;}
@@ -32,7 +32,7 @@ function App() {
     <GlobalStyle />
     <Header />
     <Route path='/shop/main/index' exact component={Home} />
-    <Route path='/shop/main/event' exact component={EventDetails} />
+    <Route path='/shop/main/event' exact component={NonProductEvent} />
     <Route path='/shop/goods/event' exact component={Event} />
     <Route path='/shop/goods/goods_cart' exact component={Shoppinglist} />
     <Route path='/shop/goods/goods_list' exact component={List} />

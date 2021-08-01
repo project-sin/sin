@@ -1,11 +1,11 @@
 import React from 'react';
 
-const EventDetails = () => {
+const NonProductEvent = () => {
   return (
       <div>
-        
+
       </div>
   );
 };
 
-export default EventDetails;
+export default NonProductEvent;

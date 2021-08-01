@@ -12,7 +12,7 @@ const Event = ({history}) => {
     const [events,setEvents] = useState(null);
 
     const move = (event) => {
-        if(event.classification=== "DetailedEvent")
+        if(event.classification=== "NonProducts")
             history.push('/shop/main/event?name='+event.fileName);
         else
             history.push('/');
