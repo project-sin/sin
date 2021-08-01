@@ -4,16 +4,14 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sin.sin.domain.event.Classification;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Getter
-public class FreqQuestionResponse {
-    private Long id;
+public class EventResponse {
 
-    private String category;
-
-    private String title;
-
-    private String content;
+    private String fileName;
+    private byte[] imageByteArray;
+    private Classification classification;
 }

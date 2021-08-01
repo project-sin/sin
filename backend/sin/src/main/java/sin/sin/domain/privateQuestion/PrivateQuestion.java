@@ -60,7 +60,7 @@ public class PrivateQuestion {
     @Column(nullable = false)
     private String content;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany
     @JoinColumn(name= "private_question_img_id")
-    private List<PrivateQuestionImg> privateQuestionImgList;
+    private List<PrivateQuestionImg> privateQuestionImgList = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package sin.sin.domain.productReview;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,5 +57,5 @@ public class ProductReview {
 
     @OneToMany
     @JoinColumn(name= "product_review_img_id")
-    private List<ProductReviewImg> productReviewImgList;
+    private List<ProductReviewImg> productReviewImgList = new ArrayList<>();
 }
