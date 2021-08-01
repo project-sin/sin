@@ -2,7 +2,7 @@
 GET http://localhost:8080/shop/board/list?id=notice
 Content-Type: application/json
 
-### 전체 공지사항 불러오기 / 다음페이지 보기(page는 0부터 시작)
+### 전체 공지사항 불러오기 / 다음페이지 보기(page는 1부터 시작)
 GET http://localhost:8080/shop/board/list?id=notice&page=1
 Content-Type: application/json
 

@@ -29,9 +29,9 @@ public class NotificationController {
                                         @RequestParam(value = "search[name]", required = false) String name,
                                         @RequestParam(value = "search[contents]", required = false) String contents,
                                         @RequestParam(value = "search[word]", required = false) String word,
-                                        @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+                                        @RequestParam(value = "page", defaultValue = "1")int page) {
 
-        Page<Notification> pagingNotification = notificationService.notificationList(subject, contents, name, word, pageable);
+        Page<Notification> pagingNotification = notificationService.notificationList(subject, contents, name, word, page);
         return ResponseEntity.ok().body(pagingNotification);
 
     }
