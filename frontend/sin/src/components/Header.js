@@ -80,8 +80,8 @@ const Header = () => {
                             </Allcategorybar>
                         </Allcategory>
                         <Category className='clearfix'>
-                            <Categoryitem><Link to='/shop/goods/goods_list?category=new'>신상품</Link></Categoryitem>
-                            <Categoryitem><Link to='/shop/goods/goods_list?category=best'>베스트</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/goods_list?category=038'>신상품</Link></Categoryitem>
+                            <Categoryitem><Link to='/shop/goods/goods_list?category=029'>베스트</Link></Categoryitem>
                             <Categoryitem><Link to='/shop/goods/goods_list?list=sale'>알뜰쇼핑</Link></Categoryitem>
                             <Categoryitem><Link to='/shop/goods/event'>특가/혜택</Link></Categoryitem>
                         </Category>
