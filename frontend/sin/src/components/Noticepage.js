@@ -1,5 +1,7 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import qs from 'query-string';
 
 const NoticeWrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -21,15 +23,51 @@ const Liptwo = styled.p`padding: 10px 15px; margin-right: 50px;`
 const Sectiontwocontent = styled.div`min-height: 500px; padding: 10px 15px; border-top: 1px solid #dbdbdb;`
 
 const Divbtn = styled.div`text-align: right; margin: 20px 0px;`
-const Listbtn = styled.button`color: #fff; border: none; padding: 10px 50px; background: #795b8f;`
+const Listbtn = styled.button`color: #fff; border: none; padding: 10px 50px; background: #795b8f; cursor: pointer;`
 
 const Prevnextul = styled.ul`border-top: 1px solid black; border-bottom : 1px solid black; margin-bottom: 50px;`
 const Prevnextlipone = styled.p`padding: 10px 15px;`
 const Prevnextliptwo = styled.p`padding: 10px 15px;`
-const Prevli = styled.div`display: flex; border-bottom: 1px solid #dbdbdb;`
-const Nextli = styled.div`display: flex;`
+const Prevli = styled.div`display: flex; border-bottom: 1px solid #dbdbdb; cursor: pointer;`
+const Nextli = styled.div`display: flex; cursor: pointer;`
 
-const Noticepage = () => {
+const Noticepage = (props) => {
+    const no = qs.parse(props.location.seacrh).no
+    const [post,setPost] = useState({
+        id: 'res.data.cur.id',
+        title: 'res.data.cur.title',
+        content: 'res.data.cur.content',
+        writer : 'res.data.cur.writer',
+        createDate: 'res.data.cur.createDate',
+        views: 'res.data.cur.views'
+    })
+
+    const [other,setOther] = useState([
+        {
+            title:'testtitle',
+            id:'testid'
+        },
+        {
+            title:'testtitle2',
+            id:'testid2'
+        }
+    ])
+
+    useEffect(()=>{
+        axios.get(`http://localhost:8080/shop/board/view?id=notice&no=${no}`).then((res)=>{
+            setPost({
+                ...post,
+                id: res.data.cur.id,
+                title: res.data.cur.title,
+                content: res.data.cur.content,
+                writer : res.data.cur.writer,
+                createDate: res.data.cur.createDate,
+                views: res.data.cur.views
+            })
+            other.concat(res.data.prev,res.data.next)
+        })
+    })
+
     return (
         <NoticeWrap>
             <Container>
@@ -42,37 +80,37 @@ const Noticepage = () => {
                         <Sectiontwotable>
                             <Sectiontwotabletr>
                                 <Th>제목</Th>
-                                <Td>[마켓컬리켓]유튜브 '마켓컬리 신선 MD 고창 수박 브이로그' 댓글 이벤트 당첨자 안내</Td>
+                                <Td>{post.title}</Td>
                             </Sectiontwotabletr>
                             <Sectiontwotabletr>
                                 <Th>작성자</Th>
-                                <Td>MarketKurly</Td>
+                                <Td>{post.writer}</Td>
                             </Sectiontwotabletr>
                             <Sectiontwotabletr>
                                 <td colSpan='2'>
                                 <Ul>
                                     <Li>
                                         <Lipone>작성일</Lipone>
-                                        <Liptwo>2021-07-20</Liptwo>
+                                        <Liptwo>{post.createDate}</Liptwo>
                                     </Li>
                                     <Li>
                                         <Lipone>조회수</Lipone>
-                                        <Liptwo>603</Liptwo>
+                                        <Liptwo>{post.views}</Liptwo>
                                     </Li>
                                 </Ul>
                                 </td>
                             </Sectiontwotabletr>
                         </Sectiontwotable>
                         <Sectiontwocontent>
-                            <h2>본문</h2>
+                            <h2>{post.content}</h2>
                         </Sectiontwocontent>
                     </Sectiontwo>
                     <Divbtn>
-                        <Listbtn>목록</Listbtn>
+                        <Listbtn onClick={()=>props.history.push(`/shop/board/list?id=notice`)}>목록</Listbtn>
                     </Divbtn>
                     <Prevnextul>
-                        <Prevli><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>[가격인하공지]핫 트러플 제스트 외 2건 (2021.7.23~)</Prevnextliptwo></Prevli>
-                        <Nextli><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>[가격인상공지]산마르코 핸들형 트레이 골드 (2021.7.26~)</Prevnextliptwo></Nextli>
+                        {(other[0])?<Prevli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${other[0].id}`)}><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>{other[0].title}</Prevnextliptwo></Prevli>:null}
+                        {(other[1])?<Nextli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${other[1].id}`)}><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>{other[1].title}</Prevnextliptwo></Nextli>:null}
                     </Prevnextul>
                 </Row>
             </Container>

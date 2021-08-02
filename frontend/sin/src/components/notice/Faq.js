@@ -36,7 +36,6 @@ const FirstPageButton = styled.div`font-weight:bold; border: 1px solid black; wi
 const LastPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 
 const Faq = (props) => {
-
     const page = queryString.parse(props.location.search).page;
     const [faqs,setFaqs] = useState(null);
     const [totalfaqs,setTotalfaqs] = useState(null);

@@ -40,7 +40,7 @@ function App() {
     <Route path='/shop/mypage/:mypageparams' component={Mypage} />
     <Route path='/shop/board/list' exact component={Notice} />
     <Route path='/shop/service/faq' exact component={Notice} />
-    <Route path='/test' exact component={Noticepage} />
+    <Route path='/shop/board/view' exact component={Noticepage} />
     <Footer />
     </>
   );
