@@ -15,10 +15,16 @@ class ProductListServiceTest {
 
     @Test
     public void 이번달_신상품() throws Exception {
-        //given
         List<Product> products = productListService.newProductList();
 
-        //when
+        products.stream().forEach(product-> System.out.println(product));
+
+    }
+
+    @Test
+    public void 알뜰쇼핑() throws Exception {
+        List<Product> products = productListService.CheapProductList();
+
         products.stream().forEach(product-> System.out.println(product));
 
     }
