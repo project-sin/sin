@@ -15,12 +15,14 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.productCatogory.ProductCatogory;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 public class Product {
 

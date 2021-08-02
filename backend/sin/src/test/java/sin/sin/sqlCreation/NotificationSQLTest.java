@@ -2,7 +2,7 @@ package sin.sin.sqlCreation;
 
 import org.junit.jupiter.api.Test;
 
-public class NotificationTest {
+public class NotificationSQLTest {
     @Test
     public void 테스트1() throws Exception {
 
