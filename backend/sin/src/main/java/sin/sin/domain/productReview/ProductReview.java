@@ -13,6 +13,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -25,6 +26,7 @@ import sin.sin.domain.productReviewImg.ProductReviewImg;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class ProductReview {
 
     @Id
@@ -37,7 +39,7 @@ public class ProductReview {
 
     @Lob
     @Column(nullable = false)
-    private String Content;
+    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "product_id")
