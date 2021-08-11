@@ -1,23 +1,15 @@
 package sin.sin.domain.product;
 
 import com.sun.istack.NotNull;
-import java.sql.Timestamp;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
-import sin.sin.domain.productCatogory.ProductCatogory;
+import sin.sin.domain.productCategory.ProductCategory;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
@@ -47,8 +39,8 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(nullable = false, name = "product_category_id")
-    @JoinColumn(name="product_category_id")
-    private ProductCatogory productCategory;
+    @JoinColumn(name = "product_category_id")
+    private ProductCategory productCategory;
 
     @Column(nullable = false)
     private int discountPercent;
