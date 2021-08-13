@@ -11,7 +11,7 @@ import sin.sin.domain.event.Classification;
 @Getter
 public class EventResponse {
 
+    private String fileCode;
     private String fileName;
-    private byte[] imageByteArray;
     private Classification classification;
 }

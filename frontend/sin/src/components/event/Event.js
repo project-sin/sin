@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import findEventsApi from "./FindEventsApi";
+import {BACKEND_ADDRESS} from "../../constants/ADDRESS";
 
 const Eventwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -25,10 +26,10 @@ const Event = ({history}) => {
     },[]);
 
     const imgs = events ? events.map((event)=>{
-        const base64Image = event ? 'data:image/png;base64,' + event.imageByteArray:"";
-        return <Eventli onClick={()=>move(event)}><img src={{uri: base64Image}}/></Eventli>;
+        const uri = BACKEND_ADDRESS + "/shop/goods/event/display?filename=" + event.fileName;
+        return <Eventli onClick={()=>move(event)}><img src= {uri} /></Eventli>;
     }) : "";
-    console.log(events)
+
     return(
         <Eventwrap>
             <Container>

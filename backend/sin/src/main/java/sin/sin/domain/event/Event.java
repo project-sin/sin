@@ -24,11 +24,10 @@ public class Event {
     private Long id;
 
     @Column(nullable = false)
-    private String fileName;
+    private String fileCode;
 
-    @Lob
     @Column(nullable = false)
-    private String filePath;
+    private String fileName;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

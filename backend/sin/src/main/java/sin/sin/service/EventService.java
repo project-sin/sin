@@ -1,9 +1,10 @@
 package sin.sin.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -24,27 +25,44 @@ public class EventService {
         List<Event> events = eventRepository.findAll();
         List<EventResponse> eventResponses = events.stream().
             map((event)-> new EventResponse(
+                event.getFileCode(),
                 event.getFileName(),
-                getFile(event.getFilePath()),
                 event.getClassification()
             )).collect(Collectors.toList());
 
         return eventResponses;
     }
 
-    private byte[] getFile(String filePath){
-        int read;
-        byte[] data = new byte[16384];
-        try {
-            InputStream imageStream = new FileInputStream(filePath);
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            while ((read = imageStream.read(data, 0, data.length)) != -1) {
-                buffer.write(data, 0, read);
-            }
-        } catch (IOException e) {
+    public byte[] getFile(String fileName){
+        File file = new File("src/main/resources/eventImg");
+
+        String Root = file.getAbsolutePath();
+        String fileDir = Root + File.separator + fileName;
+
+        FileInputStream fis = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        try{
+            fis = new FileInputStream(fileDir);
+        } catch(FileNotFoundException e){
             e.printStackTrace();
         }
 
-        return data;
+        int readCount = 0;
+        byte[] buffer = new byte[1024];
+        byte[] fileArray = null;
+
+        try{
+            while((readCount = fis.read(buffer)) != -1){
+                baos.write(buffer, 0, readCount);
+            }
+            fileArray = baos.toByteArray();
+            fis.close();
+            baos.close();
+        } catch(IOException e){
+            throw new RuntimeException("File Error");
+        }
+
+        return fileArray;
     }
 }
