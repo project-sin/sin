@@ -14,9 +14,9 @@ const Event = ({history}) => {
 
     const move = (event) => {
         if(event.classification=== "NonProducts")
-            history.push('/shop/main/event?name='+event.fileName);
+            history.push('/shop/main/event?name='+ event.fileCode);
         else
-            history.push('/');
+            history.push('/shop/goods/goods_list?category=' + event.fileCode);
 
     }
     useEffect(()=> {
