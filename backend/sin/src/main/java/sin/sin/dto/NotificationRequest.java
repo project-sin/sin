@@ -16,5 +16,4 @@ public class NotificationRequest {
                 .writer(writer)
                 .build();
     }
-
 }

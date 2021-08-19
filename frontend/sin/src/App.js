@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
 import Home from './components/Home';
-import Event from './components/Event';
+import Event from './components/event/Event';
 import Shoppinglist from './components/Shoppinglist';
 import List from './components/List';
 import Item from './components/Item';
@@ -13,6 +13,7 @@ import Mypage from './components/Mypage';
 import Notice from './components/Notice';
 import Footer from './components/Footer';
 import Noticepage from './components/Noticepage';
+import NonProductEvent from "./components/event/NonProductEvent";
 
 const GlobalStyle = createGlobalStyle`
 * {padding: 0; margin: 0;}
@@ -31,6 +32,7 @@ function App() {
     <GlobalStyle />
     <Header />
     <Route path='/shop/main/index' exact component={Home} />
+    <Route path='/shop/main/event' exact component={NonProductEvent} />
     <Route path='/shop/goods/event' exact component={Event} />
     <Route path='/shop/goods/goods_cart' exact component={Shoppinglist} />
     <Route path='/shop/goods/goods_list' exact component={List} />
