@@ -25,11 +25,4 @@ public class EventController {
         return ResponseEntity.ok()
             .body(events);
     }
-
-    @GetMapping(value = "/goods/event/display", produces= MediaType.IMAGE_PNG_VALUE)
-    public ResponseEntity<byte[]> getImage(@RequestParam(value="filename") String filename){
-
-        return ResponseEntity.ok()
-            .body(eventService.getFile(filename));
-    }
 }
