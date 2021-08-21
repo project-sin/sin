@@ -21,8 +21,11 @@ const Allcategorybarnav = styled.div`position: absolute; left: 151px; top:-1px; 
 const Allcategorybarnavitem =styled.li`transition: .2s all ease; &:hover {background: #dbdbdb;}`
 const Allcategorybarnavitemlink =styled(Link)`padding: 10px`
 const Allcategorybar = styled.div`float: left; position: absolute; display: none; width: 150px; text-align: left; background: #fff; border: 1px solid black; transition: .3s all ease; &:hover ${Allcategorybarnav} {display: block;}`
-const Allcategoryitem = styled.li`transition: .2s all ease; &:hover {background: #dbdbdb;}`
-const Allcategoryitemlink = styled(Link)`padding:10px;`
+
+const Itemcategory = styled.li`padding: 2px 0 2px 10px; transition: all .2s ease; &:hover {background: #dbdbdb;}`
+const Itemcategorylink = styled(Link)``
+const Subcategory = styled.ul`position: absolute; left: 100px;`
+
 const Allcategory = styled.div`postion: relative; float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px; &:hover ${Allcategorybar} {display: block;}`
 const Category = styled.ul`float: left;`
 const Categoryitem = styled.li`float: left; font-size: 16px; line-height:33px; color: #333; text-align: center; margin: 15px 30px;`
@@ -49,35 +52,8 @@ const Header = () => {
                         <Logolink to='/shop/main/index'>kurly</Logolink>
                     </Headerlogo>
                     <Headernav className='clearfix'>
-                        <Allcategory className='clearfix'>
+                        <Allcategory>
                             <p>전체 카테고리</p>
-                            <Allcategorybar>
-                                <ul>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                    <Allcategoryitem><Allcategoryitemlink to=''>category</Allcategoryitemlink></Allcategoryitem>
-                                </ul>
-                                <Allcategorybarnav>
-                                <ul>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                    <Allcategorybarnavitem><Allcategorybarnavitemlink to=''>categoryitem</Allcategorybarnavitemlink></Allcategorybarnavitem>
-                                </ul>
-                                </Allcategorybarnav>
-                            </Allcategorybar>
                         </Allcategory>
                         <Category className='clearfix'>
                             <Categoryitem><Link to='/shop/goods/goods_list?category=038'>신상품</Link></Categoryitem>

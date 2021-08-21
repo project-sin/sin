@@ -17,7 +17,7 @@ const Div1 = styled.div`padding-bottom: 50px; border-bottom: 2px solid #eee;`
 const Title = styled.p`font-size: 31px; font-weight: bold; color: #333; letter-spacing: -2px;`
 const Subtitle = styled.p`font-size: 15px; color: #666666; letter-spacing: -1px; padding-top: 20px;`
 const Div2 = styled.div`display: flex; justify-content: space-between; padding-top: 50px; border-bottom: 3px solid #5f0080;`
-const Thepurple = styled.div`position: relative; width: 120px; height: 90px; margin: auto 0 0; border: 1px solid #5f0080; border-bottom: none; cursor: pointer;`
+const Thepurple = styled.div`position: relative; width: 120px; height: 90px; margin: auto 0 0; border: 1px solid #5f0080; border-bottom: none; cursor: pointer; &:first-child {background: #5f0080}; & > span {color: #fff}`
 const Purple = styled.div`position: relative; width: 120px; height: 80px; text-align: center; margin: auto 0 0; border: 1px solid #5f0080; border-bottom: none; cursor: pointer;`
 const Lavender = styled.div`position: relative; width: 120px; height: 70px; margin: auto 0 0; border: 1px solid #5f0080; border-bottom: none; cursor: pointer;`
 const White = styled.div`position: relative; width: 120px; height: 60px; margin: auto 0 0; border: 1px solid #5f0080; border-bottom: none; cursor: pointer;`
@@ -26,7 +26,8 @@ const Normal = styled.div`position: relative; width: 120px; height: 40px; margin
 const Name = styled.span`position: absolute; font-size: 18px; color: #5f0080; bottom: 5px; left: 6px;`
 const Rate = styled.span`position: absolute; font-size: 18px; color: #5f0080; bottom: 5px; right: 8px;`
 
-const Div2child = styled.div`display: none; height: 250px; border-bottom: 1px solid #eee; `
+const Div3 = styled.div``
+const Div2child = styled.div`display: none; height: 250px; border-bottom: 1px solid #eee; &:first-child {display: flex}`
 const Div2childfir = styled.div`position: relative; width: 260px;`
 const Firfir = styled.p`position: absolute; top: 40px; left: 10px; font-size: 22px; color: #5f0080; font-weight: 600; letter-spacing: -.5px;`
 const Firsec = styled.p`position: absolute; top: 80px; left: 10px; font-size: 13px; letter-spacing: -.4px;`
@@ -62,11 +63,6 @@ const NonProductEvent = () => {
     document.getElementById(`${parentid}`).style.transition = 'all .2s ease'
     setParenton(parentid)
   }
-  useEffect(()=>{
-    document.getElementById('thepurple').style.display = 'flex'
-    document.getElementById(`parentthepurple`).style.backgroundColor = '#5f0080'
-    document.getElementById(`parentthepurple`).childNodes.forEach(e=>{e.style.color = '#fff'})
-  },[])
 
   return (
       <Container>
@@ -94,109 +90,111 @@ const NonProductEvent = () => {
                 <Friends id='parentfriends' onClick={()=>{handler('friends');color('parentfriends')}}><Name>프렌즈</Name><Rate>1%</Rate></Friends>
                 <Normal id='parentnormal' onClick={()=>{handler('normal');color('parentnormal')}}><Name>일반</Name><Rate>0.5%</Rate></Normal>
               </Div2>
-              <Div2child id='thepurple'>
-                <Div2childfir>
-                  <Firfir>더퍼플</Firfir>
-                  <Firsec>전월 실적 150만원 이상</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>7</Strong>%</Secfir>
-                  <Secsec>더블 후기 적립금</Secsec>
-                  <Secthi>매월 더퍼플 선물</Secthi>
-                  <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
-                  <Secfiv>(깜짝 쿠폰,적립 이벤트 등)</Secfiv>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 126만원 이상</Thifir>
-                  <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
-                </Div2childthi>
-              </Div2child>
-              {/* 더퍼플 */}
-              <Div2child id='purple'>
-                <Div2childfir>
-                  <Firfir>퍼플</Firfir>
-                  <Firsec>전월 실적 100만원 이상</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>7</Strong>%</Secfir>
-                  <Secsec>더블 후기 적립금</Secsec>
-                  <Secthi>매월 더퍼플 선물</Secthi>
-                  <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 84-126만원 이상</Thifir>
-                  <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
-                </Div2childthi>
-              </Div2child>
-              {/* 퍼플 */}
-              <Div2child id='lavender'>
-                <Div2childfir>
-                  <Firfir>라벤더</Firfir>
-                  <Firsec>전월 실적 50만원 이상</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>5</Strong>%</Secfir>
-                  <Secsec>더블 후기 적립금</Secsec>
-                  <Secthi>매월 더퍼플 선물</Secthi>
-                  <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 30-60만원 이상</Thifir>
-                  <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
-                </Div2childthi>
-              </Div2child>
-              {/* 라벤더 */}
-              <Div2child id='white'>
-                <Div2childfir>
-                  <Firfir>화이트</Firfir>
-                  <Firsec>전월 실적 30만원 이상</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>3</Strong>%</Secfir>
-                  <Secsec>더블 후기 적립금</Secsec>
-                  <Secthi>매월 더퍼플 선물</Secthi>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 10-18만원 이상</Thifir>
-                  <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
-                </Div2childthi>
-              </Div2child>
-              {/* 화이트 */}
-              <Div2child id='friends'>
-                <Div2childfir>
-                  <Firfir>프렌즈</Firfir>
-                  <Firsec>전월 실적 10만원 이상</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>1</Strong>%</Secfir>
-                  <Secsec>더블 후기 적립금</Secsec>
-                  <Secthi>매월 더퍼플 선물</Secthi>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 1-3만원 이상</Thifir>
-                  <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
-                </Div2childthi>
-              </Div2child>
-              {/* 프렌즈 */}
-              <Div2child id='normal'>
-                <Div2childfir>
-                  <Firfir>일반</Firfir>
-                  <Firsec>전월 실적 15만원 미만</Firsec>
-                  <Firthi>(결제 금액+적립금 사용액)</Firthi>
-                </Div2childfir>
-                <Div2childsec>
-                  <Secfir>적립<Strong>0.5</Strong>%</Secfir>
-                </Div2childsec>
-                <Div2childthi>
-                  <Thifir>총 적립 금액 1만원 이상</Thifir>
-                </Div2childthi>
-              </Div2child>
-              {/* 노멀 */}
+              <Div3>
+                <Div2child id='thepurple'>
+                  <Div2childfir>
+                    <Firfir>더퍼플</Firfir>
+                    <Firsec>전월 실적 150만원 이상</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>7</Strong>%</Secfir>
+                    <Secsec>더블 후기 적립금</Secsec>
+                    <Secthi>매월 더퍼플 선물</Secthi>
+                    <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
+                    <Secfiv>(깜짝 쿠폰,적립 이벤트 등)</Secfiv>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 126만원 이상</Thifir>
+                    <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
+                  </Div2childthi>
+                </Div2child>
+                {/* 더퍼플 */}
+                <Div2child id='purple'>
+                  <Div2childfir>
+                    <Firfir>퍼플</Firfir>
+                    <Firsec>전월 실적 100만원 이상</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>7</Strong>%</Secfir>
+                    <Secsec>더블 후기 적립금</Secsec>
+                    <Secthi>매월 더퍼플 선물</Secthi>
+                    <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 84-126만원 이상</Thifir>
+                    <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
+                  </Div2childthi>
+                </Div2child>
+                {/* 퍼플 */}
+                <Div2child id='lavender'>
+                  <Div2childfir>
+                    <Firfir>라벤더</Firfir>
+                    <Firsec>전월 실적 50만원 이상</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>5</Strong>%</Secfir>
+                    <Secsec>더블 후기 적립금</Secsec>
+                    <Secthi>매월 더퍼플 선물</Secthi>
+                    <Secfou>최대<Strong>2</Strong>만원 추가 혜택</Secfou>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 30-60만원 이상</Thifir>
+                    <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
+                  </Div2childthi>
+                </Div2child>
+                {/* 라벤더 */}
+                <Div2child id='white'>
+                  <Div2childfir>
+                    <Firfir>화이트</Firfir>
+                    <Firsec>전월 실적 30만원 이상</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>3</Strong>%</Secfir>
+                    <Secsec>더블 후기 적립금</Secsec>
+                    <Secthi>매월 더퍼플 선물</Secthi>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 10-18만원 이상</Thifir>
+                    <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
+                  </Div2childthi>
+                </Div2child>
+                {/* 화이트 */}
+                <Div2child id='friends'>
+                  <Div2childfir>
+                    <Firfir>프렌즈</Firfir>
+                    <Firsec>전월 실적 10만원 이상</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>1</Strong>%</Secfir>
+                    <Secsec>더블 후기 적립금</Secsec>
+                    <Secthi>매월 더퍼플 선물</Secthi>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 1-3만원 이상</Thifir>
+                    <Thisec> 더퍼플 등급 연간 유지 시</Thisec>
+                  </Div2childthi>
+                </Div2child>
+                {/* 프렌즈 */}
+                <Div2child id='normal'>
+                  <Div2childfir>
+                    <Firfir>일반</Firfir>
+                    <Firsec>전월 실적 15만원 미만</Firsec>
+                    <Firthi>(결제 금액+적립금 사용액)</Firthi>
+                  </Div2childfir>
+                  <Div2childsec>
+                    <Secfir>적립<Strong>0.5</Strong>%</Secfir>
+                  </Div2childsec>
+                  <Div2childthi>
+                    <Thifir>총 적립 금액 1만원 이상</Thifir>
+                  </Div2childthi>
+                </Div2child>
+                {/* 노멀 */}
+              </Div3>
               <Div4>
                 <Div4p>추가 혜택은 월 중 지급되며, 혜택 지급 시 SMS 수신동의해주신 고객님께 문자 개별 안내드릴 예정입니다.</Div4p>
                 <Div4p>SMS 수신 여부는 [마이컬리&gt;개인정보 수정]에서 설정하실 수 있습니다.</Div4p>
