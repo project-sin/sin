@@ -12,6 +12,6 @@ import sin.sin.domain.event.Classification;
 public class EventResponse {
 
     private String fileCode;
-    private String fileName;
+    private String imageUrl;
     private Classification classification;
 }
