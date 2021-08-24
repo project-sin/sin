@@ -4,6 +4,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
 import javax.transaction.Transactional;
+import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +23,11 @@ class EventServiceTest {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @BeforeEach
+    public void clear(){
+        eventRepository.deleteAll();
+    }
 
     @Test
     void findAllEvent() {
