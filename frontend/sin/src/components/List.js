@@ -56,10 +56,21 @@ const List = ({history,location}) => {
             axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
                 items.concat(res)
             })
-        } else {
+        } else if(category==='029') {
             setPageinfo({
                 ...pageinfo,
                 kor: '베스트',
+                orderby: '추천순'
+            })
+            document.getElementById('lione').style.color = '#5f0080'
+            setSelectedli('lione')
+            axios.get(BACKEND_ADDRESS+'/shop/goods/goods_list?category='+category).then((res)=>{
+                items.concat(res)
+            })
+        } else {
+            setPageinfo({
+                ...pageinfo,
+                kor: '카테고리',
                 orderby: '추천순'
             })
             document.getElementById('lione').style.color = '#5f0080'
@@ -112,14 +123,15 @@ const List = ({history,location}) => {
                         </Orderbylistul>
                     </Nav>
                     <ul>
-                        <li onClick={()=>link('itemid')}>
+                        {items.map(item=><li onClick={()=>link('itemid')}>
                             <Item>
-                                <Itemimg>img</Itemimg>
-                                <Itemname>친환경대파</Itemname>
-                                <Itemprice>1,999원</Itemprice>
-                                <Itemdesc>맛있는 대파</Itemdesc>
+                                <Itemimg>{item.img}}</Itemimg>
+                                <Itemname>{item.title}</Itemname>
+                                <Itemprice>{item.price}</Itemprice>
+                                <Itemdesc>{item.desc}</Itemdesc>
                             </Item>
                         </li>
+                        )}
                     </ul>
                 </Row>
             </Container>
