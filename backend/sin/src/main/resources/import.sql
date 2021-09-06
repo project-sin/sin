@@ -79,9 +79,30 @@ insert into NOTIFICATION (TITLE, CONTENT, WRITER) values('제목40','내용40','
 insert into NOTIFICATION (TITLE, CONTENT, WRITER) values('제목41','내용41','글쓴이41');
 
 
+-- product_category 기본설정
+-- 채소
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '907', '008');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '907', '001');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '907', '002');
+-- 과일
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '908', '008');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '908', '006');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '908', '001');
+-- 수산
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '909', '010');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '909', '001');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '909', '009');
+-- 정육
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '910', '001');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '910', '007');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '910', '002');
+-- 국
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '911', '001');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '911', '006');
+insert into PRODUCT_CATEGORY(main_category, sub_category) values ( '911', '002');
 
 -- product 기본 설정
---INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE) VALUES('상품0',0,'InStock',0,TO_CHAR(SYSTIMESTAMP-0, 'YYYY-MM-DD HH:MI:SS.FF3'));
+--INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE, PRODUCT_CATEGORY_ID, PRODUCT_CODE) VALUES('친환경_당근',0,'InStock',0,TO_CHAR(SYSTIMESTAMP-0, 'YYYY-MM-DD HH:MI:SS.FF3'), 1, 70);
 --INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE) VALUES('상품1',1000,'InStock',1,TO_CHAR(SYSTIMESTAMP-1, 'YYYY-MM-DD HH:MI:SS.FF3'));
 --INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE) VALUES('상품2',2000,'InStock',2,TO_CHAR(SYSTIMESTAMP-2, 'YYYY-MM-DD HH:MI:SS.FF3'));
 --INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE) VALUES('상품3',3000,'InStock',3,TO_CHAR(SYSTIMESTAMP-3, 'YYYY-MM-DD HH:MI:SS.FF3'));
@@ -127,8 +148,8 @@ insert into NOTIFICATION (TITLE, CONTENT, WRITER) values('제목41','내용41','
 
 
 -- product_review 기본 설정
---INSERT INTO LEVEL (SALE_PERCENT) VALUES('20');
---INSERT INTO Member (PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ADDRESS, BIRTH, LEVEL_ID) VALUES('a', '글쓴이1','이메일1','폰번호1','Male','집주소1','생일1', '1');
+INSERT INTO LEVEL (SALE_PERCENT) VALUES('20');
+INSERT INTO Member (PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ADDRESS, BIRTH, LEVEL_ID) VALUES('a', '글쓴이1','이메일1','폰번호1','Male','집주소1','생일1', '1');
 --INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목1','내용1', '1', '1');
 --INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목2','내용2', '1', '1');
 --INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목3','내용3', '1', '1');
