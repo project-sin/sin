@@ -9,7 +9,7 @@ public class ProductDetailsResponse {
     private Long id;
     private String name;
     private String contentSummary;
-    private String thumbnailName;
+    private String thumbnailUrl;
     private int price;
     private float discountPercent;
     private HashMap<String, String> detailedInformation;

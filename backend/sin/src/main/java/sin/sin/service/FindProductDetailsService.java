@@ -4,6 +4,8 @@ import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sin.sin.aws.AwsS3Config;
+import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRespository;
 import sin.sin.dto.ProductDetailsResponse;
@@ -13,6 +15,7 @@ import sin.sin.dto.ProductDetailsResponse;
 public class FindProductDetailsService {
 
     private final ProductRespository productRespository;
+    private final AwsS3Config awsS3Config;
 
     @Transactional
     public ProductDetailsResponse findProductDetailsService(Long productId) {
@@ -25,16 +28,24 @@ public class FindProductDetailsService {
 
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
         HashMap<String, String> detailedInformation = findDetailedInformation(product);
+        String thumbnailUrl = getImageUrl(product.getThumbnailName());
 
         return ProductDetailsResponse.builder()
             .id(product.getId())
             .name(product.getName())
             .contentSummary(product.getContentSummary())
-            .thumbnailName(product.getThumbnailName())
+            .thumbnailUrl(thumbnailUrl)
             .price(product.getPrice())
             .discountPercent(product.getDiscountPercent())
             .detailedInformation(detailedInformation)
             .build();
+    }
+
+    private String getImageUrl(String fileName){
+        S3Util s3Util = new S3Util(awsS3Config.amazonS3Client(), awsS3Config.getBucket());
+        String imageUrl = s3Util.getFileURL(fileName);
+
+        return imageUrl;
     }
 
     private HashMap<String, String> findDetailedInformation(Product product) {
