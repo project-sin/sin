@@ -33,6 +33,9 @@ public class Product {
     private String name;
 
     @Column(nullable = false)
+    private String contentSummary;
+
+    @Column(nullable = false)
     private String thumbnailName;
 
     @Column(nullable = false)
@@ -44,6 +47,20 @@ public class Product {
 
     @Column(nullable = false)
     private float discountPercent;
+
+    private String saleUnit;
+
+    private int weight;
+
+    private String deliveryClassification;
+
+    private String packingType;
+
+    private String originCountry;
+
+    private String allergicReaction;
+
+    private String expirationDate;
 
     @CreationTimestamp
     private Timestamp createdDate;
