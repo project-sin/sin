@@ -32,7 +32,7 @@ public class FindProductDetailsService {
 
         return ProductDetailsResponse.builder()
             .id(product.getId())
-            .name(product.getName())
+            .productName(product.getProductName())
             .contentSummary(product.getContentSummary())
             .thumbnailUrl(thumbnailUrl)
             .price(product.getPrice())

@@ -7,7 +7,7 @@ import lombok.Builder;
 public class ProductDetailsResponse {
 
     private Long id;
-    private String name;
+    private String productName;
     private String contentSummary;
     private String thumbnailUrl;
     private int price;
