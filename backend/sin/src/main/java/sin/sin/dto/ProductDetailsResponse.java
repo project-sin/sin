@@ -1,14 +1,9 @@
 package sin.sin.dto;
 
-import java.util.Map;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import java.util.HashMap;
+import lombok.Builder;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
-@Getter
+@Builder
 public class ProductDetailsResponse {
 
     private Long id;
@@ -17,5 +12,5 @@ public class ProductDetailsResponse {
     private String thumbnailName;
     private int price;
     private float discountPercent;
-    private Map<String, String> detailedInformation;
+    private HashMap<String, String> detailedInformation;
 }

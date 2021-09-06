@@ -1,0 +1,66 @@
+package sin.sin.service;
+
+import java.util.HashMap;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import sin.sin.domain.product.Product;
+import sin.sin.domain.product.ProductRespository;
+import sin.sin.dto.ProductDetailsResponse;
+
+@Service
+@RequiredArgsConstructor
+public class FindProductDetailsService {
+
+    private final ProductRespository productRespository;
+
+    @Transactional
+    public ProductDetailsResponse findProductDetailsService(Long productId) {
+        Product product = productRespository.findById(productId)
+            .orElseThrow(() ->
+                new IllegalArgumentException("id가 " + productId + "에 해당되는 Product가 존재하지 않습니다."));
+
+        return buildProductDetailsResponse(product);
+    }
+
+    private ProductDetailsResponse buildProductDetailsResponse(Product product) {
+        HashMap<String, String> detailedInformation = findDetailedInformation(product);
+
+        return ProductDetailsResponse.builder()
+            .id(product.getId())
+            .name(product.getName())
+            .contentSummary(product.getContentSummary())
+            .thumbnailName(product.getThumbnailName())
+            .price(product.getPrice())
+            .discountPercent(product.getDiscountPercent())
+            .detailedInformation(detailedInformation)
+            .build();
+    }
+
+    private HashMap<String, String> findDetailedInformation(Product product) {
+        HashMap<String, String> detailedInformation = new HashMap<String, String>();
+        if (!product.getSaleUnit().isEmpty()) {
+            detailedInformation.put("saleUnit", product.getSaleUnit());
+        }
+        if (!product.getWeight().isEmpty()) {
+            detailedInformation.put("weight", product.getWeight());
+        }
+        if (!product.getDeliveryClassification().isEmpty()) {
+            detailedInformation.put("deliveryClassification", product.getDeliveryClassification());
+        }
+        if (!product.getPackingType().isEmpty()) {
+            detailedInformation.put("packingType", product.getPackingType());
+        }
+        if (!product.getOriginCountry().isEmpty()) {
+            detailedInformation.put("originCountry", product.getOriginCountry());
+        }
+        if (!product.getAllergicReaction().isEmpty()) {
+            detailedInformation.put("allergicReaction", product.getAllergicReaction());
+        }
+        if (!product.getExpirationDate().isEmpty()) {
+            detailedInformation.put("expirationDate", product.getExpirationDate());
+        }
+
+        return detailedInformation;
+    }
+}

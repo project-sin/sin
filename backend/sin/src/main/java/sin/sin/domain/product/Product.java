@@ -50,7 +50,7 @@ public class Product {
 
     private String saleUnit;
 
-    private int weight;
+    private String weight;
 
     private String deliveryClassification;
 
