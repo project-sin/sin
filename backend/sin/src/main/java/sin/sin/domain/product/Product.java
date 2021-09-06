@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import sin.sin.domain.productCatogory.ProductCatogory;
+import sin.sin.domain.productCategory.ProductCategory;
 
 @Entity
 @AllArgsConstructor
@@ -30,7 +30,7 @@ public class Product {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String productName;
 
     @Column(nullable = false)
     private String contentSummary;
@@ -43,9 +43,8 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "product_category_id")
-    private ProductCatogory productCategory;
+    private ProductCategory productCategory;
 
-    @Column(nullable = false)
     private float discountPercent;
 
     private String saleUnit;
