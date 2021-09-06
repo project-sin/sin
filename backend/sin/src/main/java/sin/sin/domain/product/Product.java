@@ -36,9 +36,6 @@ public class Product {
     private String thumbnailName;
 
     @Column(nullable = false)
-    private String thumbnailPath;
-
-    @Column(nullable = false)
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
