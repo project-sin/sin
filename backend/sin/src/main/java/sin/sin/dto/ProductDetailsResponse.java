@@ -2,8 +2,10 @@ package sin.sin.dto;
 
 import java.util.HashMap;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
+@Getter
 public class ProductDetailsResponse {
 
     private Long id;
