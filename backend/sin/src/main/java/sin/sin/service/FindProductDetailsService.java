@@ -50,25 +50,25 @@ public class FindProductDetailsService {
 
     private HashMap<String, String> findDetailedInformation(Product product) {
         HashMap<String, String> detailedInformation = new HashMap<String, String>();
-        if (!product.getSaleUnit().isEmpty()) {
+        if (product.getSaleUnit() != null) {
             detailedInformation.put("saleUnit", product.getSaleUnit());
         }
-        if (!product.getWeight().isEmpty()) {
+        if (product.getWeight() != null) {
             detailedInformation.put("weight", product.getWeight());
         }
-        if (!product.getDeliveryClassification().isEmpty()) {
+        if (product.getDeliveryClassification() != null) {
             detailedInformation.put("deliveryClassification", product.getDeliveryClassification());
         }
-        if (!product.getPackingType().isEmpty()) {
+        if (product.getPackingType() != null) {
             detailedInformation.put("packingType", product.getPackingType());
         }
-        if (!product.getOriginCountry().isEmpty()) {
+        if (product.getOriginCountry() != null) {
             detailedInformation.put("originCountry", product.getOriginCountry());
         }
-        if (!product.getAllergicReaction().isEmpty()) {
+        if (product.getAllergicReaction() != null) {
             detailedInformation.put("allergicReaction", product.getAllergicReaction());
         }
-        if (!product.getExpirationDate().isEmpty()) {
+        if (product.getExpirationDate() != null) {
             detailedInformation.put("expirationDate", product.getExpirationDate());
         }
 
