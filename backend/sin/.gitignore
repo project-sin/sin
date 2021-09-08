@@ -37,4 +37,4 @@ out/
 .vscode/
 
 # ignore properties file
-application-aws.properties
+/src/main/resources/application-aws.*
