@@ -12,10 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.level.Level;
 
@@ -24,6 +22,7 @@ import sin.sin.domain.level.Level;
 @NoArgsConstructor
 @Getter
 @Builder
+@ToString
 public class Member {
 
     @Id

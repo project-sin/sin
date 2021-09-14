@@ -1,6 +1,5 @@
 package sin.sin.service;
 
-import com.querydsl.core.Tuple;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import java.util.List;
 @Service
 public class ProductListService {
     private final ProductRepository productRepository;
-    private final SearchProductRepository searchProductRepsotory;
+    private final SearchProductRepository searchProductRepository;
 
     @Transactional(readOnly = true)
     public List<Product> newProductList() {
@@ -34,12 +33,13 @@ public class ProductListService {
 
     @Transactional(readOnly = true)
     public List<ProductListResponse> BestProductList() {
-        return searchProductRepsotory.findTop20ByOrderByProductReviewDesc();
+        return searchProductRepository.findTop20ByOrderByProductReviewCntDesc();
     }
 
     @Transactional(readOnly = true)
     public List<Product> CheapProductList() {
         return productRepository.findTop30ByOrderByDiscountPercentDesc();
     }
+    
 
 }

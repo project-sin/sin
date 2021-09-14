@@ -1,32 +1,22 @@
 package sin.sin.domain.productReview;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.productReviewImg.ProductReviewImg;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Builder
 public class ProductReview {
 
@@ -42,7 +32,7 @@ public class ProductReview {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "product_id")
     private Product product;
 
@@ -60,4 +50,17 @@ public class ProductReview {
     @OneToMany
     @JoinColumn(name= "product_review_img_id")
     private List<ProductReviewImg> productReviewImgList = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "ProductReview{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", member=" + member +
+                ", createdDate=" + createdDate +
+                ", views=" + views +
+                ", productReviewImgList=" + productReviewImgList +
+                '}';
+    }
 }

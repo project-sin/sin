@@ -1,19 +1,21 @@
 package sin.sin.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import sin.sin.domain.product.Status;
 import sin.sin.domain.productCategory.ProductCategory;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Builder
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class ProductListResponse {
-    private Long id;
     private String name;
+    private String productCode;
     private String thumbnailName;
     private String thumbnailPath;
     private int price;
@@ -22,6 +24,5 @@ public class ProductListResponse {
     private Timestamp createdDate;
     private Status status;
     private int reviewCount;
-
 
 }

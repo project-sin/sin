@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.product.Product;
+import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductListResponse;
 
 import javax.transaction.Transactional;
@@ -33,7 +34,7 @@ class ProductListServiceTest {
     }
 
     @Test
-    public void 베스트상품_20() {
+    public void 후기순_베스트상품_20() {
         //given
         List<ProductListResponse> products = productListService.BestProductList();
 
