@@ -22,8 +22,6 @@ public class NotificationController {
 
     private final NotificationService notificationService;
 
-    //TODO : exception값 제대로 날려주기
-    //TODO : PageableDefault sort createdDate순으로 하기
     @GetMapping(value = "/list", params = {"id=notice"})
     public ResponseEntity<?> searchList(@RequestParam(value = "search[subject]", required = false) String subject,
                                         @RequestParam(value = "search[name]", required = false) String name,
