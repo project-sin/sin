@@ -16,8 +16,7 @@ import java.util.List;
 public class ProductListResponse {
     private String name;
     private String productCode;
-    private String thumbnailName;
-    private String thumbnailPath;
+    private String imageUrl;
     private int price;
     private ProductCategory productCategory;
     private int discountPercent;

@@ -1,10 +1,10 @@
 package sin.sin.service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sin.sin.domain.product.Product;
-import sin.sin.domain.product.ProductRepository;
+import org.springframework.data.domain.Page;
 import sin.sin.dto.ProductListResponse;
 
 import javax.transaction.Transactional;
@@ -19,10 +19,17 @@ class ProductListServiceTest {
     @Autowired
     ProductListService productListService;
 
+    @AfterEach
+    void print(){
+        products.stream().forEach(System.out::println);
+    }
+
+    List<ProductListResponse> products;
+
     @Test
     public void 이번달_신상품() {
         //given
-        List<Product> products = productListService.newProductList();
+        products = productListService.newProductList();
 
         //when
         Timestamp first = products.get(0).getCreatedDate();
@@ -36,7 +43,7 @@ class ProductListServiceTest {
     @Test
     public void 후기순_베스트상품_20() {
         //given
-        List<ProductListResponse> products = productListService.BestProductList();
+        products = productListService.bestProductList();
 
         //when
         int first = products.get(0).getReviewCount();
@@ -51,7 +58,7 @@ class ProductListServiceTest {
     @Test
     public void 알뜰쇼핑() {
         //given
-        List<Product> products = productListService.CheapProductList();
+        products = productListService.cheapProductList();
 
         //when
         int first = products.get(0).getDiscountPercent();
@@ -60,6 +67,20 @@ class ProductListServiceTest {
         //then
         //첫 상품의 discountPercent >= 두번째 상품의 discountPercent
         assertThat(first).isGreaterThanOrEqualTo(second);
+    }
+
+    @Test
+    public void 카테고리_검색() {
+        //given
+        String category="907";
+        products = productListService.categoryProductList(category);
+
+        //when
+        String main = products.get(0).getProductCategory().getMainCategory();
+
+        //then
+        //첫 상품의 discountPercent >= 두번째 상품의 discountPercent
+        assertThat(main).isEqualTo(category);
     }
 
 }
