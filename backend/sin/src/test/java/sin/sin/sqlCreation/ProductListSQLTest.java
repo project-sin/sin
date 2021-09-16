@@ -11,15 +11,6 @@ import sin.sin.domain.productReview.ProductReviewRepostiory;
 @SpringBootTest
 public class ProductListSQLTest {
 
-    @Autowired
-    ProductRepository productRepository;
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    LevelRepository levelRepository;
-    @Autowired
-    ProductReviewRepostiory productReviewRepostiory;
-
     @Test
     public void test() throws Exception {
         //InStock

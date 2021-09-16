@@ -23,10 +23,16 @@ import sin.sin.domain.member.Member;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.productReviewImg.ProductReviewImg;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Builder
 public class ProductReview {
 
@@ -42,7 +48,7 @@ public class ProductReview {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "product_id")
     private Product product;
 

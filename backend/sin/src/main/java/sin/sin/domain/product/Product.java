@@ -1,5 +1,6 @@
 package sin.sin.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,9 +15,10 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Getter
+@Setter
+@ToString
 public class Product {
 
     @Id
@@ -26,6 +28,9 @@ public class Product {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
+    private String productCode;
 
     //TODO : 주석 풀기
 
@@ -39,8 +44,7 @@ public class Product {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(nullable = false, name = "product_category_id")
-    @JoinColumn(name = "product_category_id")
+    @JoinColumn(nullable = false, name = "product_category_id")
     private ProductCategory productCategory;
 
     @Column(nullable = false)
@@ -49,10 +53,11 @@ public class Product {
     @CreationTimestamp
     private Timestamp createdDate;
 
-    @OneToMany(mappedBy="product")
+    @OneToMany(mappedBy="product", fetch=FetchType.LAZY)
     private List<ProductReview> productReview = new ArrayList<>();
 
     @NotNull
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Status status;
+
 }
