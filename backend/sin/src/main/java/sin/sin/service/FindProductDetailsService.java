@@ -7,21 +7,21 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
-import sin.sin.domain.product.ProductRespository;
+import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetailsResponse;
 
 @Service
 @RequiredArgsConstructor
 public class FindProductDetailsService {
 
-    private final ProductRespository productRespository;
+    private final ProductRepository productRepository;
     private final AwsS3Config awsS3Config;
 
     @Transactional
-    public ProductDetailsResponse findProductDetailsService(Long goodsNo) {
-        Product product = productRespository.findById(goodsNo)
+    public ProductDetailsResponse findProductDetailsService(String goodsNo) {
+        Product product = productRepository.findProductByProductCode(goodsNo)
             .orElseThrow(() ->
-                new IllegalArgumentException("id가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
+                new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
 
         return buildProductDetailsResponse(product);
     }

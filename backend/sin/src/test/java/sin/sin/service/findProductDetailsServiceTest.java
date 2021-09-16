@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.product.Product;
-import sin.sin.domain.product.ProductRespository;
+import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetailsResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -15,7 +15,7 @@ import sin.sin.dto.ProductDetailsResponse;
 public class findProductDetailsServiceTest {
 
     @Autowired
-    private ProductRespository productRespository;
+    private ProductRepository productRepository;
 
     @Autowired
     private FindProductDetailsService findProductDetailsService;
@@ -23,11 +23,11 @@ public class findProductDetailsServiceTest {
     @Test
     void findProductDetailsService() {
         //given   import.sql로 생성된 product를 가져옴
-        Product product = productRespository.findById(1L)
+        Product product = productRepository.findById(1L)
             .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
         //when
         ProductDetailsResponse productDetails = findProductDetailsService
-            .findProductDetailsService(product.getId());
+            .findProductDetailsService(product.getProductCode());
 
         //then
         assertThat(productDetails.getProductName()).isEqualTo(product.getName());

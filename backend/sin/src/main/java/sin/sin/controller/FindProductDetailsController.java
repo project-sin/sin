@@ -17,7 +17,7 @@ public class FindProductDetailsController {
     private final FindProductDetailsService findProductDetailsService;
 
     @GetMapping
-    public ResponseEntity<ProductDetailsResponse> findProductDetails(@RequestParam("goodsno") Long goodsNo) {
+    public ResponseEntity<ProductDetailsResponse> findProductDetails(@RequestParam("goodsno") String goodsNo) {
 
         return ResponseEntity.ok()
             .body(findProductDetailsService.findProductDetailsService(goodsNo));
