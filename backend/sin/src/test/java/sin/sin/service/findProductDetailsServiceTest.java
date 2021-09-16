@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
-import sin.sin.dto.ProductDetailsResponse;
+import sin.sin.dto.ProductDetails.ProductDetailsResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -31,7 +31,9 @@ public class findProductDetailsServiceTest {
 
         //then
         assertThat(productDetails.getProductName()).isEqualTo(product.getName());
-        assertThat(productDetails.getDetailedInformation().size()).isEqualTo(5);
+        assertThat(productDetails.getProductInformationResponse().getSaleUnit()).isEqualTo(
+            product.getProductDetails().getSaleUnit());
+        assertThat(productDetails.getProductInformationResponse().getAllergicReaction()).isNull();
         System.out.println(productDetails);
     }
 }

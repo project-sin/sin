@@ -1,6 +1,5 @@
-package sin.sin.dto;
+package sin.sin.dto.ProductDetails;
 
-import java.util.HashMap;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -16,5 +15,5 @@ public class ProductDetailsResponse {
     private String thumbnailUrl;
     private int price;
     private int discountPercent;
-    private HashMap<String, String> detailedInformation;
+    private ProductInformationResponse productInformationResponse;
 }

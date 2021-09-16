@@ -1,6 +1,5 @@
 package sin.sin.service;
 
-import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +8,8 @@ import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductDetails;
 import sin.sin.domain.product.ProductRepository;
-import sin.sin.dto.ProductDetailsResponse;
+import sin.sin.dto.ProductDetails.ProductDetailsResponse;
+import sin.sin.dto.ProductDetails.ProductInformationResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +28,6 @@ public class FindProductDetailsService {
     }
 
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
-        HashMap<String, String> detailedInformation = findDetailedInformation(product.getProductDetails());
         String thumbnailUrl = getImageUrl(
             product.getProductCategory().getMainCategory(),
             product.getProductCategory().getSubCategory(),
@@ -41,7 +40,7 @@ public class FindProductDetailsService {
             .thumbnailUrl(thumbnailUrl)
             .price(product.getPrice())
             .discountPercent(product.getDiscountPercent())
-            .detailedInformation(detailedInformation)
+            .productInformationResponse(findDetailedInformation(product.getProductDetails()))
             .build();
     }
 
@@ -55,30 +54,17 @@ public class FindProductDetailsService {
         return imageUrl;
     }
 
-    private HashMap<String, String> findDetailedInformation(ProductDetails productDetails) {
-        HashMap<String, String> detailedInformation = new HashMap<String, String>();
-        if (productDetails.getSaleUnit() != null) {
-            detailedInformation.put("saleUnit", productDetails.getSaleUnit());
-        }
-        if (productDetails.getWeight() != null) {
-            detailedInformation.put("weight", productDetails.getWeight());
-        }
-        if (productDetails.getDeliveryClassification() != null) {
-            detailedInformation.put("deliveryClassification", productDetails.getDeliveryClassification());
-        }
-        if (productDetails.getPackingType() != null) {
-            detailedInformation.put("packingType", productDetails.getPackingType());
-        }
-        if (productDetails.getOriginCountry() != null) {
-            detailedInformation.put("originCountry", productDetails.getOriginCountry());
-        }
-        if (productDetails.getAllergicReaction() != null) {
-            detailedInformation.put("allergicReaction", productDetails.getAllergicReaction());
-        }
-        if (productDetails.getExpirationDate() != null) {
-            detailedInformation.put("expirationDate", productDetails.getExpirationDate());
-        }
+    private ProductInformationResponse findDetailedInformation(ProductDetails productDetails) {
+        ProductInformationResponse productInformationResponse = ProductInformationResponse.builder()
+            .saleUnit(productDetails.getSaleUnit())
+            .weight(productDetails.getWeight())
+            .deliveryClassification(productDetails.getDeliveryClassification())
+            .packingType(productDetails.getPackingType())
+            .originCountry(productDetails.getOriginCountry())
+            .allergicReaction(productDetails.getAllergicReaction())
+            .expirationDate(productDetails.getExpirationDate())
+            .build();
 
-        return detailedInformation;
+        return productInformationResponse;
     }
 }
