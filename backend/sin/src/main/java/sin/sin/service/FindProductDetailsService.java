@@ -1,6 +1,7 @@
 package sin.sin.service;
 
 import java.util.HashMap;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,7 +9,9 @@ import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRespository;
+import sin.sin.domain.productCategory.ProductCategory;
 import sin.sin.dto.ProductDetailsResponse;
+import sin.sin.dto.ProductListResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -28,11 +31,14 @@ public class FindProductDetailsService {
 
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
         HashMap<String, String> detailedInformation = findDetailedInformation(product);
-        String thumbnailUrl = getImageUrl(product.getThumbnailName());
+        String thumbnailUrl = getImageUrl(
+            product.getProductCategory().getMainCategory(),
+            product.getProductCategory().getSubCategory(),
+            product.getProductCode());
 
         return ProductDetailsResponse.builder()
             .id(product.getId())
-            .productName(product.getProductName())
+            .productName(product.getName())
             .contentSummary(product.getContentSummary())
             .thumbnailUrl(thumbnailUrl)
             .price(product.getPrice())
@@ -41,7 +47,10 @@ public class FindProductDetailsService {
             .build();
     }
 
-    private String getImageUrl(String fileName){
+    private String getImageUrl(String mainCategory, String subCategory, String productCode) {
+        String fileName =
+            "product/" + mainCategory + "/" + subCategory + "/" + productCode + ".jpg";
+
         S3Util s3Util = new S3Util(awsS3Config.amazonS3Client(), awsS3Config.getBucket());
         String imageUrl = s3Util.getFileURL(fileName);
 
