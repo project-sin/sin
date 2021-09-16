@@ -33,11 +33,12 @@ public class Product {
     @Column(nullable = false)
     private String productCode;
 
+    private String contentSummary;
+
     //TODO : 주석 풀기
 
     //    @Column(nullable = false)
     private String thumbnailName;
-    private String contentSummary;
 
     //    @Column(nullable = false)
     private String thumbnailPath;
