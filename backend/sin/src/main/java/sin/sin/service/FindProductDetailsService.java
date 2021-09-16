@@ -1,7 +1,6 @@
 package sin.sin.service;
 
 import java.util.HashMap;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +8,7 @@ import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRespository;
-import sin.sin.domain.productCategory.ProductCategory;
 import sin.sin.dto.ProductDetailsResponse;
-import sin.sin.dto.ProductListResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -21,10 +18,10 @@ public class FindProductDetailsService {
     private final AwsS3Config awsS3Config;
 
     @Transactional
-    public ProductDetailsResponse findProductDetailsService(Long productId) {
-        Product product = productRespository.findById(productId)
+    public ProductDetailsResponse findProductDetailsService(Long goodsNo) {
+        Product product = productRespository.findById(goodsNo)
             .orElseThrow(() ->
-                new IllegalArgumentException("id가 " + productId + "에 해당되는 Product가 존재하지 않습니다."));
+                new IllegalArgumentException("id가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
 
         return buildProductDetailsResponse(product);
     }
