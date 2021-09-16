@@ -52,7 +52,6 @@ class ProductListServiceTest {
         //then
         //첫 상품의 reviewCount >= 두번째 상품의 reviewCount
         assertThat(first).isGreaterThanOrEqualTo(second);
-
     }
 
     @Test
@@ -82,5 +81,4 @@ class ProductListServiceTest {
         //첫 상품의 discountPercent >= 두번째 상품의 discountPercent
         assertThat(main).isEqualTo(category);
     }
-
 }

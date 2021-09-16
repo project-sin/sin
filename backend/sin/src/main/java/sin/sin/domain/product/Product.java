@@ -50,7 +50,7 @@ public class Product {
     @JoinColumn(nullable = false, name = "product_category_id")
     private ProductCategory productCategory;
 
-    private float discountPercent;
+    private int discountPercent;
 
     private String saleUnit;
 

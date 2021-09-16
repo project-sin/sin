@@ -30,7 +30,8 @@ public class findProductDetailsServiceTest {
             .findProductDetailsService(product.getId());
 
         //then
-        assertThat(productDetails.getProductName()).isEqualTo(product.getProductName());
+        assertThat(productDetails.getProductName()).isEqualTo(product.getName());
         assertThat(productDetails.getDetailedInformation().size()).isEqualTo(5);
+        System.out.println(productDetails);
     }
 }
