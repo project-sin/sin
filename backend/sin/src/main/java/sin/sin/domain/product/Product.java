@@ -1,42 +1,46 @@
 package sin.sin.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
-import java.sql.Timestamp;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.productCategory.ProductCategory;
+import sin.sin.domain.productCategory.ProductCategory;
+import sin.sin.domain.productReview.ProductReview;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Getter
+@Setter
+@ToString
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_id", nullable = false)
+    @Column(name = "product_id", nullable = false)
     private Long id;
 
     @Column(nullable = false)
-    private String productName;
+    private String name;
 
     @Column(nullable = false)
+    private String productCode;
+
+    //TODO : 주석 풀기
+
+    //    @Column(nullable = false)
+    private String thumbnailName;
     private String contentSummary;
 
-    @Column(nullable = false)
-    private String thumbnailName;
+    //    @Column(nullable = false)
+    private String thumbnailPath;
 
     @Column(nullable = false)
     private int price;
@@ -63,6 +67,9 @@ public class Product {
 
     @CreationTimestamp
     private Timestamp createdDate;
+
+    @OneToMany(mappedBy="product", fetch=FetchType.LAZY)
+    private List<ProductReview> productReview = new ArrayList<>();
 
     @NotNull
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장

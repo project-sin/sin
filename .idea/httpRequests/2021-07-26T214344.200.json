@@ -1,0 +1,77 @@
+{
+  "content": [
+    {
+      "id": 41,
+      "title": "제목41",
+      "content": "내용41",
+      "writer": "글쓴이41",
+      "createdDate": null,
+      "views": 5
+    },
+    {
+      "id": 40,
+      "title": "제목40",
+      "content": "내용40",
+      "writer": "글쓴이40",
+      "createdDate": null,
+      "views": 4
+    },
+    {
+      "id": 34,
+      "title": "제목34",
+      "content": "내용34",
+      "writer": "글쓴이34",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 24,
+      "title": "제목24",
+      "content": "내용24",
+      "writer": "글쓴이24",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 14,
+      "title": "제목14",
+      "content": "내용14",
+      "writer": "글쓴이14",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 4,
+      "title": "제목4",
+      "content": "내용4",
+      "writer": "글쓴이4",
+      "createdDate": null,
+      "views": 0
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalElements": 6,
+  "totalPages": 1,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 6,
+  "empty": false
+}

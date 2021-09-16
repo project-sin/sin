@@ -1,0 +1,37 @@
+{
+  "content": [
+    {
+      "id": 19,
+      "title": "제목19",
+      "content": "내용19",
+      "writer": "글쓴이19",
+      "createdDate": null,
+      "views": 0
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 10,
+    "pageSize": 10,
+    "pageNumber": 1,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalPages": 2,
+  "totalElements": 11,
+  "size": 10,
+  "number": 1,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": false,
+  "numberOfElements": 1,
+  "empty": false
+}

@@ -1,0 +1,350 @@
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
+Content-Type: application/json
+
+<> 2021-08-09T153938.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-08-09T153920.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=k
+Content-Type: application/json
+
+<> 2021-08-09T153915.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&page=1
+Content-Type: application/json
+
+<> 2021-07-31T200149.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-31T200145.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&page=1
+Content-Type: application/json
+
+<> 2021-07-31T200100.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-31T195517.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[contents]=on&search[word]=4
+Content-Type: application/json
+
+<> 2021-07-26T214344.200.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=42
+Content-Type: application/json
+
+<> 2021-07-26T213243.500.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=41
+Content-Type: application/json
+
+<> 2021-07-26T213243-3.200.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=40
+Content-Type: application/json
+
+<> 2021-07-26T213243-2.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
+Content-Type: application/json
+
+<> 2021-07-26T213243-1.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[contents]=on&search[word]=내용3
+Content-Type: application/json
+
+<> 2021-07-26T213243.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-07-26T213242-3.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=k
+Content-Type: application/json
+
+<> 2021-07-26T213242-2.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=0
+Content-Type: application/json
+
+<> 2021-07-26T213242-1.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[word]=제목1
+Content-Type: application/json
+
+<> 2021-07-26T213242.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=
+Content-Type: application/json
+
+<> 2021-07-26T213242.400.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&page=1
+Content-Type: application/json
+
+<> 2021-07-26T213241-1.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-26T213241.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
+Content-Type: application/json
+
+<> 2021-07-25T231603.200.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=41
+Content-Type: application/json
+
+<> 2021-07-25T231558.200.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=42
+Content-Type: application/json
+
+<> 2021-07-25T231556.500.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T231543.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&page=1
+Content-Type: application/json
+
+<> 2021-07-25T223734.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice?page=1
+Content-Type: application/json
+
+<> 2021-07-25T223723.400.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T223718.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T223607.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T223253.500.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=
+Content-Type: application/json
+
+<> 2021-07-25T223250.400.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=0
+Content-Type: application/json
+
+<> 2021-07-25T223241.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T215616.500.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=
+Content-Type: application/json
+
+<> 2021-07-25T215614.400.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[word]=제목1
+Content-Type: application/json
+
+<> 2021-07-25T215605.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=1
+Content-Type: application/json
+
+<> 2021-07-25T215544.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=제목1
+Content-Type: application/json
+
+<> 2021-07-25T215524.200.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=42
+Content-Type: application/json
+
+<> 2021-07-25T215518.500.json
+
+###
+
+GET http://localhost:8080/shop/board/view?id=notice&no=41
+Content-Type: application/json
+
+<> 2021-07-25T215513.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=1
+Content-Type: application/json
+
+<> 2021-07-25T215508.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=0
+Content-Type: application/json
+
+<> 2021-07-25T215503.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[contents]=on&search[word]=내용3
+Content-Type: application/json
+
+<> 2021-07-25T215454.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-07-25T215434.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-07-25T215417.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-07-25T215412.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice
+Content-Type: application/json
+
+<> 2021-07-25T215355.500.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=k
+Content-Type: application/json
+
+<> 2021-07-25T205451.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[name]=on&search[word]=글쓴이2
+Content-Type: application/json
+
+<> 2021-07-25T205350.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[name]=on&search[word]=제목1
+Content-Type: application/json
+
+<> 2021-07-25T204528.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[subject]=on&search[word]=제목1&page=0
+Content-Type: application/json
+
+<> 2021-07-25T204514.200.json
+
+###
+
+GET http://localhost:8080/shop/board/list?id=notice&search[word]=제목1
+Content-Type: application/json
+
+<> 2021-07-25T204446.200.json
+
+###
+

@@ -1,0 +1,18 @@
+{
+  "next": {
+    "id": 41,
+    "title": "제목41"
+  },
+  "cur": {
+    "id": 40,
+    "title": "제목40",
+    "content": "내용40",
+    "writer": "글쓴이40",
+    "createdDate": null,
+    "views": 4
+  },
+  "prev": {
+    "id": 39,
+    "title": "제목39"
+  }
+}
