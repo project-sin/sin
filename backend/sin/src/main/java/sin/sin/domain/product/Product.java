@@ -1,10 +1,8 @@
 package sin.sin.domain.product;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import sin.sin.domain.productCategory.ProductCategory;
 import sin.sin.domain.productCategory.ProductCategory;
 import sin.sin.domain.productReview.ProductReview;
 
@@ -52,19 +50,8 @@ public class Product {
 
     private int discountPercent;
 
-    private String saleUnit;
-
-    private String weight;
-
-    private String deliveryClassification;
-
-    private String packingType;
-
-    private String originCountry;
-
-    private String allergicReaction;
-
-    private String expirationDate;
+    @Embedded
+    private ProductDetails productDetails;
 
     @CreationTimestamp
     private Timestamp createdDate;

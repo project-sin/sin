@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
+import sin.sin.domain.product.ProductDetails;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetailsResponse;
 
@@ -27,7 +28,7 @@ public class FindProductDetailsService {
     }
 
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
-        HashMap<String, String> detailedInformation = findDetailedInformation(product);
+        HashMap<String, String> detailedInformation = findDetailedInformation(product.getProductDetails());
         String thumbnailUrl = getImageUrl(
             product.getProductCategory().getMainCategory(),
             product.getProductCategory().getSubCategory(),
@@ -54,28 +55,28 @@ public class FindProductDetailsService {
         return imageUrl;
     }
 
-    private HashMap<String, String> findDetailedInformation(Product product) {
+    private HashMap<String, String> findDetailedInformation(ProductDetails productDetails) {
         HashMap<String, String> detailedInformation = new HashMap<String, String>();
-        if (product.getSaleUnit() != null) {
-            detailedInformation.put("saleUnit", product.getSaleUnit());
+        if (productDetails.getSaleUnit() != null) {
+            detailedInformation.put("saleUnit", productDetails.getSaleUnit());
         }
-        if (product.getWeight() != null) {
-            detailedInformation.put("weight", product.getWeight());
+        if (productDetails.getWeight() != null) {
+            detailedInformation.put("weight", productDetails.getWeight());
         }
-        if (product.getDeliveryClassification() != null) {
-            detailedInformation.put("deliveryClassification", product.getDeliveryClassification());
+        if (productDetails.getDeliveryClassification() != null) {
+            detailedInformation.put("deliveryClassification", productDetails.getDeliveryClassification());
         }
-        if (product.getPackingType() != null) {
-            detailedInformation.put("packingType", product.getPackingType());
+        if (productDetails.getPackingType() != null) {
+            detailedInformation.put("packingType", productDetails.getPackingType());
         }
-        if (product.getOriginCountry() != null) {
-            detailedInformation.put("originCountry", product.getOriginCountry());
+        if (productDetails.getOriginCountry() != null) {
+            detailedInformation.put("originCountry", productDetails.getOriginCountry());
         }
-        if (product.getAllergicReaction() != null) {
-            detailedInformation.put("allergicReaction", product.getAllergicReaction());
+        if (productDetails.getAllergicReaction() != null) {
+            detailedInformation.put("allergicReaction", productDetails.getAllergicReaction());
         }
-        if (product.getExpirationDate() != null) {
-            detailedInformation.put("expirationDate", product.getExpirationDate());
+        if (productDetails.getExpirationDate() != null) {
+            detailedInformation.put("expirationDate", productDetails.getExpirationDate());
         }
 
         return detailedInformation;
