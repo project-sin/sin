@@ -1,0 +1,109 @@
+{
+  "content": [
+    {
+      "id": 19,
+      "title": "제목19",
+      "content": "내용19",
+      "writer": "글쓴이19",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 18,
+      "title": "제목18",
+      "content": "내용18",
+      "writer": "글쓴이18",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 17,
+      "title": "제목17",
+      "content": "내용17",
+      "writer": "글쓴이17",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 16,
+      "title": "제목16",
+      "content": "내용16",
+      "writer": "글쓴이16",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 15,
+      "title": "제목15",
+      "content": "내용15",
+      "writer": "글쓴이15",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 14,
+      "title": "제목14",
+      "content": "내용14",
+      "writer": "글쓴이14",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 13,
+      "title": "제목13",
+      "content": "내용13",
+      "writer": "글쓴이13",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 12,
+      "title": "제목12",
+      "content": "내용12",
+      "writer": "글쓴이12",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 11,
+      "title": "제목11",
+      "content": "내용11",
+      "writer": "글쓴이11",
+      "createdDate": null,
+      "views": 0
+    },
+    {
+      "id": 10,
+      "title": "제목10",
+      "content": "내용10",
+      "writer": "글쓴이10",
+      "createdDate": null,
+      "views": 0
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": false,
+  "totalElements": 11,
+  "totalPages": 2,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "first": true,
+  "numberOfElements": 10,
+  "empty": false
+}

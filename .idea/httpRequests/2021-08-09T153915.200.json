@@ -1,0 +1,17 @@
+{
+  "content": [],
+  "pageable": "INSTANCE",
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 0,
+  "size": 0,
+  "number": 0,
+  "sort": {
+    "unsorted": true,
+    "sorted": false,
+    "empty": true
+  },
+  "first": true,
+  "numberOfElements": 0,
+  "empty": true
+}

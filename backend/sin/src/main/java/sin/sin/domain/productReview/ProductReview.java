@@ -1,6 +1,22 @@
 package sin.sin.domain.productReview;
 
-import lombok.*;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
@@ -50,17 +66,4 @@ public class ProductReview {
     @OneToMany
     @JoinColumn(name= "product_review_img_id")
     private List<ProductReviewImg> productReviewImgList = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "ProductReview{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", member=" + member +
-                ", createdDate=" + createdDate +
-                ", views=" + views +
-                ", productReviewImgList=" + productReviewImgList +
-                '}';
-    }
 }
