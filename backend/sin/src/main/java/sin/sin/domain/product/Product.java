@@ -1,6 +1,5 @@
 package sin.sin.domain.product;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,6 +31,8 @@ public class Product {
     @Column(nullable = false)
     private String productCode;
 
+    private String contentSummary;
+
     //TODO : 주석 풀기
 
     //    @Column(nullable = false)
@@ -47,8 +48,10 @@ public class Product {
     @JoinColumn(nullable = false, name = "product_category_id")
     private ProductCategory productCategory;
 
-    @Column(nullable = false)
     private int discountPercent;
+
+    @Embedded
+    private ProductDetails productDetails;
 
     @CreationTimestamp
     private Timestamp createdDate;
@@ -59,5 +62,4 @@ public class Product {
     @NotNull
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Status status;
-
 }

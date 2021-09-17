@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
 import javax.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,11 @@ class FreqQuestionServiceTest {
 
     @Autowired
     private FreqQuestionService freqQuestionService;
+
+    @BeforeEach
+    public void clear(){
+        freqQuestionRepository.deleteAll();
+    }
 
     @Test
     void findAllFaq() {
@@ -42,9 +48,6 @@ class FreqQuestionServiceTest {
         assertThat(faqs1.size()).isEqualTo(10);
         assertThat(faqs2.size()).isEqualTo(10);
         assertThat(faqs3.size()).isEqualTo(4);
-        assertThat(faqs1.get(0).getId()).isEqualTo(24);
-        assertThat(faqs2.get(0).getId()).isEqualTo(14);
-        assertThat(faqs3.get(0).getId()).isEqualTo(4);
     }
 
     @Test

@@ -1,0 +1,3 @@
+### ProductCode으로 details 확인
+GET http://localhost:8080/shop/goods/goods_view?goodsno=70
+Content-Type: application/json
