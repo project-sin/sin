@@ -71,9 +71,9 @@ const ProductList = (props) => {
              <ProductDetails>
                <ProductName>{product.name}</ProductName>
                <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-               <ProductPrice>{product.price * (1-product.discountPercent/100)}원</ProductPrice>
+               <ProductPrice>{Math.floor(product.price * (1-product.discountPercent/100))}원</ProductPrice>
                <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-               <ProductSummary>{product.contentSummary?product.contentSummary: "상품요약정보"}</ProductSummary>
+               <ProductSummary>{product.contentSummary ? product.contentSummary : "상품요약정보"}</ProductSummary>
              </ProductDetails>
            </Container>;
   }) : "";
