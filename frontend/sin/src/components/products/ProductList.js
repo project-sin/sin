@@ -16,6 +16,12 @@ const Container = styled.div`
   height: 500px;
   border: 2px solid rgb(90, 155, 213);
 `;
+const ProductImg = styled.img`
+  display: inline-block;
+  width: 320px;
+  height: 400px;
+ 
+`;
 
 const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
@@ -28,15 +34,14 @@ const ProductList = (props) => {
     });
   },[]);
 
+  const productLists = products ? products.map((product)=>{
+    return <Container><ProductImg src= {product.imageUrl} /></Container>;
+  }) : "";
+
+console.log(products)
   return (
       <ProductsListWrap>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
-        <Container>ㅎㅇㅎㅇ</Container>
+        {productLists}
       </ProductsListWrap>
   );
 };
