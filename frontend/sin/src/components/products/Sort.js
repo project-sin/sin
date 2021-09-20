@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 import query from 'query-string';
 import axios from 'axios';
-import {BACKEND_ADDRESS} from "../constants/ADDRESS";
+import {BACKEND_ADDRESS} from "../../constants/ADDRESS";
 
 const Listwrap = styled.div`margin-top: 50px;`
 const Container = styled.div`width:1050px; margin: 0 auto;`
@@ -22,7 +22,7 @@ const Orderby = styled.button` float: right; border: none; background: none; cur
 const Orderbylistul = styled.ul`position: absolute; display: none; width: 100%; top: 30px; right: -10px; width: 90px; text-align: right; box-shadow: 0 2px 4px rgb(0 0 0 / 30%)`
 const Orderbylistli = styled.li`font-size: 12px; font-weight: bold; color: gray; padding: 10px 5px 10px 0; cursor: pointer; &:hover {color: #5f0080;}`
 
-const List = ({history,location}) => {
+const Sort = ({history,location}) => {
     const [selectedli,setSelectedli] = useState('')
     const [pageinfo,setPageinfo] = useState({
         kor:'',
@@ -139,4 +139,4 @@ const List = ({history,location}) => {
     )
 }
 
-export default List;
+export default Sort;
