@@ -4,7 +4,7 @@ import { BACKEND_ADDRESS } from '../../constants/ADDRESS';
 
 const GetNoticeApi = (page) => {
     return (
-        axios.get(BACKEND_ADDRESS+`/shop/board/list?id=notice&page=`+page)
+        axios.get(BACKEND_ADDRESS+`/board/list?id=notice&page=`+page)
     )
 }
 
