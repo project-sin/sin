@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import FindProductListApi from "./FindProductListApi";
+import queryString from "query-string";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -15,7 +17,17 @@ const Container = styled.div`
   border: 2px solid rgb(90, 155, 213);
 `;
 
-const ProductList = () => {
+const ProductList = (props) => {
+  const category = queryString.parse(props.location.search).category;
+
+  const [products,setProducts] = useState(null);
+
+  useEffect(()=> {
+    FindProductListApi(category).then(prodictPromises => {
+      setProducts(prodictPromises)
+    });
+  },[]);
+
   return (
       <ProductsListWrap>
         <Container>ㅎㅇㅎㅇ</Container>
