@@ -20,9 +20,20 @@ const ProductImg = styled.img`
   display: inline-block;
   width: 320px;
   height: 400px;
- 
 `;
-
+const ProductName = styled.div`
+`;
+const ProductDiscountPercent = styled.div`
+  display: inline-block;
+`;
+const ProductPrevPrice = styled.div`
+  display: inline-block;
+  margin-left:10px;
+`;
+const ProductPrice = styled.div`
+`;
+const ProductSummary = styled.div`
+`;
 const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
   const list = queryString.parse(props.location.search).list;
@@ -36,7 +47,14 @@ const ProductList = (props) => {
   },[category, list]);
 
   const productLists = products ? products.map((product)=>{
-    return <Container><ProductImg src= {product.imageUrl} /></Container>;
+    return <Container>
+             <ProductImg src= {product.imageUrl} />
+             <ProductName>{product.name}</ProductName>
+             <ProductDiscountPercent>{product.discountPercent}</ProductDiscountPercent>
+             <ProductPrevPrice>{product.price}</ProductPrevPrice>
+             <ProductPrice>할인적용가격</ProductPrice>
+             <ProductSummary>{product.contentSummary}</ProductSummary>
+           </Container>;
   }) : "";
 
 console.log(products)
