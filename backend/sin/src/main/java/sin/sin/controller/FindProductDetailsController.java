@@ -10,7 +10,7 @@ import sin.sin.dto.ProductDetails.ProductDetailsResponse;
 import sin.sin.service.FindProductDetailsService;
 
 @RestController
-@RequestMapping("/shop/goods/goods_view")
+@RequestMapping("/goods/goods_view")
 @RequiredArgsConstructor
 public class FindProductDetailsController {
 
