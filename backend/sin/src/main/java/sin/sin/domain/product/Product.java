@@ -33,14 +33,6 @@ public class Product {
 
     private String contentSummary;
 
-    //TODO : 주석 풀기
-
-    //    @Column(nullable = false)
-    private String thumbnailName;
-
-    //    @Column(nullable = false)
-    private String thumbnailPath;
-
     @Column(nullable = false)
     private int price;
 
