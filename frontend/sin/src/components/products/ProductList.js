@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import FindProductListApi from "./FindProductListApi";
+import findProductListApi from "./FindProductListApi";
 import queryString from "query-string";
 
 const ProductsListWrap = styled.div`
@@ -25,14 +25,15 @@ const ProductImg = styled.img`
 
 const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
-
+  const list = queryString.parse(props.location.search).list;
   const [products,setProducts] = useState(null);
 
   useEffect(()=> {
-    FindProductListApi(category).then(prodictPromises => {
+    setProducts(null)
+    findProductListApi(category, list).then(prodictPromises => {
       setProducts(prodictPromises)
     });
-  },[]);
+  },[category, list]);
 
   const productLists = products ? products.map((product)=>{
     return <Container><ProductImg src= {product.imageUrl} /></Container>;
