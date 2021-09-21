@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import findProductListApi from "./FindProductListApi";
 import queryString from "query-string";
+import Sort from "./Sort";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -78,9 +79,11 @@ const ProductList = (props) => {
            </Container>;
   }) : "";
 
-console.log(products)
   return (
       <ProductsListWrap>
+        <Sort
+          category={category}
+        />
         {productLists}
       </ProductsListWrap>
   );
