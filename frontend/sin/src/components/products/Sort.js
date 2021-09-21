@@ -2,31 +2,31 @@ import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 const Listwrap = styled.div`margin-top: 50px;`
-const Container = styled.div`width:1050px; margin: 0 auto; border: 2px solid rgb(90, 155, 213);`
+const Container = styled.div`width:1050px; margin: 0 auto;`
 const Row = styled.div``
 const Title = styled.div`margin-bottom: 20px;`
 const Nav = styled.div`position: relative;`
-const Navtype = styled.span`font-size:14px; font-weight: bold; padding-left: 10px; color: #5f0080;`
+const Navtype = styled.span`font-size:14px; font-weight: bold; padding-left: 10px; color: gray;`
 const Category = styled.p`font-weight: bold;`
-const Orderby = styled.button` float: right; border: none; background: none; cursor: pointer;`
+const Orderby = styled.button` float: right; border: none; background: none; cursor: pointer; color: gray`
 const Orderbylistul = styled.ul`position: absolute; display: none; width: 100%; top: 30px; right: -10px; width: 90px; text-align: right; box-shadow: 0 2px 4px rgb(0 0 0 / 30%); background-color: white; z-index: 1`
 const Orderbylistli = styled.li`font-size: 12px; font-weight: bold; color: gray; padding: 10px 5px 10px 0; cursor: pointer; &:hover {color: #5f0080;}`
 
-const Sort = (category) => {
+const Sort = (props) => {
     const [selectedli,setSelectedli] = useState('')
     const [pageinfo,setPageinfo] = useState('')
 
     useEffect(()=>{
         document.getElementById('nav').childNodes.forEach(e => {e.style.color = 'gray'})
-        if(!category) {
+        if(!props.category) {
             setPageinfo('혜택순')
             document.getElementById('lifou').style.color = '#5f0080'
             setSelectedli('lifou')
-        } else if(category==='038') {
+        } else if(props.category==='038') {
             setPageinfo('신상품순')
             document.getElementById('litwo').style.color = '#5f0080'
             setSelectedli('litwo')
-        } else if(category==='029') {
+        } else if(props.category==='029') {
             setPageinfo('추천순')
             document.getElementById('lione').style.color = '#5f0080'
             setSelectedli('lione')
@@ -35,7 +35,7 @@ const Sort = (category) => {
             document.getElementById('lione').style.color = '#5f0080'
             setSelectedli('lione')
         }
-    },[category])
+    },[props.category])
 
     const togglenav = () => {
         const nav = document.getElementById('nav')
@@ -74,7 +74,7 @@ const Sort = (category) => {
                         <Category>test</Category>
                     </Title>
                     <Nav>
-                        <Navtype>전체보기</Navtype>
+                        <Navtype>총 {props.products ? Object.keys(props.products).length : ""}건</Navtype>
                         <Orderby onClick={togglenav}>{pageinfo}</Orderby>
                         <Orderbylistul id='nav'>
                             <Orderbylistli id='lione' onClick={selectorderby}>추천순</Orderbylistli>

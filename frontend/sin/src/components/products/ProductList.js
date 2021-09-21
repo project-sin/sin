@@ -82,6 +82,7 @@ const ProductList = (props) => {
   return (
       <ProductsListWrap>
         <Sort
+          products={products}
           category={category}
         />
         {productLists}
