@@ -1,13 +1,11 @@
 package sin.sin.dto;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import sin.sin.domain.event.Classification;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
+@ToString
 @Getter
 public class EventResponse {
 

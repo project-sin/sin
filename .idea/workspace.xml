@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96148c92-2246-4fcd-ae6d-89bd636e99ac" name="Default Changelist" comment="" />
+    <list default="true" id="96148c92-2246-4fcd-ae6d-89bd636e99ac" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__joda_time_joda_time_2_10_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/event/SearchEventRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/dto/MainResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/service/MainService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/sin/src/test/java/sin/sin/service/MainServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat.values.at" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat.values.at" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat_i" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/entities/entities.dat_i" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/storage_v2/_src_/database/TESTDB.kGhKkw/schema/PUBLIC.aaZQjQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86687123-49d5-469e-9cb3-37bcbc3be7f3/storage_v2/_src_/database/TESTDB.kGhKkw/schema/PUBLIC.aaZQjQ.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__joda_time_joda_time_2_10_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/backend.sin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/backend.sin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/backend.sin.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/backend.sin.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/backend.sin.querydsl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/backend.sin.querydsl.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/backend.sin.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/backend.sin.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/event/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/event/EventRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/product/SearchProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/product/SearchProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/productReview/ProductReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/domain/productReview/ProductReview.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/dto/EventResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/sin/src/main/java/sin/sin/dto/EventResponse.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,6 +73,17 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="querydsl" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sin" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="sin" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -56,8 +95,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -107,15 +146,15 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.40316686" />
-    <property name="settings.editor.selected.configurable" value="spring" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="sin.sin.domain.product" />
       <recent name="sin.sin.service" />
+      <recent name="sin.sin.domain.product" />
       <recent name="sin.sin.domain.notification" />
     </key>
   </component>
@@ -728,7 +767,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ProductListServiceTest.후기순_베스트상품_20">
+  <component name="RunManager" selected="JUnit.MainServiceTest.이상품_어때요">
+    <configuration name="sin [compileQuerydslJava]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/sin" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileQuerydslJava" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="sin [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -750,7 +810,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ProductListServiceTest.이번달_신상품" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend.sin.test" />
       <extension name="coverage">
         <pattern>
@@ -759,14 +819,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sin.sin.service" />
-      <option name="MAIN_CLASS_NAME" value="sin.sin.service.ProductListServiceTest" />
-      <option name="METHOD_NAME" value="이번달_신상품" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="sin.sin.service.MainServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductListServiceTest.베스트상품_20" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainServiceTest.메인배너" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend.sin.test" />
       <extension name="coverage">
         <pattern>
@@ -775,14 +834,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sin.sin.service" />
-      <option name="MAIN_CLASS_NAME" value="sin.sin.service.ProductListServiceTest" />
-      <option name="METHOD_NAME" value="베스트상품_20" />
+      <option name="MAIN_CLASS_NAME" value="sin.sin.service.MainServiceTest" />
+      <option name="METHOD_NAME" value="메인배너" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProductListServiceTest.후기순_베스트상품_20" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainServiceTest.이상품_어때요" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="backend.sin.test" />
       <extension name="coverage">
         <pattern>
@@ -791,24 +850,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="sin.sin.service" />
-      <option name="MAIN_CLASS_NAME" value="sin.sin.service.ProductListServiceTest" />
-      <option name="METHOD_NAME" value="후기순_베스트상품_20" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SearchProductRepositoryTest.후기순_조회_20" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="backend.sin.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sin.sin.domain.product.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="sin.sin.domain.product" />
-      <option name="MAIN_CLASS_NAME" value="sin.sin.domain.product.SearchProductRepositoryTest" />
-      <option name="METHOD_NAME" value="후기순_조회_20" />
+      <option name="MAIN_CLASS_NAME" value="sin.sin.service.MainServiceTest" />
+      <option name="METHOD_NAME" value="이상품_어때요" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -823,11 +866,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProductListServiceTest.후기순_베스트상품_20" />
+        <item itemvalue="JUnit.MainServiceTest.이상품_어때요" />
+        <item itemvalue="JUnit.MainServiceTest" />
+        <item itemvalue="JUnit.MainServiceTest.메인배너" />
         <item itemvalue="Gradle.sin [compileQuerydsl]" />
-        <item itemvalue="JUnit.ProductListServiceTest.베스트상품_20" />
-        <item itemvalue="JUnit.SearchProductRepositoryTest.후기순_조회_20" />
-        <item itemvalue="JUnit.ProductListServiceTest.이번달_신상품" />
+        <item itemvalue="Gradle.sin [compileQuerydslJava]" />
       </list>
     </recent_temporary>
   </component>
@@ -891,6 +934,9 @@
       <workItem from="1630996801554" duration="8793000" />
       <workItem from="1631112048836" duration="5420000" />
       <workItem from="1631616161657" duration="3029000" />
+      <workItem from="1632662943815" duration="2945000" />
+      <workItem from="1632666851431" duration="1528000" />
+      <workItem from="1632668413057" duration="5855000" />
     </task>
     <servers />
   </component>
