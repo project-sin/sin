@@ -1,6 +1,5 @@
 package sin.sin.domain.product;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -8,7 +7,6 @@ import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.productReview.QProductReview;
 import sin.sin.dto.MainResponse;
-import sin.sin.dto.ProductListResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,18 +34,6 @@ public class SearchMainRepository {
 
         return productsToMainResponse(products);
     }
-
-    //TODO : 항목별로 4개씩 가져오기 구성 어떻게?
-//    public List<MainResponse> findTop4ByOrderByProductReviewDesc() {
-//        List<Product> products = queryFactory
-//                .selectFrom(product)
-//                .leftJoin(productReview).on(productReview.product.eq(product))
-//                .groupBy(product)
-//                .orderBy(productReview.count().desc(), product.id.asc())
-//                .limit(20).fetch();
-//
-//        return productsToMainResponse(products);
-//    }
 
     public List<MainResponse> productsToMainResponse(List<Product> products) {
         List<MainResponse> mainResponse = products.stream().map(product ->

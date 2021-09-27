@@ -17,4 +17,5 @@ public class MainResponse {
     private int price;
     private int discountPercent;
     private Status status;
+
 }
