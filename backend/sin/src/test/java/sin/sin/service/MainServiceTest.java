@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.event.Classification;
+import sin.sin.domain.product.Product;
 import sin.sin.dto.EventResponse;
 import sin.sin.dto.MainResponse;
 
 import javax.transaction.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -54,6 +56,19 @@ class MainServiceTest {
 
         //then
         assertThat(discountPercent).isEqualTo(44);
+
+    }
+
+    @Test
+    void MD의_추천() throws Exception {
+        //given
+        HashMap<String, List<MainResponse>> mdChoice = mainService.findMdChoice();
+
+        //when
+        List<MainResponse> mainResponse = mdChoice.get("907");
+
+        //then
+        assertThat(mainResponse.size()).isEqualTo(4);
 
     }
 
