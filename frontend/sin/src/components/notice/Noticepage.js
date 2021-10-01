@@ -45,13 +45,13 @@ const Noticepage = (props) => {
 
     const [prevOther,setPrevOther] = useState(
         {
-            id:'testtitle',
-            title:'testid'
+            id: null,
+            title: null
         })
     const [nextOther,setNextOther] = useState(
         {
-            id:'testtitle',
-            title:'testid'
+            id: null,
+            title: null
         })
 
     useEffect(()=>{
@@ -111,8 +111,8 @@ const Noticepage = (props) => {
                         <Listbtn onClick={()=>props.history.push(`/shop/board/list?id=notice`)}>목록</Listbtn>
                     </Divbtn>
                     <Prevnextul>
-                        {prevOther?<Prevli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${prevOther.id}`)}><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>{prevOther.title}</Prevnextliptwo></Prevli>:null}
-                        {nextOther?<Nextli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${nextOther.id}`)}><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>{nextOther.title}</Prevnextliptwo></Nextli>:null}
+                        {prevOther.id?<Prevli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${prevOther.id}`)}><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>{prevOther.title}</Prevnextliptwo></Prevli>:null}
+                        {nextOther.id?<Nextli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${nextOther.id}`)}><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>{nextOther.title}</Prevnextliptwo></Nextli>:null}
                     </Prevnextul>
                 </Row>
             </Container>
