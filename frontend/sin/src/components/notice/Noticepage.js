@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import qs from 'query-string';
-import getNoticeDetailsApi from "../api/GetNoticeDetailsApi";
+import getNoticeDetailsApi from "../api/notice/GetNoticeDetailsApi";
 
 const NoticeWrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`

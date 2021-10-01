@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import findEventsApi from "./FindEventsApi";
+import findEventsApi from "../api/event/FindEventsApi";
 
 const Eventwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`

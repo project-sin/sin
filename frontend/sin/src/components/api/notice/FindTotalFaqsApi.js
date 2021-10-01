@@ -1,5 +1,5 @@
 import React from 'react';
-import {BACKEND_ADDRESS} from "../../constants/ADDRESS";
+import {BACKEND_ADDRESS} from "../../../constants/ADDRESS";
 import axios from "axios";
 
 const findTotalFaqsApi = () => {

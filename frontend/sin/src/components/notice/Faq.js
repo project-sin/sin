@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
-import findFaqApi from "./FindFaqApi";
+import findFaqApi from "../api/notice/FindFaqApi";
 import queryString from "query-string";
-import findTotalFaqsApi from "./FindTotalFaqsApi";
+import findTotalFaqsApi from "../api/notice/FindTotalFaqsApi";
 
 const Faqtitlewrap = styled.div``
 const Faqtitle = styled.span`font-size: 22px; font-weight: bold; padding-right: 20px;`
