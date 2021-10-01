@@ -38,7 +38,7 @@ const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#
 const Noticesection = (props) => {
     const page = parseInt(qs.parse(props.location.search).page)
     const word = qs.parse(props.location.search).word
-    const [totalPage,settotalPage] = useState(null)
+    const [totalNotices, settotalNotices] = useState(null)
     const [list,setLists] = useState([])
     const [searchopt,setSearchopt] = useState([])
     const [searchword,setSearchword] = useState('')
@@ -53,12 +53,12 @@ const Noticesection = (props) => {
         if(word===undefined) {
             getNoticeApi(page ? page : 1).then((res)=>{
                 setLists(res)
-                settotalPage(res.totalElements)
+                settotalNotices(res.totalElements)
             })
         } else {
             GetSearchedNoticeApi(geturl(),searchword,page).then((res)=>{
                 setLists(res)
-                settotalPage(res.totalElements)
+                settotalNotices(res.totalElements)
             })
         }
     },[page])
@@ -81,7 +81,7 @@ const Noticesection = (props) => {
         props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=0`)
     }
 
-    const numbers = [...Array((parseInt(totalPage/10)+1)>=5 ? 5 : parseInt(totalPage/10)+1)].map((value, index)=>
+    const numbers = [...Array((parseInt(totalNotices/10)+1)>=5 ? 5 : parseInt(totalNotices/10)+1)].map((value, index)=>
         <NumberButton onClick={()=>
             page?props.history.push("/shop/board/list?id=notice&page="+(parseInt((page-1)/5)*5+index+1)) :props.history.push("/shop/board/list?id=notice&page="+(index+1)) }
         >{page?parseInt((page-1)/5)*5+index+1 : index+1} </NumberButton>
@@ -133,11 +133,11 @@ const Noticesection = (props) => {
                 </PrevButton>
                 {numbers}
                 <NextButton onClick={()=>
-                    (page > parseInt(totalPage/10))?props.history.push("/shop/board/list?id=notice&page="+parseInt(totalPage/10+1)):props.history.push("/shop/board/list?id=notice&page="+ (Number(page)+1))}
+                    (page > parseInt(totalNotices/10))?props.history.push("/shop/board/list?id=notice&page="+parseInt(totalNotices/10+1)):props.history.push("/shop/board/list?id=notice&page="+ (Number(page)+1))}
                 >
                     〉
                 </NextButton>
-                <LastPageButton onClick={()=>props.history.push("/shop/board/list?id=notice&page="+ parseInt(totalPage/10+1))}>
+                <LastPageButton onClick={()=>props.history.push("/shop/board/list?id=notice&page="+ parseInt(totalNotices/10+1))}>
                     〉〉
                 </LastPageButton>
             </PageChangeButtons>
