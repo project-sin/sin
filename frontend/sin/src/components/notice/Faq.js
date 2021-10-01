@@ -115,7 +115,7 @@ const Faq = (props) => {
                     〈〈
                 </FirstPageButton>
                 <PrevButton onClick={()=>
-                    (page <= 1)?props.history.push("/shop/service/faq?page=1"):props.history.push("/shop/service/faq?page="+ (page-1))}
+                    (page== null || page <= 1)?props.history.push("/shop/service/faq?page=1"):props.history.push("/shop/service/faq?page="+ (page-1))}
                 >
                     〈
                 </PrevButton>

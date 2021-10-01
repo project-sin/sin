@@ -5,6 +5,7 @@ import axios from 'axios';
 import qs from 'query-string';
 import getNoticeApi from '../api/notice/GetNoticeApi';
 import GetSearchedNoticeApi from '../api/notice/GetSearchedNoticeApi';
+import queryString from "query-string";
 
 const Mainrighttitle = styled.div`padding: 20px 0;`
 const Mainrighttitlestrong = styled.strong`display: inline-block; font-size: 24px; font-weight: bold; padding-right: 10px;`
@@ -36,7 +37,7 @@ const Mainrightfooterrightinput = styled.input`width:200px; height: 20px; paddin
 const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#fff; background: #5f0080; border: none; cursor: pointer;`
 
 const Noticesection = (props) => {
-    const page = parseInt(qs.parse(props.location.search).page)
+    const page = queryString.parse(props.location.search).page;
     const word = qs.parse(props.location.search).word
     const [totalNotices, settotalNotices] = useState(null)
     const [list,setLists] = useState([])
@@ -62,7 +63,6 @@ const Noticesection = (props) => {
             })
         }
     },[page])
-
 
     const checkboxhandler = e => {
         const {value,checked} = e.target
@@ -127,7 +127,7 @@ const Noticesection = (props) => {
                     〈〈
                 </FirstPageButton>
                 <PrevButton onClick={()=>
-                    (page <= 1)?props.history.push("/shop/board/list?id=notice&page=1"):props.history.push("/shop/board/list?id=notice&page="+ (page-1))}
+                    (page == null || page <= 1)?props.history.push("/shop/board/list?id=notice&page=1"):props.history.push("/shop/board/list?id=notice&page="+ (page-1))}
                 >
                     〈
                 </PrevButton>
