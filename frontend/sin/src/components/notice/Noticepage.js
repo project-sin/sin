@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import qs from 'query-string';
+import getNoticeDetailsApi from "../api/GetNoticeDetailsApi";
 
 const NoticeWrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -32,41 +33,42 @@ const Prevli = styled.div`display: flex; border-bottom: 1px solid #dbdbdb; curso
 const Nextli = styled.div`display: flex; cursor: pointer;`
 
 const Noticepage = (props) => {
-    const no = qs.parse(props.location.seacrh).no
+    const no = parseInt(qs.parse(props.location.search).no)
     const [post,setPost] = useState({
-        id: 'res.data.cur.id',
-        title: 'res.data.cur.title',
-        content: 'res.data.cur.content',
-        writer : 'res.data.cur.writer',
-        createDate: 'res.data.cur.createDate',
-        views: 'res.data.cur.views'
+        id: "id",
+        title: "title",
+        content: "content",
+        writer : "writer",
+        createDate: "createDate",
+        views: "views"
     })
 
-    const [other,setOther] = useState([
+    const [prevOther,setPrevOther] = useState(
         {
-            title:'testtitle',
-            id:'testid'
-        },
+            id:'testtitle',
+            title:'testid'
+        })
+    const [nextOther,setNextOther] = useState(
         {
-            title:'testtitle2',
-            id:'testid2'
-        }
-    ])
+            id:'testtitle',
+            title:'testid'
+        })
 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/shop/board/view?id=notice&no=${no}`).then((res)=>{
+        getNoticeDetailsApi(no).then((res)=> {
             setPost({
                 ...post,
-                id: res.data.cur.id,
-                title: res.data.cur.title,
-                content: res.data.cur.content,
-                writer : res.data.cur.writer,
-                createDate: res.data.cur.createDate,
-                views: res.data.cur.views
+                id: res.cur.id,
+                title: res.cur.title,
+                content: res.cur.content,
+                writer : res.cur.writer,
+                createDate: res.cur.createDate,
+                views: res.views
             })
-            other.concat(res.data.prev,res.data.next)
+            setPrevOther({id: res.prev.id, title: res.prev.title})
+            setNextOther({id: res.next.id, title: res.next.title})
         })
-    })
+    },[no])
 
     return (
         <NoticeWrap>
@@ -109,8 +111,8 @@ const Noticepage = (props) => {
                         <Listbtn onClick={()=>props.history.push(`/shop/board/list?id=notice`)}>목록</Listbtn>
                     </Divbtn>
                     <Prevnextul>
-                        {(other[0])?<Prevli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${other[0].id}`)}><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>{other[0].title}</Prevnextliptwo></Prevli>:null}
-                        {(other[1])?<Nextli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${other[1].id}`)}><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>{other[1].title}</Prevnextliptwo></Nextli>:null}
+                        {prevOther?<Prevli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${prevOther.id}`)}><Prevnextlipone>이전글</Prevnextlipone><Prevnextliptwo>{prevOther.title}</Prevnextliptwo></Prevli>:null}
+                        {nextOther?<Nextli onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${nextOther.id}`)}><Prevnextlipone>다음글</Prevnextlipone><Prevnextliptwo>{nextOther.title}</Prevnextliptwo></Nextli>:null}
                     </Prevnextul>
                 </Row>
             </Container>
