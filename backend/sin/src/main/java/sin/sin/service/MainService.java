@@ -44,25 +44,27 @@ public class MainService {
     }
 
 
-    public HashMap<String, List<MainResponse>> MainCategoryResponseToHashAndMainResponse(List<MainCategoryResponse> products) {
+    private HashMap<String, List<MainResponse>> MainCategoryResponseToHashAndMainResponse(List<MainCategoryResponse> products) {
         HashMap<String, List<MainResponse>> map = new HashMap<>();
         products.stream().forEach(product -> {
             map.putIfAbsent(product.getMainCategory(), new ArrayList<>());
-            map.get(product.getMainCategory()).add(
-                    MainResponse.builder()
-                            .name(product.getName())
-                            .productCode(product.getProductCode())
-                            .imageUrl(imgUrl(product.getMainCategory(), product.getSubCategory(), product.getProductCode()))
-                            .price(product.getPrice())
-                            .discountPercent(product.getDiscountPercent())
-                            .status(product.getStatus()).build());
-                }
-        );
+            map.get(product.getMainCategory()).add(createMainResponse(product));
+        });
 
         return map;
     }
 
-    public String imgUrl(String mainCategory, String subCategory, String productCode) {
+    private MainResponse createMainResponse(MainCategoryResponse product){
+        return MainResponse.builder()
+                .name(product.getName())
+                .productCode(product.getProductCode())
+                .imageUrl(imgUrl(product.getMainCategory(), product.getSubCategory(), product.getProductCode()))
+                .price(product.getPrice())
+                .discountPercent(product.getDiscountPercent())
+                .status(product.getStatus()).build();
+    }
+
+    private String imgUrl(String mainCategory, String subCategory, String productCode) {
         String fileName = "product/" + mainCategory + "/" + subCategory + "/" + productCode + ".jpg";
 
         S3Util s3Util = new S3Util(awsS3Config.amazonS3Client(), awsS3Config.getBucket());
