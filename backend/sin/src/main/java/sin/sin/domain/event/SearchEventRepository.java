@@ -29,8 +29,6 @@ public class SearchEventRepository {
                         getImageUrl(event.getFileName()),
                         event.getClassification()
                 )).collect(Collectors.toList());
-
-
     }
 
     private String getImageUrl(String fileName) {

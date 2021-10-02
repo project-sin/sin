@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.dto.EventResponse;
-import sin.sin.dto.MainResponse;
+import sin.sin.dto.ProductMain.MainResponse;
 import sin.sin.service.MainService;
 
 import java.util.HashMap;

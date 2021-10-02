@@ -8,8 +8,8 @@ import sin.sin.domain.event.SearchEventRepository;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.domain.product.SearchMainRepository;
 import sin.sin.dto.EventResponse;
-import sin.sin.dto.MainCategoryResponse;
-import sin.sin.dto.MainResponse;
+import sin.sin.dto.ProductMain.MainCategoryResponse;
+import sin.sin.dto.ProductMain.MainResponse;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;

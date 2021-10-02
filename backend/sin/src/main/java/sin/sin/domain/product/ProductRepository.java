@@ -2,7 +2,7 @@ package sin.sin.domain.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import sin.sin.dto.MainCategoryResponse;
+import sin.sin.dto.ProductMain.MainCategoryResponse;
 
 import java.util.List;
 import java.util.Optional;

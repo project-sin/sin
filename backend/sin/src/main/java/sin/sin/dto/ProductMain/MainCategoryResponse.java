@@ -1,9 +1,5 @@
-package sin.sin.dto;
+package sin.sin.dto.ProductMain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 import sin.sin.domain.product.Status;
 
 public interface MainCategoryResponse{

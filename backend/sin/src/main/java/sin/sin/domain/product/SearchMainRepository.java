@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.domain.productReview.QProductReview;
-import sin.sin.dto.MainResponse;
+import sin.sin.dto.ProductMain.MainResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;

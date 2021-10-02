@@ -1,13 +1,11 @@
 package sin.sin.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.event.Classification;
-import sin.sin.domain.product.Product;
 import sin.sin.dto.EventResponse;
-import sin.sin.dto.MainResponse;
+import sin.sin.dto.ProductMain.MainResponse;
 
 import javax.transaction.Transactional;
 
@@ -56,7 +54,6 @@ class MainServiceTest {
 
         //then
         assertThat(discountPercent).isEqualTo(44);
-
     }
 
     @Test
@@ -69,7 +66,6 @@ class MainServiceTest {
 
         //then
         assertThat(mainResponse.size()).isEqualTo(4);
-
     }
 
 }

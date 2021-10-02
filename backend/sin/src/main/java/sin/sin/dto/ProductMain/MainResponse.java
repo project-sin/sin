@@ -1,4 +1,4 @@
-package sin.sin.dto;
+package sin.sin.dto.ProductMain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +17,4 @@ public class MainResponse {
     private int price;
     private int discountPercent;
     private Status status;
-
 }
