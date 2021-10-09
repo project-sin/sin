@@ -4,7 +4,7 @@ import axios from "axios";
 
 const findTotalFaqsApi = () => {
 
-  return (axios.get(BACKEND_ADDRESS + "/shop/service/faq/total")
+  return (axios.get(BACKEND_ADDRESS + "/service/faq/total")
   .then(response => response.data))
 };
 

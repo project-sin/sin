@@ -27,7 +27,6 @@ const Mainleftli = styled.li`padding: 15px 0 15px 20px; border: 1px solid #dbdbd
 const Mainright = styled.div`width: 80%;`
 const Mypage = ({match}) => {
     const type = match.params.mypageparams
-    console.log(type)
     return(
         <>
         <Mypageuserinfowrap>

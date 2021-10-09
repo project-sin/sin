@@ -5,7 +5,6 @@ import Header from './components/Header';
 import Home from './components/Home';
 import Event from './components/event/Event';
 import Shoppinglist from './components/Shoppinglist';
-import List from './components/List';
 import Item from './components/Item';
 import Signup from './components/Signup';
 import Login from './components/Login';
@@ -14,6 +13,7 @@ import Notice from './components/Notice';
 import Footer from './components/Footer';
 import Noticepage from './components/Noticepage';
 import NonProductEvent from "./components/event/NonProductEvent";
+import ProductList from "./components/products/ProductList";
 
 const GlobalStyle = createGlobalStyle`
 * {padding: 0; margin: 0;}
@@ -35,7 +35,7 @@ function App() {
     <Route path='/shop/main/event' exact component={NonProductEvent} />
     <Route path='/shop/goods/event' exact component={Event} />
     <Route path='/shop/goods/goods_cart' exact component={Shoppinglist} />
-    <Route path='/shop/goods/goods_list' exact component={List} />
+    <Route path='/shop/goods/goods_list' exact component={ProductList} />
     <Route path='/shop/goods/goods_view' exact component={Item} />
     <Route path='/shop/member/join' exact component={Signup} />
     <Route path='/shop/member/login' exact component={Login} />

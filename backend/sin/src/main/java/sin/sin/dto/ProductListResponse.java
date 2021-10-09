@@ -17,6 +17,7 @@ public class ProductListResponse {
     private String name;
     private String productCode;
     private String imageUrl;
+    private String contentSummary;
     private int price;
     private ProductCategory productCategory;
     private int discountPercent;

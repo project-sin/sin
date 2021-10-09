@@ -11,7 +11,7 @@ import sin.sin.dto.FreqQuestionResponse;
 import sin.sin.service.FreqQuestionService;
 
 @RestController
-@RequestMapping("/shop/service/faq")
+@RequestMapping("/service/faq")
 @RequiredArgsConstructor
 public class FreqQuestionController {
 

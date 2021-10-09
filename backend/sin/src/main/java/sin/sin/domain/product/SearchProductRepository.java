@@ -50,7 +50,7 @@ public class SearchProductRepository {
 
     JPAQuery<ProductListResponse> selectFromJoin() {
         return queryFactory.select(Projections.bean(ProductListResponse.class,
-                        product.name, product.productCode, product.price, product.productCategory,
+                        product.name, product.productCode, product.contentSummary, product.price, product.productCategory,
                         product.discountPercent, product.createdDate, product.status, productReview.count().intValue().as("reviewCount")))
                 .from(product)
                 .leftJoin(productReview).on(productReview.product.eq(product));

@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/shop/board")
+@RequestMapping("/board")
 public class NotificationController {
 
     private final NotificationService notificationService;
