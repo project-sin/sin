@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import qs from 'query-string';
-import GetNoticeApi from '../api/GetNoticeApi';
-import GetSearchedNoticeApi from '../api/GetSearchedNoticeApi';
+import getNoticeApi from '../api/notice/GetNoticeApi';
+import GetSearchedNoticeApi from '../api/notice/GetSearchedNoticeApi';
+import queryString from "query-string";
 
 const Mainrighttitle = styled.div`padding: 20px 0;`
 const Mainrighttitlestrong = styled.strong`display: inline-block; font-size: 24px; font-weight: bold; padding-right: 10px;`
@@ -20,9 +21,12 @@ const Tdwriter = styled.td`width:100px; padding: 20px 0; border-bottom: 1px soli
 const Tddate = styled.td`width:100px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
 const Tdview = styled.td`width:30px; padding: 20px 0; border-bottom: 1px solid #f4f4f4;`
 
-const Pagenav = styled.div`text-align: center; margin-top: 50px;`
-const Pagebtn = styled.button`padding: 8px 13px; margin-left: -1px; background: none; border: 1px solid gray;`
-const Pagebtnl = styled.button`padding: 8px 8px; margin-left: -1px; background: none; border: 1px solid gray;`
+const NumberButton = styled.div`border: 2px solid black; width:20px; margin:5px; cursor:pointer`
+const PageChangeButtons = styled.div`padding-top:30px; display: flex; justify-content: center; text-align: center; `;
+const NextButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const PrevButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const FirstPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
+const LastPageButton = styled.div`font-weight:bold; border: 1px solid black; width:20px; margin:5px; cursor:pointer`
 
 const Mainrightfooter = styled.div`border-top : 1px solid black; padding: 20px 0; margin-top: 20px;`
 const Mainrightfooterleft = styled.div`float: left;`
@@ -33,12 +37,9 @@ const Mainrightfooterrightinput = styled.input`width:200px; height: 20px; paddin
 const Mainrightfooterrightbtn = styled.button`width: 34px; height: 34px; color:#fff; background: #5f0080; border: none; cursor: pointer;`
 
 const Noticesection = (props) => {
-    const page = parseInt(qs.parse(props.location.search).page)
+    const page = queryString.parse(props.location.search).page;
     const word = qs.parse(props.location.search).word
-    const [pageinfo,setpageinfo] = useState({
-        totalpages: 5,
-        currentpage: page
-    })
+    const [totalNotices, settotalNotices] = useState(null)
     const [list,setLists] = useState([])
     const [searchopt,setSearchopt] = useState([])
     const [searchword,setSearchword] = useState('')
@@ -51,22 +52,14 @@ const Noticesection = (props) => {
 
     useEffect(()=>{
         if(word===undefined) {
-            GetNoticeApi(page).then((res)=>{
-                setLists(list.filter(post=> post.id === -1))
-                list.concat(res.data.content)
-                setpageinfo({
-                    ...pageinfo,
-                    totalpages: res.data.totalpages
-                })
+            getNoticeApi(page ? page : 1).then((res)=>{
+                setLists(res)
+                settotalNotices(res.totalElements)
             })
         } else {
             GetSearchedNoticeApi(geturl(),searchword,page).then((res)=>{
-                setLists(list.filter(post=> post.id === -1))
-                list.concat(res.data.content)
-                setpageinfo({
-                    ...pageinfo,
-                    totalpages: res.data.totalpages
-                })
+                setLists(res)
+                settotalNotices(res.totalElements)
             })
         }
     },[page])
@@ -88,15 +81,11 @@ const Noticesection = (props) => {
         props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=0`)
     }
 
-    const pagebtnurl = (pagen) => {
-        const pagenum = pagen
-        if(word===undefined) {
-            return props.history.push(`/shop/board/list?id=notice&page=`+pagenum)
-        } else {
-            return props.history.push(`/shop/board/list?id=notice${geturl()}&word=${searchword}&page=`+pagenum)
-        }
-    }
-    
+    const numbers = [...Array((parseInt(totalNotices/10)+1)>=5 ? 5 : parseInt(totalNotices/10)+1)].map((value, index)=>
+        <NumberButton onClick={()=>
+            page?props.history.push("/shop/board/list?id=notice&page="+(parseInt((page-1)/5)*5+index+1)) :props.history.push("/shop/board/list?id=notice&page="+(index+1)) }
+        >{page?parseInt((page-1)/5)*5+index+1 : index+1} </NumberButton>
+    );
 
     return (
         <>
@@ -116,33 +105,42 @@ const Noticesection = (props) => {
             <tbody>
                 <Tr>
                     <Tdorder>공지</Tdorder>
-                    <Tdtitle><Link to=''>[마켓컬리] 유튜브 컬리's TMI : 뷰티에 대한 모든 것 편' 댓글 이벤트 당첨자 안내</Link></Tdtitle>
+                    <Tdtitle><Link to=''>[마켓컬리] 유튜브 컬리's TMI : 뷰티에 대한 모든 xcxccxxc것 편' 댓글 이벤트 당첨자 안내</Link></Tdtitle>
                     <Tdwriter>marketkurly</Tdwriter>
                     <Tddate>2021-07-08</Tddate>
                     <Tdview>55</Tdview>
                 </Tr>
-                {list.map(post =>
-                    <Tr onClick={()=>props.history.push(`/shop/board/view?id=notice&no=${post.id}`)}>
+                {list.content ? list.content.map(post =>
+                    <Tr onClick={()=>
+                        props.history.push("/shop/board/view?id=notice&no=" + post.id)}>
                         <Tdorder>{post.id}</Tdorder>
                         <Tdtitle>{post.title}</Tdtitle>
                         <Tdwriter>{post.writer}</Tdwriter>
                         <Tddate>{post.createdDate}</Tddate>
                         <Tdview>{post.views}</Tdview>
                     </Tr>
-                )}
+                ) : ""}
             </tbody>
         </Mainrightlisttable>
-        <Pagenav>
-            <Pagebtnl onClick={()=>pagebtnurl(1)}>&lt;&lt;</Pagebtnl>
-            <Pagebtn onClick={()=>(page >1)? pagebtnurl(page-1) :null}>&lt;</Pagebtn>
-            {[...Array(pageinfo.totalpages)].map((n,idx)=>{
-                return (
-                    <Pagebtn onClick={()=>pagebtnurl(idx+1)}>{idx+1}</Pagebtn>
-                )
-            })}
-            <Pagebtn onClick={()=>(page <pageinfo.totalpages)? pagebtnurl(page+1):null}>&gt;</Pagebtn>
-            <Pagebtnl onClick={()=> pagebtnurl(pageinfo.totalpages)}>&gt;&gt;</Pagebtnl>
-        </Pagenav>
+            <PageChangeButtons>
+                <FirstPageButton onClick={()=>props.history.push("/shop/board/list?id=notice&page=1")}>
+                    〈〈
+                </FirstPageButton>
+                <PrevButton onClick={()=>
+                    (page == null || page <= 1)?props.history.push("/shop/board/list?id=notice&page=1"):props.history.push("/shop/board/list?id=notice&page="+ (page-1))}
+                >
+                    〈
+                </PrevButton>
+                {numbers}
+                <NextButton onClick={()=>
+                    (page > parseInt(totalNotices/10))?props.history.push("/shop/board/list?id=notice&page="+parseInt(totalNotices/10+1)):props.history.push("/shop/board/list?id=notice&page="+ (Number(page)+1))}
+                >
+                    〉
+                </NextButton>
+                <LastPageButton onClick={()=>props.history.push("/shop/board/list?id=notice&page="+ parseInt(totalNotices/10+1))}>
+                    〉〉
+                </LastPageButton>
+            </PageChangeButtons>
         <Mainrightfooter className='clearfix'>
             <Mainrightfooterleft>
                 <Mainrightfooterleftspan>검색어</Mainrightfooterleftspan>

@@ -9,9 +9,9 @@ import Item from './components/Item';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Mypage from './components/Mypage';
-import Notice from './components/Notice';
+import Notice from './components/notice/Notice';
 import Footer from './components/Footer';
-import Noticepage from './components/Noticepage';
+import Noticepage from './components/notice/Noticepage';
 import NonProductEvent from "./components/event/NonProductEvent";
 import ProductList from "./components/products/ProductList";
 

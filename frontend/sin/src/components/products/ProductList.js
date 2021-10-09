@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import findProductListApi from "./FindProductListApi";
+import findProductListApi from "../api/product/FindProductListApi";
 import queryString from "query-string";
 import Sort from "./Sort";
 

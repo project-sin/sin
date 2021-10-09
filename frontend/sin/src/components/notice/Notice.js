@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Link } from 'react-router-dom';
-import Noticesection from './notice/Noticesection';
-import Faq from './notice/Faq';
+import Noticesection from './Noticesection';
+import Faq from './Faq';
 
 const Noticewrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
