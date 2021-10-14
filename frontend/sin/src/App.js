@@ -24,6 +24,14 @@ a {text-decoration: none; color: black;}
 .clearfix:after {clear: both;}
 
 ul,li,ol {list-style:none;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.swiper-container {
+  width: 1440px;
+}
+
 `
 
 function App() {

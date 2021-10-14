@@ -1,7 +1,17 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore, { Navigation } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
+import axios from 'axios';
+import { BACKEND_ADDRESS } from '../constants/ADDRESS';
+
+SwiperCore.use([Navigation])
+
 
 const Homewrap = styled.div``
+const ContainerSlide = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
 const Row = styled.div``
 
@@ -17,9 +27,41 @@ const Section4wrap = styled.div``
 const Section4 = styled.div`height: 300px; background: #555;`
 
 const Home = () => {
+    const [bannerImg,setBannerImg] = useState([])
+    const [section2,setSection2] = useState([])
+
+    useEffect(()=>{
+        axios({
+            method: 'get',
+            url: BACKEND_ADDRESS + `/shop/main/index/main_banner`
+        }).then(res=>{
+            setBannerImg(bannerImg.concat(res.data))
+        })
+        axios({
+            method: 'get',
+            url: BACKEND_ADDRESS + `/shop/main/index/today_recommendation`
+        }).then(res=>{
+            setSection2(Section2.concat(res.data))
+        })
+    },[])
     return (
         <Homewrap>
-            <Slide><h2>Slide</h2></Slide>
+            <ContainerSlide>
+                <Row>
+                    <Slide>
+                        <Swiper
+                            style={{height: '300px'}}
+                            className='banner'
+                            slidesPerView={1}
+                            navigation
+                        >
+                            <SwiperSlide>{bannerImg[0]}</SwiperSlide>
+                            <SwiperSlide>{bannerImg[1]}</SwiperSlide>
+                            <SwiperSlide>{bannerImg[2]}</SwiperSlide>
+                        </Swiper>
+                    </Slide>
+                </Row>
+            </ContainerSlide>
             <Section1wrap>
                 <Container>
                     <Row>
