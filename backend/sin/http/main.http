@@ -1,15 +1,15 @@
 ### 메인 배너 ## nonProduct 최신 event 세 개
-GET http://localhost:8080/shop/main/index/main_banner
+GET http://localhost:8080/shop/main/index/main-banner
 Content-Type: application/json
 
 ### 이 상품 어때요? ##신상품 8개
-GET http://localhost:8080/shop/main/index/today_recommendation
+GET http://localhost:8080/shop/main/index/today-recommendation
 Content-Type: application/json
 
 ### 놓치면 후회할 가격 ##할인율 높은 순 8개
-GET http://localhost:8080/shop/main/index/cheap_product
+GET http://localhost:8080/shop/main/index/cheap-product
 Content-Type: application/json
 
 ### MD의 추천 ##리뷰 많은 순 main_category별로 4개씩
-GET http://localhost:8080/shop/main/index/md_choice
+GET http://localhost:8080/shop/main/index/md-choice
 Content-Type: application/json
