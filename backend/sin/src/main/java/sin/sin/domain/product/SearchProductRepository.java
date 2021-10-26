@@ -43,7 +43,7 @@ public class SearchProductRepository {
     public List<ProductListResponse> findTop20ByOrderByCreatedDateDesc(String category) {
         List<ProductListResponse> results = selectFromJoin()
                 .where(product.productCategory.mainCategory.eq(category.substring(0, 3)))
-                .groupBy(product).orderBy(product.createdDate.desc(), product.id.asc()).limit(30).fetch();
+                .groupBy(product, product.name).orderBy(product.createdDate.desc(), product.id.asc()).limit(30).fetch();
 
         return results;
     }
