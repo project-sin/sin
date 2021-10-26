@@ -15,7 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/goods/goods_list")
+@RequestMapping("/goods/goods-list")
 public class ProductListController {
     private final ProductListService productListService;
 
@@ -37,6 +37,7 @@ public class ProductListController {
 
         //알뜰쇼핑 //할인율 높은 상품순 조회
         else if ("sale".equals(list)) {
+            System.out.println("sale");
             List<ProductListResponse> cheapProducts = productListService.cheapProductList();
             return ResponseEntity.ok().body(cheapProducts);
         }
