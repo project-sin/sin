@@ -1,0 +1,24 @@
+### 회원가입
+POST http://localhost:8080/shop/member/join
+Content-Type: application/json
+
+{
+  "id" : "a",
+  "password" : "a",
+  "name" : "a",
+  "email" : "a",
+  "phone_number" : "a",
+  "address" : "a",
+  "gender" : "Male",
+  "birth" : "1999-99-99"
+}
+
+
+### 아이디 체크
+GET http://localhost:8080/shop/member/check/id?id=c
+Content-Type: application/json
+
+
+### 이메일 체크
+GET http://localhost:8080/shop/member/check/email?email=c
+Content-Type: application/json
