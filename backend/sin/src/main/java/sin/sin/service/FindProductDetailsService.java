@@ -1,5 +1,6 @@
 package sin.sin.service;
 
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +56,9 @@ public class FindProductDetailsService {
     }
 
     private ProductInformationResponse findDetailedInformation(ProductDetails productDetails) {
+        if (Objects.isNull(productDetails)) {
+            return new ProductInformationResponse();
+        }
         ProductInformationResponse productInformationResponse = ProductInformationResponse.builder()
             .saleUnit(productDetails.getSaleUnit())
             .weight(productDetails.getWeight())
