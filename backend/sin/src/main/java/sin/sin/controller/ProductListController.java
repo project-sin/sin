@@ -37,7 +37,6 @@ public class ProductListController {
 
         //알뜰쇼핑 //할인율 높은 상품순 조회
         else if ("sale".equals(list)) {
-            System.out.println("sale");
             List<ProductListResponse> cheapProducts = productListService.cheapProductList();
             return ResponseEntity.ok().body(cheapProducts);
         }

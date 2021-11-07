@@ -39,3 +39,4 @@ out/
 
 # ignore properties file
 /src/main/resources/application-aws.*
+/src/main/resources/application-jwt.*
