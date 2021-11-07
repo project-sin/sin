@@ -34,9 +34,6 @@ public class AuthController {
     public ResponseEntity signin(@Valid @RequestBody LoginRequest loginRequest) {
         String token = authService.login(loginRequest);
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer " + token);
-
         return ResponseEntity.ok(new TokenDto(token));
     }
 

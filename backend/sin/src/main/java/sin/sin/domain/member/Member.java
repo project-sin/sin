@@ -30,7 +30,7 @@ public class Member {
     @Column(name="member_id", nullable = false)
     private Long id;
 
-    @Column(name="id", nullable = false)
+    @Column(name="login_id", nullable = false)
     private String _id;
 
     @Column(nullable = false)
