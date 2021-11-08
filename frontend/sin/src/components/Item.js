@@ -99,7 +99,7 @@ const Item = (props) => {
             console.log('err')
         }).then(
             setDelay('on'))
-    })
+    },[])
 
     return (
         <Itemwrap>
