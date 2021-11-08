@@ -19,6 +19,7 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea
+
 *.iws
 *.iml
 *.ipr
@@ -38,3 +39,4 @@ out/
 
 # ignore properties file
 /src/main/resources/application-aws.*
+/src/main/resources/application-jwt.*

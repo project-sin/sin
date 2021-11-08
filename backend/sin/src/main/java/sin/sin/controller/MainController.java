@@ -14,27 +14,27 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/shop/main/index")
+@RequestMapping("/main/index")
 public class MainController {
 
     private final MainService mainService;
 
-    @GetMapping("/main_banner")
+    @GetMapping("/main-banner")
     public ResponseEntity<List<EventResponse>> mainBanner() {
         return ResponseEntity.ok().body(mainService.findMainBanner());
     }
 
-    @GetMapping("/today_recommendation")
+    @GetMapping("/today-recommendation")
     public ResponseEntity<List<MainResponse>> recommedProduct() {
         return ResponseEntity.ok().body(mainService.findRecommendProduct());
     }
 
-    @GetMapping("/cheap_product")
+    @GetMapping("/cheap-product")
     public ResponseEntity<List<MainResponse>> cheapProduct() {
         return ResponseEntity.ok().body(mainService.findCheapProduct());
     }
 
-    @GetMapping("/md_choice")
+    @GetMapping("/md-choice")
     public ResponseEntity<HashMap<String, List<MainResponse>>> mdChoice() {
         return ResponseEntity.ok().body(mainService.findMdChoice());
     }
