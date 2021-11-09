@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import signUpApi from "./api/auth/SingupApi";
 
 const Signupwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -26,7 +27,7 @@ const Agreediv = styled.div`width: 480px; height: 40px;`
 const Agreeinput = styled.input`margin-right: 10px;`
 const Agreelabel = styled.label`font-size: 14px; color: #4c4c4c;`
 
-const Signup = () => {
+const Signup = (props) => {
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -44,11 +45,14 @@ const Signup = () => {
         && email.length && phoneNumber.length && gender.length
         && birthYear.length && birthMonth.length && birthDay.length) {
       if (password === checkPassword) {
-        //signUpApi(email, password, nickName, props.history);
-        if(birthYear >=0 && birthMonth >=1 && birthMonth <=12 && birthDay >= 1 && birthDay <=31){
+        if (birthYear >= 0 && birthMonth >= 1 && birthMonth <= 12 && birthDay
+            >= 1 && birthDay <= 31) {
           alert("조건 충족");
+          const birth = birthYear + birthMonth + birthDay;
+          signUpApi(id, email, password, name, phoneNumber, gender, birth, props.history);
+        } else {
+          alert("생년월일을 올바르게 작성해 주세요");
         }
-        alert("생년월일을 올바르게 작성해 주세요");
       } else {
         alert("비밀번호가 일치하지 않습니다");
       }
@@ -117,21 +121,15 @@ const Signup = () => {
                   <Sexradio type='radio'
                             name='sex'
                             value={gender}
-                            onChange={e => setGender('man')}
+                            onChange={e => setGender('Male')}
                             id='sex1'/>
                   <Sexlabel htmlFor='sex1'>남자</Sexlabel>
                   <Sexradio type='radio'
                             name='sex'
                             value={gender}
-                            onChange={e => setGender('woman')}
+                            onChange={e => setGender('FeMale')}
                             id='sex2'/>
                   <Sexlabel htmlFor='sex2'>여자</Sexlabel>
-                  <Sexradio type='radio'
-                            name='sex'
-                            value={gender}
-                            onChange={e => setGender('none')}
-                            id='sex3'/>
-                  <Sexlabel htmlFor='sex3'>선택안함</Sexlabel>
                 </td>
               </tr>
               <tr>
