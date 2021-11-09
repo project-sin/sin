@@ -32,8 +32,8 @@ public class Cart {
     @Column(nullable = false)
     private int count;
 
-    public void add(){
-        this.count++;
+    public void setCount(int count){
+        this.count=count;
     }
 
 
