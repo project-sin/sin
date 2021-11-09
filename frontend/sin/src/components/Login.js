@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import loginApi from "./api/auth/LoginApi";
 
 const Loginwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -19,14 +20,27 @@ const Loginfooterbuttonlogin = styled.button`display: block; width: 100%; height
 const Loginfooterbuttonsignup = styled.button`display: block; width: 100%; height: 50px; color: #5f0080; font-size: 16px; font-weight: bold; box-sizing: border-box; margin-top: 10px; border: 1px solid #5f0080;`
 
 const Login = ({history}) => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = ()=>{
+    loginApi(id, password, history);
+  };
+
   return (
       <Loginwrap>
         <Container>
           <Row>
             <Logintitle>로그인</Logintitle>
             <Loginform>
-              <Logininput type='text' placeholder='아이디를 입력해주세요'/>
-              <Logininput type='password' placeholder='비밀번호를 입력해주세요'/>
+              <Logininput type='text'
+                          value={id}
+                          onChange={e => setId(e.target.value)}
+                          placeholder='아이디를 입력해주세요'/>
+              <Logininput type='password'
+                          value={password}
+                          onChange={e => setPassword(e.target.value)}
+                          placeholder='비밀번호를 입력해주세요'/>
               <Loginadd className='clearfix'>
                 <Loginaddsecurity>
                   <input type='checkbox' id='security'/>
@@ -37,7 +51,7 @@ const Login = ({history}) => {
                 </Loginaddforget>
               </Loginadd>
               <Loginfooter>
-                <Loginfooterbuttonlogin>로그인</Loginfooterbuttonlogin>
+                <Loginfooterbuttonlogin onClick={()=>login()}>로그인</Loginfooterbuttonlogin>
                 <Loginfooterbuttonsignup onClick={() => history.push(
                     '/shop/member/join')}>회원가입</Loginfooterbuttonsignup>
               </Loginfooter>
