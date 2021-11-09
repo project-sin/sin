@@ -78,7 +78,7 @@ const Item = (props) => {
     useEffect(()=>{
         axios({
             method: 'get',
-            url: BACKEND_ADDRESS + `/shop/goods/goods_view?goodsno=${goodsno}`
+            url: BACKEND_ADDRESS + `/goods/goods_view?goodsno=${goodsno}`
         }).then(res=>{
             setItem({
                 ...item,

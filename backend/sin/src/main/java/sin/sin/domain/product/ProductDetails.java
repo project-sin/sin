@@ -1,10 +1,11 @@
 package sin.sin.domain.product;
 
+import java.util.Objects;
 import javax.persistence.Embeddable;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Setter;
 
-@Getter
+@Setter
 @Embeddable
 public class ProductDetails {
 
@@ -21,6 +22,48 @@ public class ProductDetails {
     private String allergicReaction;
 
     private String expirationDate;
+
+    public String getSaleUnit() {
+        if(Objects.isNull(saleUnit) || saleUnit.trim().isEmpty())
+            return null;
+        return saleUnit;
+    }
+
+    public String getWeight() {
+        if(Objects.isNull(weight) || weight.trim().isEmpty())
+            return null;
+        return weight;
+    }
+
+    public String getDeliveryClassification() {
+        if(Objects.isNull(deliveryClassification) || deliveryClassification.trim().isEmpty())
+            return null;
+        return deliveryClassification;
+    }
+
+    public String getPackingType() {
+        if(Objects.isNull(packingType) || packingType.trim().isEmpty())
+            return null;
+        return packingType;
+    }
+
+    public String getOriginCountry() {
+        if(Objects.isNull(originCountry) || originCountry.trim().isEmpty())
+            return null;
+        return originCountry;
+    }
+
+    public String getAllergicReaction() {
+        if(Objects.isNull(allergicReaction) || allergicReaction.trim().isEmpty())
+            return null;
+        return allergicReaction;
+    }
+
+    public String getExpirationDate() {
+        if(Objects.isNull(expirationDate) || expirationDate.trim().isEmpty())
+            return null;
+        return expirationDate;
+    }
 
     public ProductDetails() {
     }
