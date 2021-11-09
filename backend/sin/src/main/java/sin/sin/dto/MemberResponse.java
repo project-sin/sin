@@ -12,4 +12,5 @@ public class MemberResponse {
 
     private Long memberId;
     private String loginId;
+    private int levelSalePercent;
 }

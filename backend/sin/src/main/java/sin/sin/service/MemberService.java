@@ -18,6 +18,7 @@ public class MemberService {
         Member foundMember = memberRepository.findById(member.getId())
             .orElseThrow(() -> new IllegalArgumentException("해당되는 유저가 없습니다!"));
 
-        return new MemberResponse(foundMember.getId(), foundMember.get_id());
+        return new MemberResponse(foundMember.getId(), foundMember.get_id(),
+            foundMember.getLevel().getSalePercent());
     }
 }
