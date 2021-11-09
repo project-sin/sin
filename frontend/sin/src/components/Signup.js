@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import signUpApi from "./api/auth/SingupApi";
+import checkIsDuplicateEmail from "./api/auth/CheckIsDuplicateEmail";
+import checkIsDuplicateId from "./api/auth/CheckIsDuplicateId";
 
 const Signupwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -11,6 +13,7 @@ const Table = styled.table`border-collapse: collapse; border-spacing: 0;`
 const Signuptitlewrap = styled.div`text-align: center; padding-top: 50px; padding-bottom:55px; border-bottom: 2px solid black;`
 const Signuptitle = styled.strong`font-size: 25px;`
 const Input = styled.input`width:330px; font-size: 14px; color: #333; box-sizing: border-box; padding: 0 14px; background: #fff; border: 1px solid #ccc; border-radius: 3px; height: 45px;`
+const Button = styled.button` margin-left: -140px; width:100px; font-size: 14px; color: purple; border-box; background: #fff; border: 1px solid purple; border-radius: 3px; height: 45px;`
 const Addressbtn = styled.button`width:330px; font-size: 14px; color: #5f0080; background: #fff; border: 1px solid #5f0080; border-radius: 3px; height: 45px; font-weight: bold; cursor: pointer;`
 const Th = styled.th`width:155px; font-size: 14px; text-align: left; padding: 30px 0px 20px 20px; color: #333333;`
 const Singupfooter = styled.div`padding-top: 40px;`
@@ -47,9 +50,9 @@ const Signup = (props) => {
       if (password === checkPassword) {
         if (birthYear >= 0 && birthMonth >= 1 && birthMonth <= 12 && birthDay
             >= 1 && birthDay <= 31) {
-          alert("조건 충족");
           const birth = birthYear + birthMonth + birthDay;
-          signUpApi(id, email, password, name, phoneNumber, gender, birth, props.history);
+          signUpApi(id, email, password, name, phoneNumber, gender, birth,
+              props.history);
         } else {
           alert("생년월일을 올바르게 작성해 주세요");
         }
@@ -73,6 +76,13 @@ const Signup = (props) => {
                            value={id}
                            onChange={e => setId(e.target.value)}
                            placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/></td>
+                <td>
+                  <Button onClick={() => {
+                    checkIsDuplicateId(id).then(message => {
+                      alert(message);
+                    })
+                  }}>중복확인</Button>
+                </td>
               </tr>
               <tr>
                 <Th>비밀번호</Th>
@@ -102,6 +112,11 @@ const Signup = (props) => {
                            value={email}
                            onChange={e => setEmail(e.target.value)}
                            placeholder="예: marketkurly@kurly.com"/>
+                </td>
+                <td>
+                  <Button onClick={() => {
+                    checkIsDuplicateEmail();
+                  }}>중복확인</Button>
                 </td>
               </tr>
               <tr>
