@@ -115,7 +115,9 @@ const Signup = (props) => {
                 </td>
                 <td>
                   <Button onClick={() => {
-                    checkIsDuplicateEmail();
+                    checkIsDuplicateEmail(email).then(message => {
+                      alert(message);
+                    })
                   }}>중복확인</Button>
                 </td>
               </tr>
