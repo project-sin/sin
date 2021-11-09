@@ -43,6 +43,9 @@ const Signup = (props) => {
   const [birthMonth, setBirthMonth] = useState("");
   const [birthDay, setBirthDay] = useState("");
 
+  const [checkDuplicatedId, setCheckDuplicatedId] = useState(false);
+  const [checkDuplicatedEmail, setCheckDuplicatedEmail] = useState(false);
+
   const signup = () => {
     if (id.length && password.length && checkPassword.length && name.length
         && email.length && phoneNumber.length && gender.length
@@ -50,9 +53,13 @@ const Signup = (props) => {
       if (password === checkPassword) {
         if (birthYear >= 0 && birthMonth >= 1 && birthMonth <= 12 && birthDay
             >= 1 && birthDay <= 31) {
-          const birth = birthYear + birthMonth + birthDay;
-          signUpApi(id, email, password, name, phoneNumber, gender, birth,
-              props.history);
+          if(checkDuplicatedId === true && checkDuplicatedEmail === true){
+            const birth = birthYear + birthMonth + birthDay;
+            signUpApi(id, email, password, name, phoneNumber, gender, birth,
+                props.history);
+          } else {
+            alert("아이디, 이메일 중복체크를 확인해주세요");
+          }
         } else {
           alert("생년월일을 올바르게 작성해 주세요");
         }
@@ -79,7 +86,10 @@ const Signup = (props) => {
                 <td>
                   <Button onClick={() => {
                     checkIsDuplicateId(id).then(message => {
-                      alert(message);
+                      if(message != null){
+                        setCheckDuplicatedId(true);
+                        alert(message);
+                      }
                     })
                   }}>중복확인</Button>
                 </td>
@@ -116,7 +126,10 @@ const Signup = (props) => {
                 <td>
                   <Button onClick={() => {
                     checkIsDuplicateEmail(email).then(message => {
-                      alert(message);
+                      if(message != null){
+                        setCheckDuplicatedEmail(true);
+                        alert(message);
+                      }
                     })
                   }}>중복확인</Button>
                 </td>

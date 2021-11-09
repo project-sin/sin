@@ -7,7 +7,7 @@ const checkIsDuplicateId = (id) => {
   .then(response => response.data)
   .catch(error => {
     if (error.response.status === 400 || error.response.status === 404) {
-      alert("error.response.data.errorMessage");
+      alert(error.response.data.message);
       return Promise.reject();
     } else {
       alert("이유가 뭔지 모르겠지만 실패...");
