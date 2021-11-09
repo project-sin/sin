@@ -18,7 +18,7 @@ const signUpApi = (id, email, password, name, phoneNumber, gender, birth, histor
   .then(response => {
     if (response.status === 200) {
       alert(response.data);
-      history.push("shop/member/login");
+      history.push("/shop/member/login");
     }
   })
   .catch(error => {
