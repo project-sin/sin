@@ -1,13 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation } from "swiper";
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
+/*import { Swiper, SwiperSlide } from 'swiper/react';*/
+/*import SwiperCore, { Navigation } from "swiper";*/
+/*import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";*/
 import axios from 'axios';
 import { BACKEND_ADDRESS } from '../constants/ADDRESS';
 
-SwiperCore.use([Navigation])
+/*SwiperCore.use([Navigation])*/
 
 
 const Homewrap = styled.div``
@@ -27,7 +27,7 @@ const Section4wrap = styled.div``
 const Section4 = styled.div`height: 300px; background: #555;`
 
 const Home = () => {
-    const [bannerImg,setBannerImg] = useState([])
+    /*const [bannerImg,setBannerImg] = useState([])
     const [section2,setSection2] = useState([])
 
     useEffect(()=>{
@@ -43,10 +43,10 @@ const Home = () => {
         }).then(res=>{
             setSection2(Section2.concat(res.data))
         })
-    },[])
+    },[])*/
     return (
         <Homewrap>
-            <ContainerSlide>
+            {/*<ContainerSlide>
                 <Row>
                     <Slide>
                         <Swiper
@@ -61,7 +61,7 @@ const Home = () => {
                         </Swiper>
                     </Slide>
                 </Row>
-            </ContainerSlide>
+            </ContainerSlide>*/}
             <Section1wrap>
                 <Container>
                     <Row>
