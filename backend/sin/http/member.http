@@ -1,0 +1,4 @@
+### 내 아이디, 로그인아이디 조회
+GET http://localhost:8080/shop/member/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM2NDM2MzExLCJleHAiOjE2MzY1MjI3MTF9.2tyT2HjAK0wWeTaIZ9gl8pXwIgMM1Hh6vbKMDFCjGWguyyR9OF0LSirDRYr5N7lz3ZKDdEh0h8UMnmZC_BqM_g

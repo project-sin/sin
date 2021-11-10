@@ -41,7 +41,7 @@ public class AuthController {
     public ResponseEntity isDuplicateId(@RequestParam String id) {
         authService.isDuplicateId(id);
 
-        return ResponseEntity.ok("중복되지 않은 아이디입니다");
+        return ResponseEntity.ok("사용가능한 아이디입니다");
 
     }
 
@@ -49,7 +49,7 @@ public class AuthController {
     public ResponseEntity isDuplicateEmail(@RequestParam String email) {
         authService.isDuplicateEmail(email);
 
-        return ResponseEntity.ok("중복되지 않은 이메일입니다");
+        return ResponseEntity.ok("사용가능한 이메일입니다");
     }
 
 }

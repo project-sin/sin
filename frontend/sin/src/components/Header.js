@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
+import {ACCESS_TOKEN} from "../constants/Sessionstorage";
+import findUserApi from "./api/user/FIndUserApi";
 
 const Headerwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -46,6 +48,19 @@ const Header = (props) => {
         setSub(id)
     }
 
+    const [user, setUser] = useState(null);
+    const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+
+    useEffect(() => {
+        if (!accessToken) {
+            return;
+        }
+        findUserApi(accessToken).then(userPromise => {
+            setUser(userPromise)
+        })
+    }, [accessToken]);
+
+    console.log(user)
     return (
         <Headerwrap>
             <Container>
@@ -53,9 +68,13 @@ const Header = (props) => {
                     <Usermenu className='clearfix'>
                         <Usermenuleft>item</Usermenuleft>
                         <Usermenuright>
-                            <Link to='/shop/member/join'>회원가입</Link>
-                            <Link to='/shop/member/login'>로그인</Link> / 
-                            <Link to='/shop/mypage/mypage_orderlist'>로그인중</Link>
+                            {user == null?
+                                <block><Link
+                                    to='/shop/member/join'>회원가입</Link> |
+                                    <Link to='/shop/member/login'>로그인</Link> |
+                                </block>
+                                : user.loginId +" 님 | "
+                            }
                             <Link to='/shop/board/list?id=notice'>고객센터</Link>
                         </Usermenuright>
                     </Usermenu>
