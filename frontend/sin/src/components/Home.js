@@ -1,17 +1,18 @@
 import React,{useState,useEffect} from 'react';
 import styled from 'styled-components';
-/*import { Swiper, SwiperSlide } from 'swiper/react';*/
-/*import SwiperCore, { Navigation } from "swiper";*/
-/*import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";*/
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import SwiperCore, { Navigation } from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
 import axios from 'axios';
 import { BACKEND_ADDRESS } from '../constants/ADDRESS';
 
-/*SwiperCore.use([Navigation])*/
+SwiperCore.use([Navigation])
 
 
 const Homewrap = styled.div``
-const ContainerSlide = styled.div``
+const ContainerSlide = styled.div`width: 1050px; margin: 0 auto;`
 const Container = styled.div`width: 1050px; margin: 0 auto;`
 const Row = styled.div``
 
@@ -27,41 +28,45 @@ const Section4wrap = styled.div``
 const Section4 = styled.div`height: 300px; background: #555;`
 
 const Home = () => {
-    /*const [bannerImg,setBannerImg] = useState([])
+    const [banners,setBanners] = useState(null)
     const [section2,setSection2] = useState([])
+
+    const bannerList = banners ? banners.map((banner)=>{
+      return <SwiperSlide><img style={{height: '300px', width: "1050px"}}
+                               src={banner.imageUrl}/></SwiperSlide>;
+    }) : "";
 
     useEffect(()=>{
         axios({
             method: 'get',
-            url: BACKEND_ADDRESS + `/shop/main/index/main_banner`
+            url: BACKEND_ADDRESS + `/main/index/main-banner`
         }).then(res=>{
-            setBannerImg(bannerImg.concat(res.data))
+            setBanners(res.data)
         })
-        axios({
+/*        axios({
             method: 'get',
-            url: BACKEND_ADDRESS + `/shop/main/index/today_recommendation`
+            url: BACKEND_ADDRESS + `/main/index/today-recommendation`
         }).then(res=>{
             setSection2(Section2.concat(res.data))
-        })
-    },[])*/
+        })*/
+    },[])
+    console.log(banners)
     return (
         <Homewrap>
-            {/*<ContainerSlide>
+            <ContainerSlide>
                 <Row>
                     <Slide>
                         <Swiper
-                            style={{height: '300px'}}
+                            style={{height: '300px', width: "1050px"}}
                             className='banner'
                             slidesPerView={1}
                             navigation
                         >
-                            <SwiperSlide>{bannerImg[0]}</SwiperSlide>
-                            <SwiperSlide>{bannerImg[1]}</SwiperSlide>
-                            <SwiperSlide>{bannerImg[2]}</SwiperSlide>
+                            {bannerList}
                         </Swiper>
                     </Slide>
                 </Row>
-            </ContainerSlide>*/}
+            </ContainerSlide>
             <Section1wrap>
                 <Container>
                     <Row>
