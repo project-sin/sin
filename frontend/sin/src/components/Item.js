@@ -96,7 +96,6 @@ const Item = (props) => {
                 expirationDate: res.data.expirationDate
             })
         }).catch(err=>{
-            console.log('err')
         }).then(
             setDelay('on'))
     },[])

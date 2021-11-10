@@ -7,6 +7,7 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import axios from 'axios';
 import { BACKEND_ADDRESS } from '../constants/ADDRESS';
+import mainBannerApi from "./api/home/MainBannerApi";
 
 SwiperCore.use([Navigation])
 
@@ -37,12 +38,7 @@ const Home = () => {
     }) : "";
 
     useEffect(()=>{
-        axios({
-            method: 'get',
-            url: BACKEND_ADDRESS + `/main/index/main-banner`
-        }).then(res=>{
-            setBanners(res.data)
-        })
+        mainBannerApi().then(bannersPromise=>{setBanners(bannersPromise)})
 /*        axios({
             method: 'get',
             url: BACKEND_ADDRESS + `/main/index/today-recommendation`
@@ -50,7 +46,6 @@ const Home = () => {
             setSection2(Section2.concat(res.data))
         })*/
     },[])
-    console.log(banners)
     return (
         <Homewrap>
             <ContainerSlide>
