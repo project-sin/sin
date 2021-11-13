@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import signUpApi from "./api/auth/SingupApi";
 import checkIsDuplicateEmail from "./api/auth/CheckIsDuplicateEmail";
 import checkIsDuplicateId from "./api/auth/CheckIsDuplicateId";
+import Header from "./Header";
 
 const Signupwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -72,6 +73,8 @@ const Signup = (props) => {
   };
 
   return (
+      <>
+        <Header/>
       <Signupwrap>
         <Container>
           <Row>
@@ -232,6 +235,7 @@ const Signup = (props) => {
           </Row>
         </Container>
       </Signupwrap>
+        </>
   )
 }
 

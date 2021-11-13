@@ -38,7 +38,7 @@ function App() {
   return (
     <>
     <GlobalStyle />
-    <Header />
+      <Route path='/' exact component={Home} />
     <Route path='/shop/main/index' exact component={Home} />
     <Route path='/shop/main/event' exact component={NonProductEvent} />
     <Route path='/shop/goods/event' exact component={Event} />

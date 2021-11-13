@@ -60,7 +60,6 @@ const Header = (props) => {
         })
     }, [accessToken]);
 
-    console.log(user)
     return (
         <Headerwrap>
             <Container>

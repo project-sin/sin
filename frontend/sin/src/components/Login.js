@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import loginApi from "./api/auth/LoginApi";
+import Header from "./Header";
 
 const Loginwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -23,42 +24,46 @@ const Login = ({history}) => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = ()=>{
+  const login = () => {
     loginApi(id, password, history);
   };
 
   return (
-      <Loginwrap>
-        <Container>
-          <Row>
-            <Logintitle>로그인</Logintitle>
-            <Loginform>
-              <Logininput type='text'
-                          value={id}
-                          onChange={e => setId(e.target.value)}
-                          placeholder='아이디를 입력해주세요'/>
-              <Logininput type='password'
-                          value={password}
-                          onChange={e => setPassword(e.target.value)}
-                          placeholder='비밀번호를 입력해주세요'/>
-              <Loginadd className='clearfix'>
-                <Loginaddsecurity>
-                  <input type='checkbox' id='security'/>
-                  <label htmlFor='security'>보안접속</label>
-                </Loginaddsecurity>
-                <Loginaddforget>
-                  <Link to=''>아이디 찾기</Link>/<Link to=''>비밀번호 찾기</Link>
-                </Loginaddforget>
-              </Loginadd>
-              <Loginfooter>
-                <Loginfooterbuttonlogin onClick={()=>login()}>로그인</Loginfooterbuttonlogin>
-                <Loginfooterbuttonsignup onClick={() => history.push(
-                    '/shop/member/join')}>회원가입</Loginfooterbuttonsignup>
-              </Loginfooter>
-            </Loginform>
-          </Row>
-        </Container>
-      </Loginwrap>
+      <>
+        <Header/>
+        <Loginwrap>
+          <Container>
+            <Row>
+              <Logintitle>로그인</Logintitle>
+              <Loginform>
+                <Logininput type='text'
+                            value={id}
+                            onChange={e => setId(e.target.value)}
+                            placeholder='아이디를 입력해주세요'/>
+                <Logininput type='password'
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            placeholder='비밀번호를 입력해주세요'/>
+                <Loginadd className='clearfix'>
+                  <Loginaddsecurity>
+                    <input type='checkbox' id='security'/>
+                    <label htmlFor='security'>보안접속</label>
+                  </Loginaddsecurity>
+                  <Loginaddforget>
+                    <Link to=''>아이디 찾기</Link>/<Link to=''>비밀번호 찾기</Link>
+                  </Loginaddforget>
+                </Loginadd>
+                <Loginfooter>
+                  <Loginfooterbuttonlogin
+                      onClick={() => login()}>로그인</Loginfooterbuttonlogin>
+                  <Loginfooterbuttonsignup onClick={() => history.push(
+                      '/shop/member/join')}>회원가입</Loginfooterbuttonsignup>
+                </Loginfooter>
+              </Loginform>
+            </Row>
+          </Container>
+        </Loginwrap>
+      </>
   )
 }
 
