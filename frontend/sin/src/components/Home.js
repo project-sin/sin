@@ -9,6 +9,9 @@ import axios from 'axios';
 import {BACKEND_ADDRESS} from '../constants/ADDRESS';
 import mainBannerApi from "./api/home/MainBannerApi";
 import Header from "./Header";
+import cheapProductApi from "./api/home/CheapProductApi";
+import mdChoiceApi from "./api/home/MDChoiceApi";
+import todayRecommendationAPi from "./api/home/TodayRecommendationAPi";
 
 SwiperCore.use([Navigation])
 
@@ -30,7 +33,9 @@ const Section4 = styled.div`height: 300px; background: #555;`
 
 const Home = () => {
   const [banners, setBanners] = useState(null)
-  const [section2, setSection2] = useState([])
+  const [cheapProducts, setCheapProducts] = useState(null)
+  const [mdChoices, setMdChoices] = useState(null)
+  const [recommendations, setRecommendations] = useState(null)
 
   const bannerList = banners ? banners.map((banner) => {
     return <SwiperSlide><img style={{height: '300px', width: "1050px"}}
@@ -38,16 +43,22 @@ const Home = () => {
   }) : "";
 
   useEffect(() => {
+    cheapProductApi().then(productsPromise => {
+      setCheapProducts(productsPromise)
+    })
     mainBannerApi().then(bannersPromise => {
       setBanners(bannersPromise)
     })
-    /*        axios({
-                method: 'get',
-                url: BACKEND_ADDRESS + `/main/index/today-recommendation`
-            }).then(res=>{
-                setSection2(Section2.concat(res.data))
-            })*/
+    mdChoiceApi().then(productsPromise => {
+      setMdChoices(productsPromise)
+    })
+    todayRecommendationAPi().then(productsPromise => {
+      setRecommendations(productsPromise)
+    })
   }, [])
+
+  console.log(cheapProducts)
+
   return (
       <>
         <Header/>
