@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {Swiper, SwiperSlide} from "swiper/react";
 
-import SwiperCore, {Navigation, Autoplay } from "swiper";
+import SwiperCore, {Navigation, Autoplay} from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 
@@ -64,13 +64,12 @@ const ProductPrevPrice = styled.div`
   text-decoration:line-through
 `;
 
-const ProductSummary = styled.div`
-`;
-
 const Home = (props) => {
   const [banners, setBanners] = useState(null)
   const [cheapProducts, setCheapProducts] = useState(null)
   const [mdChoices, setMdChoices] = useState(null)
+  const [mdShow, setMdShow] = useState('908')
+  const [choices, setChoices] = useState(null)
   const [recommendations, setRecommendations] = useState(null)
 
   useEffect(() => {
@@ -87,6 +86,14 @@ const Home = (props) => {
       setRecommendations(productsPromise)
     })
   }, [])
+
+  useEffect(() => {
+    for (let choice in mdChoices) {
+      if (choice === mdShow) {
+        setChoices(mdChoices[choice]);
+      }
+    }
+  }, [mdShow, mdChoices])
 
   const bannerList = banners ? banners.map((banner) => {
     return <SwiperSlide><img style={{height: '300px', width: "1050px"}}
@@ -106,18 +113,22 @@ const Home = (props) => {
     </Container></SwiperSlide>;
   }) : "";
 
-  const recommendationList = recommendations ? recommendations.map((product) => {
-    return <SwiperSlide><Container>
-      <ProductImg src={product.imageUrl}/>
-      <ProductDetails>
-        <ProductName>{product.name}</ProductName>
-        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
-            / 100))}원</ProductPrice>
-        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-      </ProductDetails>
-    </Container></SwiperSlide>;
-  }) : "";
+  const recommendationList = recommendations ? recommendations.map(
+      (product) => {
+        return <SwiperSlide><Container>
+          <ProductImg src={product.imageUrl}/>
+          <ProductDetails>
+            <ProductName>{product.name}</ProductName>
+            <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+            <ProductPrice>{Math.floor(
+                product.price * (1 - product.discountPercent
+                    / 100))}원</ProductPrice>
+            <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          </ProductDetails>
+        </Container></SwiperSlide>;
+      }) : "";
+
+  console.log(choices)
 
   return (
       <>
@@ -132,7 +143,7 @@ const Home = (props) => {
                     slidesPerView={1}
                     navigation
                     loop={true}
-                    autoplay={{ delay: 2000 }}
+                    autoplay={{delay: 2000}}
                 >
                   {bannerList}
                 </Swiper>
@@ -160,24 +171,24 @@ const Home = (props) => {
           <SubTitle
               style={{cursor: 'pointer'}}
               onClick={() => props.history.push(
-              "/shop/goods/goods_list?list=sale")}>
+                  "/shop/goods/goods_list?list=sale")}>
             놓치면 후회할 가격 〉</SubTitle>
-            <ContainerSlide>
-              <Row>
-                <SectionSlide>
-                  <Swiper
-                      style={{height: '440px', width: "1050px"}}
-                      className='cheapProduct'
-                      slidesPerView={4}
-                      slidesPerGroup={4}
-                      navigation
-                      loop={true}
-                  >
-                    {cheapProductList}
-                  </Swiper>
-                </SectionSlide>
-              </Row>
-            </ContainerSlide>
+          <ContainerSlide>
+            <Row>
+              <SectionSlide>
+                <Swiper
+                    style={{height: '440px', width: "1050px"}}
+                    className='cheapProduct'
+                    slidesPerView={4}
+                    slidesPerGroup={4}
+                    navigation
+                    loop={true}
+                >
+                  {cheapProductList}
+                </Swiper>
+              </SectionSlide>
+            </Row>
+          </ContainerSlide>
         </Wrap>
       </>
   )
