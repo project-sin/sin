@@ -5,8 +5,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, {Navigation, Autoplay } from "swiper";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
-import axios from 'axios';
-import {BACKEND_ADDRESS} from '../constants/ADDRESS';
+
 import mainBannerApi from "./api/home/MainBannerApi";
 import Header from "./Header";
 import cheapProductApi from "./api/home/CheapProductApi";
@@ -22,40 +21,40 @@ const Row = styled.div``
 const SubTitle = styled.div`text-align:center; margin-top:100px; font-size:30px; font-weight:bold;`
 
 const Slide = styled.div`height: 300px; background: #999;`
-const SectionSlide = styled.div`height: 500px;`
+const SectionSlide = styled.div`height: 440px;`
 
 const Container = styled.div`
   position: relative;
-  width: 320px;
+  width: 240px;
   margin:11px;
-  height: 500px;
+  height: 400px;
   cursor: pointer;
 `;
 const ProductImg = styled.img`
   position: absolute;
-  width: 320px;
-  height: 340px;
+  width: 240px;
+  height: 300px;
 `;
 
 const ProductDetails = styled.div`
   position: absolute;
-  top: 350px;
+  top: 310px;
 `;
 
 const ProductName = styled.div`
-  font-size: 25px;
+  font-size: 18px;
 `;
 
 const ProductDiscountPercent = styled.div`
   display: inline-block;
-  font-size: 20px;
+  font-size: 15px;
   color: red;
   font-weight: bold;
 `;
 
 const ProductPrice = styled.div`
   display: inline-block;
-  font-size: 20px;
+  font-size: 14px;
   margin-left:10px;
   font-weight: bold;
 `;
@@ -146,10 +145,10 @@ const Home = (props) => {
             <Row>
               <SectionSlide>
                 <Swiper
-                    style={{height: '500px', width: "1050px"}}
+                    style={{height: '440px', width: "1050px"}}
                     className='recommendation'
-                    slidesPerView={3}
-                    slidesPerGroup={3}
+                    slidesPerView={4}
+                    slidesPerGroup={4}
                     navigation
                     loop={true}
                 >
@@ -167,10 +166,10 @@ const Home = (props) => {
               <Row>
                 <SectionSlide>
                   <Swiper
-                      style={{height: '500px', width: "1050px"}}
+                      style={{height: '440px', width: "1050px"}}
                       className='cheapProduct'
-                      slidesPerView={3}
-                      slidesPerGroup={3}
+                      slidesPerView={4}
+                      slidesPerGroup={4}
                       navigation
                       loop={true}
                   >
