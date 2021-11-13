@@ -20,6 +20,22 @@ const Row = styled.div``
 
 const SubTitle = styled.div`text-align:center; margin-top:100px; font-size:30px; font-weight:bold;`
 
+const MdBlock = styled.div`
+  margin: 0 auto;
+  margin-bottom: -50px;
+  width: 1000px;
+  height: 100px;
+  padding-left:300px;
+ `;
+const MdButton = styled.div`
+  display: inline-block;
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 15px; 
+  cursor: pointer;
+`;
 const Slide = styled.div`height: 300px; background: #999;`
 const SectionSlide = styled.div`height: 440px;`
 
@@ -68,7 +84,7 @@ const Home = (props) => {
   const [banners, setBanners] = useState(null)
   const [cheapProducts, setCheapProducts] = useState(null)
   const [mdChoices, setMdChoices] = useState(null)
-  const [mdShow, setMdShow] = useState('908')
+  const [mdShow, setMdShow] = useState('910')
   const [choices, setChoices] = useState(null)
   const [recommendations, setRecommendations] = useState(null)
 
@@ -88,11 +104,16 @@ const Home = (props) => {
   }, [])
 
   useEffect(() => {
-    for (let choice in mdChoices) {
-      if (choice === mdShow) {
-        setChoices(mdChoices[choice]);
+      for (let choice in mdChoices) {
+        if (choice === mdShow) {
+          document.getElementById(choice).style.background = 'rgb(112,48,160)'
+          document.getElementById(choice).style.color = 'white'
+          setChoices(mdChoices[choice]);
+        } else {
+          document.getElementById(choice).style.background = 'rgb(242,242,242)'
+          document.getElementById(choice).style.color = 'black'
+        }
       }
-    }
   }, [mdShow, mdChoices])
 
   const bannerList = banners ? banners.map((banner) => {
@@ -128,7 +149,20 @@ const Home = (props) => {
         </Container></SwiperSlide>;
       }) : "";
 
-  console.log(choices)
+  const mdChoiceList = choices ? choices.map(
+      (product) => {
+        return <SwiperSlide><Container>
+          <ProductImg src={product.imageUrl}/>
+          <ProductDetails>
+            <ProductName>{product.name}</ProductName>
+            <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+            <ProductPrice>{Math.floor(
+                product.price * (1 - product.discountPercent
+                    / 100))}원</ProductPrice>
+            <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          </ProductDetails>
+        </Container></SwiperSlide>;
+      }) : "";
 
   return (
       <>
@@ -150,8 +184,7 @@ const Home = (props) => {
               </Slide>
             </Row>
           </ContainerSlide>
-          <SubTitle>
-            이 상품 어때요?</SubTitle>
+          <SubTitle>이 상품 어때요?</SubTitle>
           <ContainerSlide>
             <Row>
               <SectionSlide>
@@ -185,6 +218,30 @@ const Home = (props) => {
                     loop={true}
                 >
                   {cheapProductList}
+                </Swiper>
+              </SectionSlide>
+            </Row>
+          </ContainerSlide>
+          <SubTitle>MD의 추천</SubTitle>
+          <MdBlock>
+            <MdButton id={'907'} onClick={()=>{setMdShow('907')}}>채소</MdButton>
+            <MdButton id={'908'} onClick={()=>{setMdShow('908')}}>과일·견과·쌀</MdButton>
+            <MdButton id={'909'} onClick={()=>{setMdShow('909')}}>수산·해산·건어물</MdButton>
+            <MdButton id={'910'} onClick={()=>{setMdShow('910')}}>정육·계란</MdButton>
+            <MdButton id={'911'} onClick={()=>{setMdShow('911')}}>국·반찬·메인요리</MdButton>
+          </MdBlock>
+          <ContainerSlide>
+            <Row>
+              <SectionSlide>
+                <Swiper
+                    style={{height: '440px', width: "1050px"}}
+                    className='mdProducts'
+                    slidesPerView={4}
+                    slidesPerGroup={4}
+                    navigation
+                    loop={true}
+                >
+                  {mdChoiceList}
                 </Swiper>
               </SectionSlide>
             </Row>
