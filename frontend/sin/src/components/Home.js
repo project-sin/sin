@@ -16,11 +16,13 @@ import todayRecommendationAPi from "./api/home/TodayRecommendationAPi";
 SwiperCore.use([Navigation])
 
 const Homewrap = styled.div``
-const ContainerSlide = styled.div`width: 1050px; margin: 0 auto;`
-const Container = styled.div`width: 1050px; margin: 0 auto;`
+const ContainerSlide = styled.div`width: 1050px; margin: 30px auto;`
 const Row = styled.div``
 
+const SubTitle = styled.div`text-align:center; margin-top:100px; font-size:30px; font-weight:bold; cursor: pointer;`
+
 const Slide = styled.div`height: 300px; background: #999;`
+const SectionSlide = styled.div`height: 500px;`
 const Section1wrap = styled.div``
 const Section1 = styled.div`height: 300px; background: #888;  overflow: hidden;`
 const Section1item = styled.div`float: left; width: 300px; height: 200px; margin: 10px;`
@@ -31,7 +33,51 @@ const Section3 = styled.div`height: 300px; background: #666;`
 const Section4wrap = styled.div``
 const Section4 = styled.div`height: 300px; background: #555;`
 
-const Home = () => {
+const Container = styled.div`
+  position: relative;
+  width: 320px;
+  margin:11px;
+  height: 500px;
+  cursor: pointer;
+`;
+const ProductImg = styled.img`
+  position: absolute;
+  width: 320px;
+  height: 340px;
+`;
+
+const ProductDetails = styled.div`
+  position: absolute;
+  top: 350px;
+`;
+
+const ProductName = styled.div`
+  font-size: 25px;
+`;
+
+const ProductDiscountPercent = styled.div`
+  display: inline-block;
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+`;
+
+const ProductPrice = styled.div`
+  display: inline-block;
+  font-size: 20px;
+  margin-left:10px;
+  font-weight: bold;
+`;
+
+const ProductPrevPrice = styled.div`
+  color: gray;
+  text-decoration:line-through
+`;
+
+const ProductSummary = styled.div`
+`;
+
+const Home = (props) => {
   const [banners, setBanners] = useState(null)
   const [cheapProducts, setCheapProducts] = useState(null)
   const [mdChoices, setMdChoices] = useState(null)
@@ -40,6 +86,19 @@ const Home = () => {
   const bannerList = banners ? banners.map((banner) => {
     return <SwiperSlide><img style={{height: '300px', width: "1050px"}}
                              src={banner.imageUrl}/></SwiperSlide>;
+  }) : "";
+
+  const productLists = cheapProducts ? cheapProducts.map((product) => {
+    return <SwiperSlide><Container>
+      <ProductImg src={product.imageUrl}/>
+      <ProductDetails>
+        <ProductName>{product.name}</ProductName>
+        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+            / 100))}원</ProductPrice>
+        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+      </ProductDetails>
+    </Container></SwiperSlide>;
   }) : "";
 
   useEffect(() => {
@@ -77,51 +136,52 @@ const Home = () => {
               </Slide>
             </Row>
           </ContainerSlide>
+          <SubTitle onClick={() => props.history.push(
+              "/shop/goods/goods_list?list=sale")}>
+            놓치면 후회할 가격 〉</SubTitle>
           <Section1wrap>
-            <Container>
+            <ContainerSlide>
               <Row>
-                <Section1 className='clearfix'>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                  <Section1item>item</Section1item>
-                </Section1>
+                <SectionSlide>
+                  <Swiper
+                      style={{height: '500px', width: "1050px"}}
+                      className='cheapProduct'
+                      slidesPerView={3}
+                      navigation
+                  >
+                    {productLists}
+                  </Swiper>
+                </SectionSlide>
               </Row>
-            </Container>
+            </ContainerSlide>
           </Section1wrap>
-          <Section2wrap>
-            <Container>
+          {/*<Section2wrap>
+            <ContainerSlide>
               <Row>
                 <Section2>
                   <h2>section2</h2>
                 </Section2>
               </Row>
-            </Container>
+            </ContainerSlide>
           </Section2wrap>
           <Section3wrap>
-            <Container>
+            <ContainerSlide>
               <Row>
                 <Section3>
                   <h2>section3</h2>
                 </Section3>
               </Row>
-            </Container>
+            </ContainerSlide>
           </Section3wrap>
           <Section4wrap>
-            <Container>
+            <ContainerSlide>
               <Row>
                 <Section4>
                   <h2>section4</h2>
                 </Section4>
               </Row>
-            </Container>
-          </Section4wrap>
+            </ContainerSlide>
+          </Section4wrap>*/}
         </Homewrap>
       </>
   )
