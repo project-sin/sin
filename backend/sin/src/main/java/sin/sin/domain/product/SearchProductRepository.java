@@ -1,12 +1,12 @@
 package sin.sin.domain.product;
 
-import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import sin.sin.domain.productReview.QProductReview;
 import sin.sin.dto.ProductListResponse;
+import sin.sin.dto.QProductListResponse;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -49,9 +49,9 @@ public class SearchProductRepository {
     }
 
     JPAQuery<ProductListResponse> selectFromJoin() {
-        return queryFactory.select(Projections.bean(ProductListResponse.class,
-                        product.name, product.productCode, product.contentSummary, product.price, product.productCategory,
-                        product.discountPercent, product.createdDate, product.status, productReview.count().intValue().as("reviewCount")))
+        return queryFactory.select(new QProductListResponse(
+                        product.name, product.productCode, product.price, product.productCategory, product.discountPercent,
+                        product.contentSummary, product.createdDate, product.status, productReview.count().intValue().as("reviewCount")))
                 .from(product)
                 .leftJoin(productReview).on(productReview.product.eq(product));
     }

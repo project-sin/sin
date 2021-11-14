@@ -2,6 +2,7 @@ package sin.sin.config.auth;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Getter
 @Setter
+@ToString
 public class PrincipalDetails implements UserDetails {
 
     private static final String ROLE_USER = "ROLE_USER";
