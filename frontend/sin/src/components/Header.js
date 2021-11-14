@@ -14,7 +14,7 @@ const Usermenuleft = styled.div`float: left;`
 const Usermenuright = styled.div`float: right`
 
 const Headerlogo = styled.div``
-const Logolink = styled(Link)`display: block; width: 200px; margin: 0 auto; font-size: 40px; font-weight: bold; color: purple; text-align: center;`
+const Logolink = styled(Link)`display: block; width: 200px; margin: 0 auto; font-size: 40px; font-weight: bold; color: rgb(112,48,160); text-align: center;`
 
 const Headernav = styled.div`display: flex;`
 const Totalcategorysubnav = styled.div`display: none; box-sizing: border-box; position: absolute; top: 0px; left: 200px; width: 200px; height: 300px; font-size: 14px; text-align: left; background: #f7f7f7;`
@@ -60,7 +60,6 @@ const Header = (props) => {
         })
     }, [accessToken]);
 
-    console.log(user)
     return (
         <Headerwrap>
             <Container>

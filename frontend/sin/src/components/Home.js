@@ -1,114 +1,254 @@
-import React,{useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-/*import { Swiper, SwiperSlide } from 'swiper/react';*/
-/*import SwiperCore, { Navigation } from "swiper";*/
-/*import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";*/
-import axios from 'axios';
-import { BACKEND_ADDRESS } from '../constants/ADDRESS';
+import {Swiper, SwiperSlide} from "swiper/react";
 
-/*SwiperCore.use([Navigation])*/
+import SwiperCore, {Navigation, Autoplay} from "swiper";
+import "swiper/swiper.scss";
+import "swiper/components/navigation/navigation.scss";
 
+import mainBannerApi from "./api/home/MainBannerApi";
+import Header from "./Header";
+import cheapProductApi from "./api/home/CheapProductApi";
+import mdChoiceApi from "./api/home/MDChoiceApi";
+import todayRecommendationAPi from "./api/home/TodayRecommendationAPi";
 
-const Homewrap = styled.div``
-const ContainerSlide = styled.div``
-const Container = styled.div`width: 1050px; margin: 0 auto;`
+SwiperCore.use([Navigation, Autoplay])
+
+const Wrap = styled.div``
+const ContainerSlide = styled.div`width: 1050px; margin: 30px auto;`
 const Row = styled.div``
 
+const SubTitle = styled.div`text-align:center; margin-top:100px; font-size:30px; font-weight:bold;`
+
+const MdBlock = styled.div`
+  margin: 0 auto;
+  margin-bottom: -50px;
+  width: 1000px;
+  height: 100px;
+  padding-left:300px;
+ `;
+const MdButton = styled.div`
+  display: inline-block;
+  margin: 20px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50px;
+  font-size: 15px; 
+  cursor: pointer;
+`;
 const Slide = styled.div`height: 300px; background: #999;`
-const Section1wrap = styled.div``
-const Section1 = styled.div`height: 300px; background: #888;  overflow: hidden;`
-const Section1item = styled.div`float: left; width: 300px; height: 200px; margin: 10px;`
-const Section2wrap = styled.div``
-const Section2 = styled.div`height: 300px; background: #777;`
-const Section3wrap = styled.div``
-const Section3 = styled.div`height: 300px; background: #666;`
-const Section4wrap = styled.div``
-const Section4 = styled.div`height: 300px; background: #555;`
+const SectionSlide = styled.div`height: 440px;`
 
-const Home = () => {
-    /*const [bannerImg,setBannerImg] = useState([])
-    const [section2,setSection2] = useState([])
+const Container = styled.div`
+  position: relative;
+  width: 240px;
+  margin:11px;
+  height: 400px;
+  cursor: pointer;
+`;
+const ProductImg = styled.img`
+  position: absolute;
+  width: 240px;
+  height: 300px;
+`;
 
-    useEffect(()=>{
-        axios({
-            method: 'get',
-            url: BACKEND_ADDRESS + `/shop/main/index/main_banner`
-        }).then(res=>{
-            setBannerImg(bannerImg.concat(res.data))
-        })
-        axios({
-            method: 'get',
-            url: BACKEND_ADDRESS + `/shop/main/index/today_recommendation`
-        }).then(res=>{
-            setSection2(Section2.concat(res.data))
-        })
-    },[])*/
-    return (
-        <Homewrap>
-            {/*<ContainerSlide>
-                <Row>
-                    <Slide>
-                        <Swiper
-                            style={{height: '300px'}}
-                            className='banner'
-                            slidesPerView={1}
-                            navigation
-                        >
-                            <SwiperSlide>{bannerImg[0]}</SwiperSlide>
-                            <SwiperSlide>{bannerImg[1]}</SwiperSlide>
-                            <SwiperSlide>{bannerImg[2]}</SwiperSlide>
-                        </Swiper>
-                    </Slide>
-                </Row>
-            </ContainerSlide>*/}
-            <Section1wrap>
-                <Container>
-                    <Row>
-                        <Section1 className='clearfix'>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                            <Section1item>item</Section1item>
-                        </Section1>
-                    </Row>
-                </Container>
-            </Section1wrap>
-            <Section2wrap>
-                <Container>
-                    <Row>
-                        <Section2>
-                            <h2>section2</h2>
-                        </Section2>
-                    </Row>
-                </Container>
-            </Section2wrap>
-            <Section3wrap>
-                <Container>
-                    <Row>
-                        <Section3>
-                            <h2>section3</h2>
-                        </Section3>
-                    </Row>
-                </Container>
-            </Section3wrap>
-            <Section4wrap>
-                <Container>
-                    <Row>
-                        <Section4>
-                            <h2>section4</h2>
-                        </Section4>
-                    </Row>
-                </Container>
-            </Section4wrap>
-        </Homewrap>
-    )
+const ProductDetails = styled.div`
+  position: absolute;
+  top: 310px;
+`;
+
+const ProductName = styled.div`
+  font-size: 18px;
+`;
+
+const ProductDiscountPercent = styled.div`
+  display: inline-block;
+  font-size: 15px;
+  color: red;
+  font-weight: bold;
+`;
+
+const ProductPrice = styled.div`
+  display: inline-block;
+  font-size: 14px;
+  margin-left:10px;
+  font-weight: bold;
+`;
+
+const ProductPrevPrice = styled.div`
+  color: gray;
+  text-decoration:line-through
+`;
+
+const Home = (props) => {
+  const [banners, setBanners] = useState(null)
+  const [cheapProducts, setCheapProducts] = useState(null)
+  const [mdChoices, setMdChoices] = useState(null)
+  const [mdShow, setMdShow] = useState('910')
+  const [choices, setChoices] = useState(null)
+  const [recommendations, setRecommendations] = useState(null)
+
+  useEffect(() => {
+    cheapProductApi().then(productsPromise => {
+      setCheapProducts(productsPromise)
+    })
+    mainBannerApi().then(bannersPromise => {
+      setBanners(bannersPromise)
+    })
+    mdChoiceApi().then(productsPromise => {
+      setMdChoices(productsPromise)
+    })
+    todayRecommendationAPi().then(productsPromise => {
+      setRecommendations(productsPromise)
+    })
+  }, [])
+
+  useEffect(() => {
+      for (let choice in mdChoices) {
+        if (choice === mdShow) {
+          document.getElementById(choice).style.background = 'rgb(112,48,160)'
+          document.getElementById(choice).style.color = 'white'
+          setChoices(mdChoices[choice]);
+        } else {
+          document.getElementById(choice).style.background = 'rgb(242,242,242)'
+          document.getElementById(choice).style.color = 'black'
+        }
+      }
+  }, [mdShow, mdChoices])
+
+  const bannerList = banners ? banners.map((banner) => {
+    return <SwiperSlide><img style={{height: '300px', width: "1050px"}}
+                             src={banner.imageUrl}/></SwiperSlide>;
+  }) : "";
+
+  const cheapProductList = cheapProducts ? cheapProducts.map((product) => {
+    return <SwiperSlide><Container>
+      <ProductImg src={product.imageUrl}/>
+      <ProductDetails>
+        <ProductName>{product.name}</ProductName>
+        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+            / 100))}원</ProductPrice>
+        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+      </ProductDetails>
+    </Container></SwiperSlide>;
+  }) : "";
+
+  const recommendationList = recommendations ? recommendations.map(
+      (product) => {
+        return <SwiperSlide><Container>
+          <ProductImg src={product.imageUrl}/>
+          <ProductDetails>
+            <ProductName>{product.name}</ProductName>
+            <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+            <ProductPrice>{Math.floor(
+                product.price * (1 - product.discountPercent
+                    / 100))}원</ProductPrice>
+            <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          </ProductDetails>
+        </Container></SwiperSlide>;
+      }) : "";
+
+  const mdChoiceList = choices ? choices.map(
+      (product) => {
+        return <SwiperSlide><Container>
+          <ProductImg src={product.imageUrl}/>
+          <ProductDetails>
+            <ProductName>{product.name}</ProductName>
+            <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+            <ProductPrice>{Math.floor(
+                product.price * (1 - product.discountPercent
+                    / 100))}원</ProductPrice>
+            <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          </ProductDetails>
+        </Container></SwiperSlide>;
+      }) : "";
+
+  return (
+      <>
+        <Header/>
+        <Wrap>
+          <ContainerSlide>
+            <Row>
+              <Slide>
+                <Swiper
+                    style={{height: '300px', width: "1050px"}}
+                    className='banner'
+                    slidesPerView={1}
+                    navigation
+                    loop={true}
+                    autoplay={{delay: 2000}}
+                >
+                  {bannerList}
+                </Swiper>
+              </Slide>
+            </Row>
+          </ContainerSlide>
+          <SubTitle>이 상품 어때요?</SubTitle>
+          <ContainerSlide>
+            <Row>
+              <SectionSlide>
+                <Swiper
+                    style={{height: '440px', width: "1050px"}}
+                    className='recommendation'
+                    slidesPerView={4}
+                    slidesPerGroup={4}
+                    navigation
+                    loop={true}
+                >
+                  {recommendationList}
+                </Swiper>
+              </SectionSlide>
+            </Row>
+          </ContainerSlide>
+          <SubTitle
+              style={{cursor: 'pointer'}}
+              onClick={() => props.history.push(
+                  "/shop/goods/goods_list?list=sale")}>
+            놓치면 후회할 가격 〉</SubTitle>
+          <ContainerSlide>
+            <Row>
+              <SectionSlide>
+                <Swiper
+                    style={{height: '440px', width: "1050px"}}
+                    className='cheapProduct'
+                    slidesPerView={4}
+                    slidesPerGroup={4}
+                    navigation
+                    loop={true}
+                >
+                  {cheapProductList}
+                </Swiper>
+              </SectionSlide>
+            </Row>
+          </ContainerSlide>
+          <SubTitle>MD의 추천</SubTitle>
+          <MdBlock>
+            <MdButton id={'907'} onClick={()=>{setMdShow('907')}}>채소</MdButton>
+            <MdButton id={'908'} onClick={()=>{setMdShow('908')}}>과일·견과·쌀</MdButton>
+            <MdButton id={'909'} onClick={()=>{setMdShow('909')}}>수산·해산·건어물</MdButton>
+            <MdButton id={'910'} onClick={()=>{setMdShow('910')}}>정육·계란</MdButton>
+            <MdButton id={'911'} onClick={()=>{setMdShow('911')}}>국·반찬·메인요리</MdButton>
+          </MdBlock>
+          <ContainerSlide>
+            <Row>
+              <SectionSlide>
+                <Swiper
+                    style={{height: '440px', width: "1050px"}}
+                    className='mdProducts'
+                    slidesPerView={4}
+                    slidesPerGroup={4}
+                    navigation
+                    loop={true}
+                >
+                  {mdChoiceList}
+                </Swiper>
+              </SectionSlide>
+            </Row>
+          </ContainerSlide>
+        </Wrap>
+      </>
+  )
 }
 
 export default Home;

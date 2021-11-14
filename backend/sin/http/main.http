@@ -1,4 +1,4 @@
-### 메인 배너 ## nonProduct 최신 event 세 개
+### 메인 배너 ## nonProduct 최신 event 두 개
 GET http://localhost:8080/shop/main/index/main-banner
 Content-Type: application/json
 

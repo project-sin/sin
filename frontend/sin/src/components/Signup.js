@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import signUpApi from "./api/auth/SingupApi";
 import checkIsDuplicateEmail from "./api/auth/CheckIsDuplicateEmail";
 import checkIsDuplicateId from "./api/auth/CheckIsDuplicateId";
+import Header from "./Header";
 
 const Signupwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -13,7 +14,7 @@ const Table = styled.table`border-collapse: collapse; border-spacing: 0;`
 const Signuptitlewrap = styled.div`text-align: center; padding-top: 50px; padding-bottom:55px; border-bottom: 2px solid black;`
 const Signuptitle = styled.strong`font-size: 25px;`
 const Input = styled.input`width:330px; font-size: 14px; color: #333; box-sizing: border-box; padding: 0 14px; background: #fff; border: 1px solid #ccc; border-radius: 3px; height: 45px;`
-const Button = styled.button` margin-left: -140px; width:100px; font-size: 14px; color: purple; border-box; background: #fff; border: 1px solid purple; border-radius: 3px; height: 45px;`
+const Button = styled.button` margin-left: -140px; width:100px; font-size: 14px; color: rgb(112,48,160); border-box; background: #fff; border: 1px solid rgb(112,48,160); border-radius: 3px; height: 45px;`
 const Addressbtn = styled.button`width:330px; font-size: 14px; color: #5f0080; background: #fff; border: 1px solid #5f0080; border-radius: 3px; height: 45px; font-weight: bold; cursor: pointer;`
 const Th = styled.th`width:155px; font-size: 14px; text-align: left; padding: 30px 0px 20px 20px; color: #333333;`
 const Singupfooter = styled.div`padding-top: 40px;`
@@ -72,6 +73,8 @@ const Signup = (props) => {
   };
 
   return (
+      <>
+        <Header/>
       <Signupwrap>
         <Container>
           <Row>
@@ -232,6 +235,7 @@ const Signup = (props) => {
           </Row>
         </Container>
       </Signupwrap>
+        </>
   )
 }
 

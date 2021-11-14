@@ -1,8 +1,9 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import query from 'query-string';
 import {BACKEND_ADDRESS} from "../constants/ADDRESS";
+import Header from "./Header";
 
 const Itemwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -46,193 +47,196 @@ const Section3 = styled.div`height: 300px;`
 const Section4 = styled.div`height: 300px;`
 
 const Item = (props) => {
-    const goodsno = query.parse(props.location.search).goodsno
-    const [item, setItem] = useState({
-        productName: 'test',
-        contentSummary: 'test',
-        thumbnailUrl: 'test',
-        price : 'test',
-        discountPercent: 'test',
-        saleUnit: 'test',
-        weight: 'test',
-        deliveryClassification: 'test',
-        packingType: 'test',
-        originCountry: 'test',
-        allergicReaction: 'test',
-        expirationDate: 'test',
-        // productName: null,
-        // contentSummary: null,
-        // thumbnailUrl: null,
-        // price : null,
-        // discountPercent: null,
-        // saleUnit: null,
-        // weight: null,
-        // deliveryClassification: null,
-        // packingType: null,
-        // originCountry: null,
-        // allergicReaction: null,
-        // expirationDate: null
-    })
-    const [delay,setDelay] = useState(null)
-    
-    useEffect(()=>{
-        axios({
-            method: 'get',
-            url: BACKEND_ADDRESS + `/goods/goods_view?goodsno=${goodsno}`
-        }).then(res=>{
-            setItem({
-                ...item,
-                productName: res.data.productName,
-                contentSummary: res.data.contentSummary,
-                thumbnailUrl: res.data.thumbnailUrl,
-                price : res.data.price,
-                discountPercent: res.data.discountPercent,
-                saleUnit: res.data.saleUnit,
-                weight: res.data.weight,
-                deliveryClassification: res.data.deliveryClassification,
-                packingType: res.data.packingType,
-                originCountry: res.data.originCountry,
-                allergicReaction: res.data.allergicReaction,
-                expirationDate: res.data.expirationDate
-            })
-        }).catch(err=>{
-            console.log('err')
-        }).then(
-            setDelay('on'))
-    },[])
+  const goodsno = query.parse(props.location.search).goodsno
+  const [item, setItem] = useState({
+    productName: 'test',
+    contentSummary: 'test',
+    thumbnailUrl: 'test',
+    price: 'test',
+    discountPercent: 'test',
+    saleUnit: 'test',
+    weight: 'test',
+    deliveryClassification: 'test',
+    packingType: 'test',
+    originCountry: 'test',
+    allergicReaction: 'test',
+    expirationDate: 'test',
+    // productName: null,
+    // contentSummary: null,
+    // thumbnailUrl: null,
+    // price : null,
+    // discountPercent: null,
+    // saleUnit: null,
+    // weight: null,
+    // deliveryClassification: null,
+    // packingType: null,
+    // originCountry: null,
+    // allergicReaction: null,
+    // expirationDate: null
+  })
+  const [delay, setDelay] = useState(null)
 
-    return (
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: BACKEND_ADDRESS + `/goods/goods_view?goodsno=${goodsno}`
+    }).then(res => {
+      setItem({
+        ...item,
+        productName: res.data.productName,
+        contentSummary: res.data.contentSummary,
+        thumbnailUrl: res.data.thumbnailUrl,
+        price: res.data.price,
+        discountPercent: res.data.discountPercent,
+        saleUnit: res.data.saleUnit,
+        weight: res.data.weight,
+        deliveryClassification: res.data.deliveryClassification,
+        packingType: res.data.packingType,
+        originCountry: res.data.originCountry,
+        allergicReaction: res.data.allergicReaction,
+        expirationDate: res.data.expirationDate
+      })
+    }).catch(err => {
+    }).then(
+        setDelay('on'))
+  }, [])
+
+  return (
+      <>
+        <Header/>
         <Itemwrap>
-            <Container>
-                <Row>
-                    {delay==='on'?
-                    <>
+          <Container>
+            <Row>
+              {delay === 'on' ?
+                  <>
                     <Section1>
-                        <Section1left />
-                        <Section1right>
-                            <RightDiv1>
-                                <ItemTitle>{item.productName}</ItemTitle>
-                                <ItemSubTitle>{item.contentSummary}</ItemSubTitle>
-                            </RightDiv1>
-                            <RightDiv2>
-                                {item.discountPercent?
-                                <>
+                      <Section1left/>
+                      <Section1right>
+                        <RightDiv1>
+                          <ItemTitle>{item.productName}</ItemTitle>
+                          <ItemSubTitle>{item.contentSummary}</ItemSubTitle>
+                        </RightDiv1>
+                        <RightDiv2>
+                          {item.discountPercent ?
+                              <>
                                 <PriceForMember>회원할인가</PriceForMember>
                                 <PriceP>
-                                    <Price>{item.price}</Price>
-                                    <Won>원</Won>
-                                    <Discount>{item.discountPercent}</Discount>
-                                    <Discount>%</Discount>
+                                  <Price>{item.price}</Price>
+                                  <Won>원</Won>
+                                  <Discount>{item.discountPercent}</Discount>
+                                  <Discount>%</Discount>
                                 </PriceP>
                                 <Nodiscount>
-                                    <NdcPrice>nodiscount</NdcPrice>
-                                    <NdcPrice>원</NdcPrice>
+                                  <NdcPrice>nodiscount</NdcPrice>
+                                  <NdcPrice>원</NdcPrice>
                                 </Nodiscount>
                                 <Info>로그인 후, 회원할인가와 적립혜택이 제공됩니다./로그인시 적립금</Info>
-                                </>
-                                :
-                                <>
+                              </>
+                              :
+                              <>
                                 <PriceP>
-                                    <Price>{item.price}</Price>
-                                    <Won>원</Won>
+                                  <Price>{item.price}</Price>
+                                  <Won>원</Won>
                                 </PriceP>
                                 <Info>로그인 후, 회원할인가와 적립혜택이 제공됩니다./로그인시 적립금</Info>
-                                </>
-                                }
-                            </RightDiv2>
-                            <RightDiv3>
-                                {item.saleUnit?
-                                <>
+                              </>
+                          }
+                        </RightDiv2>
+                        <RightDiv3>
+                          {item.saleUnit ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>판매단위</ItemInfoTag>
-                                <ItemInfoValue>{item.saleUnit}</ItemInfoValue>
+                                  <ItemInfoTag>판매단위</ItemInfoTag>
+                                  <ItemInfoValue>{item.saleUnit}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.weight?
-                                <>
+                              </> : null
+                          }
+                          {item.weight ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>중량/용량</ItemInfoTag>
-                                <ItemInfoValue>{item.weight}</ItemInfoValue>
+                                  <ItemInfoTag>중량/용량</ItemInfoTag>
+                                  <ItemInfoValue>{item.weight}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.deliveryClassification?
-                                <>
+                              </> : null
+                          }
+                          {item.deliveryClassification ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>배송구분</ItemInfoTag>
-                                <ItemInfoValue>{item.deliveryClassification}</ItemInfoValue>
+                                  <ItemInfoTag>배송구분</ItemInfoTag>
+                                  <ItemInfoValue>{item.deliveryClassification}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.packingType?
-                                <>
+                              </> : null
+                          }
+                          {item.packingType ?
+                              <>
                                 <ItemInfo>
-                                <p>
-                                <ItemInfoTag>포장타입</ItemInfoTag>
-                                <ItemInfoValue>{item.saleUnit}</ItemInfoValue>
-                                </p>
-                                <p>
-                                    <ItemInfoTag />
-                                    <DeliveryDesc>택배배송은 에코포장이 스티로폼으로 대체됩니다.</DeliveryDesc>
-                                </p>
+                                  <p>
+                                    <ItemInfoTag>포장타입</ItemInfoTag>
+                                    <ItemInfoValue>{item.saleUnit}</ItemInfoValue>
+                                  </p>
+                                  <p>
+                                    <ItemInfoTag/>
+                                    <DeliveryDesc>택배배송은 에코포장이 스티로폼으로
+                                      대체됩니다.</DeliveryDesc>
+                                  </p>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.originCountry?
-                                <>
+                              </> : null
+                          }
+                          {item.originCountry ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>원산지</ItemInfoTag>
-                                <ItemInfoValue>{item.originCountry}</ItemInfoValue>
+                                  <ItemInfoTag>원산지</ItemInfoTag>
+                                  <ItemInfoValue>{item.originCountry}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.allergicReaction?
-                                <>
+                              </> : null
+                          }
+                          {item.allergicReaction ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>알레르기정보</ItemInfoTag>
-                                <ItemInfoValue>{item.allergicReaction}</ItemInfoValue>
+                                  <ItemInfoTag>알레르기정보</ItemInfoTag>
+                                  <ItemInfoValue>{item.allergicReaction}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                                {item.expirationDate?
-                                <>
+                              </> : null
+                          }
+                          {item.expirationDate ?
+                              <>
                                 <ItemInfo>
-                                <ItemInfoTag>보증 유통기한</ItemInfoTag>
-                                <ItemInfoValue>{item.expirationDate}</ItemInfoValue>
+                                  <ItemInfoTag>보증 유통기한</ItemInfoTag>
+                                  <ItemInfoValue>{item.expirationDate}</ItemInfoValue>
                                 </ItemInfo>
-                                </>:null
-                                }
-                            </RightDiv3>
-                            <div>
-                                <TotalPriceDiv>
-                                    <p>
-                                        <TotalPriceTag>총 상품금액:</TotalPriceTag>
-                                        <TotalPrice>TotalPrice</TotalPrice>
-                                        <TotalPriceWon>원</TotalPriceWon>
-                                    </p>
-                                    <p>
-                                        <Save>적립</Save>
-                                        <SaveDesc>로그인 후, 적립혜택 적용/로그인시 적립금</SaveDesc>
-                                    </p>
-                                </TotalPriceDiv>
-                                <Btndiv>
-                                    <Restocked>재입고 알림</Restocked>
-                                    <Basket>장바구니 담기</Basket>
-                                </Btndiv>
-                            </div>
-                        </Section1right>
+                              </> : null
+                          }
+                        </RightDiv3>
+                        <div>
+                          <TotalPriceDiv>
+                            <p>
+                              <TotalPriceTag>총 상품금액:</TotalPriceTag>
+                              <TotalPrice>TotalPrice</TotalPrice>
+                              <TotalPriceWon>원</TotalPriceWon>
+                            </p>
+                            <p>
+                              <Save>적립</Save>
+                              <SaveDesc>로그인 후, 적립혜택 적용/로그인시 적립금</SaveDesc>
+                            </p>
+                          </TotalPriceDiv>
+                          <Btndiv>
+                            <Restocked>재입고 알림</Restocked>
+                            <Basket>장바구니 담기</Basket>
+                          </Btndiv>
+                        </div>
+                      </Section1right>
                     </Section1>
                     <Section2></Section2>
                     <Section3></Section3>
                     <Section4></Section4>
-                    </>:
-                    null                    
-                    }
-                </Row>
-            </Container>
-        </Itemwrap>        
-    )
+                  </> :
+                  null
+              }
+            </Row>
+          </Container>
+        </Itemwrap>
+      </>
+  )
 }
 
 export default Item;

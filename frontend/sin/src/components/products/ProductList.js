@@ -3,6 +3,7 @@ import styled from "styled-components";
 import findProductListApi from "../api/product/FindProductListApi";
 import queryString from "query-string";
 import Sort from "./Sort";
+import Header from "../Header";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -57,36 +58,41 @@ const ProductSummary = styled.div`
 const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
   const list = queryString.parse(props.location.search).list;
-  const [products,setProducts] = useState(null);
+  const [products, setProducts] = useState(null);
 
-  useEffect(()=> {
+  useEffect(() => {
     setProducts(null)
     findProductListApi(category, list).then(prodictPromises => {
       setProducts(prodictPromises)
     });
-  },[category, list]);
+  }, [category, list]);
 
-  const productLists = products ? products.map((product)=>{
+  const productLists = products ? products.map((product) => {
     return <Container>
-             <ProductImg src= {product.imageUrl} />
-             <ProductDetails>
-               <ProductName>{product.name}</ProductName>
-               <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-               <ProductPrice>{Math.floor(product.price * (1-product.discountPercent/100))}원</ProductPrice>
-               <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-               <ProductSummary>{product.contentSummary ? product.contentSummary : "상품요약정보"}</ProductSummary>
-             </ProductDetails>
-           </Container>;
+      <ProductImg src={product.imageUrl}/>
+      <ProductDetails>
+        <ProductName>{product.name}</ProductName>
+        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+            / 100))}원</ProductPrice>
+        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+        <ProductSummary>{product.contentSummary ? product.contentSummary
+            : "상품요약정보"}</ProductSummary>
+      </ProductDetails>
+    </Container>;
   }) : "";
 
   return (
-      <ProductsListWrap>
-        <Sort
-          products={products}
-          category={category}
-        />
-        {productLists}
-      </ProductsListWrap>
+      <>
+        <Header/>
+        <ProductsListWrap>
+          <Sort
+              products={products}
+              category={category}
+          />
+          {productLists}
+        </ProductsListWrap>
+      </>
   );
 };
 
