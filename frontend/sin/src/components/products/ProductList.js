@@ -4,6 +4,7 @@ import findProductListApi from "../api/product/FindProductListApi";
 import queryString from "query-string";
 import Sort from "./Sort";
 import Header from "../Header";
+import {Link} from "react-router-dom";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -70,6 +71,19 @@ const ProductList = (props) => {
   const productLists = products ? products.map((product) => {
     return <Container>
       <ProductImg src={product.imageUrl}/>
+      <Link to='/'><img
+          src="/cart2.png"
+          alt="my image"
+          style={{
+            borderRadius: "100px",
+            position: "absolute",
+            right: "6px",
+            bottom: "164px",
+            marginLeft: "-15px",
+            width: "45px",
+            height: "45px"
+          }}
+      /></Link>
       <ProductDetails>
         <ProductName>{product.name}</ProductName>
         <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
