@@ -15,12 +15,30 @@ const StyledCompleteButton = styled.div`
   color: white;
 `;
 
-const CompleteButton = ({setOpenAddCartListModal, setCount, setTotalPrice}) => {
+const CompleteButton = ({
+  productCode,
+  count,
+  setOpenAddCartListModal,
+  setCount,
+  setTotalPrice
+}) => {
   return (
-      <StyledCompleteButton onClick={()=>{
-        setOpenAddCartListModal(false)
-        setCount(0);
-        setTotalPrice(0);
+      <StyledCompleteButton onClick={() => {
+        if (count <= 0) {
+          alert("수량은 반드시 1 이상이어야 합니다.")
+        } else {
+          if (sessionStorage.getItem(productCode)) {
+            sessionStorage.setItem(productCode,
+                Number(sessionStorage.getItem(productCode)) + count);
+            alert("장바구니에 이미 있는 상품이어서 상품이 추가되었습니다.")
+          } else {
+            sessionStorage.setItem(productCode, count);
+            alert("장바구니에 상품을 담았습니다.")
+          }
+          setOpenAddCartListModal(false)
+          setCount(0);
+          setTotalPrice(0);
+        }
       }}>
         장바구니 담기
       </StyledCompleteButton>

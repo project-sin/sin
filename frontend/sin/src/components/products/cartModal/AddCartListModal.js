@@ -161,6 +161,8 @@ const AddCartListModal = ({
               setTotalPrice={setTotalPrice}
           />
           <CompleteButton
+              productCode={productCode}
+              count={count}
               setOpenAddCartListModal={setOpenAddCartListModal}
               setCount={setCount}
               setTotalPrice={setTotalPrice}
