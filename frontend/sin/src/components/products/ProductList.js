@@ -4,7 +4,7 @@ import findProductListApi from "../api/product/FindProductListApi";
 import queryString from "query-string";
 import Sort from "./Sort";
 import Header from "../Header";
-import {Link} from "react-router-dom";
+import AddCartListModal from "./cartModal/AddCartListModal";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -61,6 +61,12 @@ const ProductList = (props) => {
   const list = queryString.parse(props.location.search).list;
   const [products, setProducts] = useState(null);
 
+  const [openAddCartListModal, setOpenAddCartListModal] = useState(false);
+  const [nameInModal, setNameInModal] = useState("");
+  const [priceInModal, setPriceInModal] = useState("");
+  const [productCondeInModal, setProductCondeInModal] = useState("");
+  const [discountInModal, setDiscountInModal] = useState("");
+
   useEffect(() => {
     setProducts(null)
     findProductListApi(category, list).then(prodictPromises => {
@@ -71,19 +77,27 @@ const ProductList = (props) => {
   const productLists = products ? products.map((product) => {
     return <Container>
       <ProductImg src={product.imageUrl}/>
-      <Link to='/'><img
+      <img
           src="/cart2.png"
           alt="my image"
           style={{
             borderRadius: "100px",
             position: "absolute",
             right: "6px",
-            bottom: "164px",
+            bottom: "165px",
             marginLeft: "-15px",
             width: "45px",
             height: "45px"
+          }
+          }
+          onClick={()=>{
+            setOpenAddCartListModal(true)
+            setNameInModal(product.name)
+            setPriceInModal(product.price)
+            setProductCondeInModal(product.productCode)
+            setDiscountInModal(product.discountPercent)
           }}
-      /></Link>
+      />
       <ProductDetails>
         <ProductName>{product.name}</ProductName>
         <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
@@ -103,6 +117,14 @@ const ProductList = (props) => {
           <Sort
               products={products}
               category={category}
+          />
+          <AddCartListModal
+              openAddCartListModal={openAddCartListModal}
+              setOpenAddCartListModal={setOpenAddCartListModal}
+              productName={nameInModal}
+              productPrice={priceInModal}
+              productCode={productCondeInModal}
+              discountInModal={discountInModal}
           />
           {productLists}
         </ProductsListWrap>
