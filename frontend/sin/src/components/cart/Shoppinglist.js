@@ -71,6 +71,7 @@ const Shoppinglist = () => {
                       checkedProductCodes={checkedProductCodes}
                       setCheckedProductCodes={setCheckedProductCodes}
                       products={products}
+                      setProducts={setProducts}
                   />
                   {productsPresent}
                 </Shoppinglistleft>
