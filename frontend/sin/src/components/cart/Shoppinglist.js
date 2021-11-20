@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Header from "../Header";
-import SelectAllButton from "./SelectAllButton";
+import SelectFunc from "./SelectFunc";
 import StyledCheckbox from "./StyledCheckbox";
 import StyledElement from "./StyledElement";
 import findNonMemberCartApi from "../api/cart/FindNonMemberCartApi";
@@ -30,10 +30,10 @@ const Shoppinglist = () => {
       if (isNaN(productCode)) {
         break;
       } else {
-        query+= productCode + ",";
+        query += productCode + ",";
       }
     }
-    findNonMemberCartApi(query).then((productPromises)=>{
+    findNonMemberCartApi(query).then((productPromises) => {
       setProducts(productPromises)
     })
   }, []);
@@ -47,7 +47,8 @@ const Shoppinglist = () => {
   };
 
   const productsPresent = products.map((e, idx) =>
-      <StyledElement onClick={() => onProductCheckboxClicked(products[idx].productCode)}>
+      <StyledElement
+          onClick={() => onProductCheckboxClicked(products[idx].productCode)}>
         <StyledCheckbox
             onChange={() => onProductCheckboxClicked(products[idx].productCode)}
             checked={checkedProductCodes.includes(products[idx].productCode)}/>
@@ -66,8 +67,12 @@ const Shoppinglist = () => {
               </Shoppinglisttop>
               <Shoppinglistmain className='clearfix'>
                 <Shoppinglistleft>
+                  <SelectFunc
+                      checkedProductCodes={checkedProductCodes}
+                      setCheckedProductCodes={setCheckedProductCodes}
+                      products={products}
+                  />
                   {productsPresent}
-
                 </Shoppinglistleft>
                 <Shoppinglistright><p>right</p></Shoppinglistright>
               </Shoppinglistmain>
