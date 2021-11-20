@@ -7,7 +7,6 @@ const StyledDiv = styled.div`
   height: 35px;
   width: 95%;
 `
-
 const SelectAllButton = styled.div`
   display: inline-block;
   width:20%;
