@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 import Header from './components/Header';
 import Home from './components/Home';
 import Event from './components/event/Event';
-import Shoppinglist from './components/Shoppinglist';
+import Shoppinglist from './components/cart/Shoppinglist';
 import Item from './components/Item';
 import Signup from './components/Signup';
 import Login from './components/Login';
