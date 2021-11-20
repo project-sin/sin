@@ -21,9 +21,8 @@ const Shoppinglistleft = styled.div`
 const Shoppinglistright = styled.div`float: left; width: 28%; height: 300px; margin-top: 20px; border: 1px solid #dbdbdb;`
 
 const Shoppinglist = () => {
-
-  const [products, setProducts] = useState(null);
-
+  const [checkedProductCodes, setCheckedProductCodes] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     let query = ""
@@ -34,12 +33,27 @@ const Shoppinglist = () => {
         query+= productCode + ",";
       }
     }
-
     findNonMemberCartApi(query).then((productPromises)=>{
       setProducts(productPromises)
     })
   }, []);
 
+  const onProductCheckboxClicked = (productCode) => {
+    if (checkedProductCodes.includes(productCode)) {
+      setCheckedProductCodes(checkedProductCodes.filter(e => e !== productCode))
+    } else {
+      setCheckedProductCodes([...checkedProductCodes, productCode]);
+    }
+  };
+
+  const productsPresent = products.map((e, idx) =>
+      <StyledElement onClick={() => onProductCheckboxClicked(products[idx].productCode)}>
+        <StyledCheckbox
+            onChange={() => onProductCheckboxClicked(products[idx].productCode)}
+            checked={checkedProductCodes.includes(products[idx].productCode)}/>
+        {products[idx].name}
+      </StyledElement>
+  );
 
   return (
       <>
@@ -52,6 +66,7 @@ const Shoppinglist = () => {
               </Shoppinglisttop>
               <Shoppinglistmain className='clearfix'>
                 <Shoppinglistleft>
+                  {productsPresent}
 
                 </Shoppinglistleft>
                 <Shoppinglistright><p>right</p></Shoppinglistright>
