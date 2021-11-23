@@ -178,6 +178,7 @@ const AddCartListModal = ({
               setOpenAddCartListModal={setOpenAddCartListModal}
               setCount={setCount}
               setTotalPrice={setTotalPrice}
+              accessToken={accessToken}
           />
         </div>
       </Modal>

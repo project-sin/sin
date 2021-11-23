@@ -1,0 +1,9 @@
+### 장바구니에 추가
+POST http://localhost:8080/shop/goods/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjU1NjczLCJleHAiOjE2Mzc3NDIwNzN9.XIR2djgDIZaflUGk4lZpq29qmX4WTiYCE08I6jyrBOlddtcziK8-MewmkpxEDoH_ctiWdTw0HErgP-o7o3qBlA
+
+{
+  "productCode": "95",
+  "cnt": "4"
+}

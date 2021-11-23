@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import addProductInCartApi from "../../api/cart/AddProductInCartApi";
 
 const StyledCompleteButton = styled.div`
   position: absolute;
@@ -20,20 +21,25 @@ const CompleteButton = ({
   count,
   setOpenAddCartListModal,
   setCount,
-  setTotalPrice
+  setTotalPrice,
+  accessToken
 }) => {
   return (
       <StyledCompleteButton onClick={() => {
         if (count <= 0) {
           alert("수량은 반드시 1 이상이어야 합니다.")
         } else {
-          if (sessionStorage.getItem(productCode)) {
-            sessionStorage.setItem(productCode,
-                Number(sessionStorage.getItem(productCode)) + count);
-            alert("장바구니에 이미 있는 상품이어서 상품이 추가되었습니다.")
+          if (accessToken) {
+            addProductInCartApi({productCode, count, accessToken});
           } else {
-            sessionStorage.setItem(productCode, count);
-            alert("장바구니에 상품을 담았습니다.")
+            if (sessionStorage.getItem(productCode)) {
+              sessionStorage.setItem(productCode,
+                  Number(sessionStorage.getItem(productCode)) + count);
+              alert("장바구니에 이미 있는 상품이어서 상품이 추가되었습니다.")
+            } else {
+              sessionStorage.setItem(productCode, count);
+              alert("장바구니에 상품을 담았습니다.")
+            }
           }
           setOpenAddCartListModal(false)
           setCount(0);
