@@ -5,6 +5,9 @@ import SelectFunc from "./SelectFunc";
 import StyledCheckbox from "./StyledCheckbox";
 import StyledElement from "./StyledElement";
 import findNonMemberCartApi from "../api/cart/FindNonMemberCartApi";
+import {ACCESS_TOKEN} from "../../constants/Sessionstorage";
+import findMemberCartApi from "../api/cart/FindMemberCartApi";
+import deleteCartProductAPi from "../api/cart/DeleteCartProductAPi";
 
 const Shoppinglistwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -92,23 +95,31 @@ const Shoppinglist = () => {
   const [count, setCount] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+
   useEffect(() => {
-    let query = ""
-    for (let productCode in sessionStorage) {
-      if (isNaN(productCode)) {
-        break;
-      } else {
-        query += productCode + ",";
-        setCount((count) => [...count, {
-          productCode: productCode,
-          count: sessionStorage.getItem(productCode)
-        }])
-      }
-    }
-    if (query != "") {
-      findNonMemberCartApi(query).then((productPromises) => {
+    if (accessToken) {
+      findMemberCartApi(accessToken).then((productPromises) => {
         setProducts(productPromises)
       })
+    } else {
+      let query = ""
+      for (let productCode in sessionStorage) {
+        if (isNaN(productCode)) {
+          break;
+        } else {
+          query += productCode + ",";
+          setCount((count) => [...count, {
+            productCode: productCode,
+            count: sessionStorage.getItem(productCode)
+          }])
+        }
+      }
+      if (query != "") {
+        findNonMemberCartApi(query).then((productPromises) => {
+          setProducts(productPromises)
+        })
+      }
     }
   }, []);
 
@@ -177,9 +188,13 @@ const Shoppinglist = () => {
             return product.count * products[idx].price
           }
         })} 원</Price>
-        <Delete onClick={()=>{
-          if(window.confirm("삭제하시겠습니까?")){
-            sessionStorage.removeItem(products[idx].productCode)
+        <Delete onClick={() => {
+          if (window.confirm("삭제하시겠습니까?")) {
+            if (accessToken) {
+              deleteCartProductAPi(accessToken, products[idx].productCode);
+            } else {
+              sessionStorage.removeItem(products[idx].productCode)
+            }
             setProducts(products.filter(
                 product => (products[idx].productCode !== product.productCode)))
           }
@@ -203,6 +218,7 @@ const Shoppinglist = () => {
                       setCheckedProductCodes={setCheckedProductCodes}
                       products={products}
                       setProducts={setProducts}
+                      accessToken={accessToken}
                   />
                   {productsPresent}
                 </Shoppinglistleft>

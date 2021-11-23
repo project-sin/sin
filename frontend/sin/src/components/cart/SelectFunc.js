@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import StyledCheckbox from "./StyledCheckbox";
+import deleteCartProductAPi from "../api/cart/DeleteCartProductAPi";
 
 const StyledDiv = styled.div`
   border-bottom: 1px solid black;
@@ -39,8 +40,17 @@ const SelectFunc = (props) => {
     if (props.checkedProductCodes.length === 0) {
       alert("삭제할 상품을 선택해주세요")
     } else if (window.confirm("선택한 상품을 삭제하시겠습니까?")) {
-      for (let i = 0; i < props.checkedProductCodes.length; i++) {
-        sessionStorage.removeItem(props.checkedProductCodes[i])
+      if (props.accessToken) {
+        let query = "";
+        for (let i = 0; i < props.checkedProductCodes.length; i++) {
+          query += props.checkedProductCodes[i] + ",";
+        }
+        query = query.substring(0, query.length - 1)
+        deleteCartProductAPi(props.accessToken, query);
+      } else {
+        for (let i = 0; i < props.checkedProductCodes.length; i++) {
+          sessionStorage.removeItem(props.checkedProductCodes[i])
+        }
       }
       props.setProducts(props.products.filter(
           product => !props.checkedProductCodes.includes(product.productCode)))
