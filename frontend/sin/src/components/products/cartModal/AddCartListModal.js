@@ -14,6 +14,12 @@ const Name = styled.div`
   text-align:left;
 `;
 
+const PrevPrice = styled.div`
+  display: inline-block;
+  color: gray;
+  text-decoration:line-through
+`;
+
 const Price = styled.div`
   position: absolute;
   top: 55px;
@@ -105,13 +111,15 @@ const AddCartListModal = ({
   productName,
   productPrice,
   productCode,
-  discountInModal
+  discountInModal,
+  accessToken
 }) => {
   const [count, setCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
+  const discountedPrice = Math.floor(productPrice * (1 - discountInModal
+      / 100));
   useEffect(() => {
-    setTotalPrice(count * productPrice);
+    setTotalPrice(accessToken ? count * discountedPrice : count * productPrice);
   }, [count]);
   return (
       <Modal
@@ -138,7 +146,11 @@ const AddCartListModal = ({
           height: "280px",
         }}>
           <Name>{productName}</Name>
-          <Price>{productPrice} 원</Price>
+          {accessToken ?
+              <Price>{discountedPrice} 원&nbsp;
+                <PrevPrice> {productPrice} 원</PrevPrice></Price>
+              : <Price>{productPrice} 원</Price>
+          }
           <Calculator>
             <MinusButton onClick={() => {
               if (count >= 1) {

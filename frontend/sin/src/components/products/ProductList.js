@@ -5,6 +5,7 @@ import queryString from "query-string";
 import Sort from "./Sort";
 import Header from "../Header";
 import AddCartListModal from "./cartModal/AddCartListModal";
+import {ACCESS_TOKEN} from "../../constants/Sessionstorage";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -67,6 +68,8 @@ const ProductList = (props) => {
   const [productCondeInModal, setProductCondeInModal] = useState("");
   const [discountInModal, setDiscountInModal] = useState("");
 
+  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+
   useEffect(() => {
     setProducts(null)
     findProductListApi(category, list).then(prodictPromises => {
@@ -90,7 +93,7 @@ const ProductList = (props) => {
             height: "45px"
           }
           }
-          onClick={()=>{
+          onClick={() => {
             setOpenAddCartListModal(true)
             setNameInModal(product.name)
             setPriceInModal(product.price)
@@ -125,6 +128,7 @@ const ProductList = (props) => {
               productPrice={priceInModal}
               productCode={productCondeInModal}
               discountInModal={discountInModal}
+              accessToken={accessToken ? accessToken : null}
           />
           {productLists}
         </ProductsListWrap>
