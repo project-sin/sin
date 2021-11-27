@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.cart.Cart;
 import sin.sin.domain.cart.CartRepository;
-import sin.sin.domain.cart.SearchCartRepository;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductFrame;
@@ -58,14 +57,14 @@ class CartServiceTest {
         List<Cart> cart = cartRepository.findAll();
 
         //then
-        assertThat(cart.get(0).getCount()).isEqualTo(4);
+        assertThat(cart.get(0).getCount()).isEqualTo(6);
     }
 
     @Test
     void 상품_수량_감소() throws Exception {
         //given
         CartRequest cartRequest = CartRequest.builder()
-                .productCode("70").cnt(1).build();
+                .productCode("70").cnt(-1).build();
         cartService.add(1L, cartRequest);
 
         //when

@@ -47,7 +47,7 @@ public class CartService {
                     .build();
             cartRepository.save(newCart);
         } else {
-            ExistCart.get().setCount(cnt);
+            ExistCart.get().setCount(ExistCart.get().getCount() + cnt);
         }
     }
 

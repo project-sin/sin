@@ -1,17 +1,17 @@
 ### 장바구니에 추가
 POST http://localhost:8080/shop/goods/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjU1NjczLCJleHAiOjE2Mzc3NDIwNzN9.XIR2djgDIZaflUGk4lZpq29qmX4WTiYCE08I6jyrBOlddtcziK8-MewmkpxEDoH_ctiWdTw0HErgP-o7o3qBlA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3OTk3NzAwLCJleHAiOjE2MzgwODQxMDB9.24OKtRcW3Ifj-NDvVKlgYKUQ3ozqGLPpCwVtfFKUPYaQYBbT_CE3f_50_M0SzIvkx62ch8iH7R5Ha4DQ7GAW6A
 
 {
   "productCode": "70",
-  "cnt": "4"
+  "cnt": "-1"
 }
 
 ### 회원 장바구니 조회
 GET http://localhost:8080/shop/goods/cart/member
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3NjcxMDQ4LCJleHAiOjE2Mzc3NTc0NDh9.7Kehwp-wjWEUUN472EejSkJ4gzHvRYAv2xBLKeGwAEx-LHS1h3-tdGGnYe2yJlgX5WEzznYuWXFJtLhFCl4t_Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjM3OTk3NzAwLCJleHAiOjE2MzgwODQxMDB9.24OKtRcW3Ifj-NDvVKlgYKUQ3ozqGLPpCwVtfFKUPYaQYBbT_CE3f_50_M0SzIvkx62ch8iH7R5Ha4DQ7GAW6A
 
 ### 회원 장바구니 조회
 DELETE http://localhost:8080/shop/goods/cart?productCode=95,70,
