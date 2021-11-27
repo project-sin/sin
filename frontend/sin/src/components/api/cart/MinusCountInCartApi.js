@@ -2,10 +2,10 @@ import React from 'react';
 import axios from "axios";
 import {BACKEND_ADDRESS} from "../../../constants/ADDRESS";
 
-const addProductInCartApi = ({productCode, count, accessToken}) => {
+const minusCountInCartApi = ({productCode, accessToken}) => {
   const body = {
     productCode: productCode,
-    cnt: count,
+    cnt: -1,
   };
   const config = {
     headers: {
@@ -15,7 +15,6 @@ const addProductInCartApi = ({productCode, count, accessToken}) => {
   axios.post(BACKEND_ADDRESS + "/goods/cart", body, config)
   .then(response => {
     if (response.status === 200) {
-      alert(response.data);
     }
   })
   .catch(error => {
@@ -30,4 +29,4 @@ const addProductInCartApi = ({productCode, count, accessToken}) => {
   });
 };
 
-export default addProductInCartApi;
+export default minusCountInCartApi;

@@ -8,6 +8,8 @@ import findNonMemberCartApi from "../api/cart/FindNonMemberCartApi";
 import {ACCESS_TOKEN} from "../../constants/Sessionstorage";
 import findMemberCartApi from "../api/cart/FindMemberCartApi";
 import deleteCartProductAPi from "../api/cart/DeleteCartProductAPi";
+import minusCountInCartApi from "../api/cart/MinusCountInCartApi";
+import plusCountInCartApi from "../api/cart/PlusCountInCartApi";
 
 const Shoppinglistwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
@@ -101,6 +103,12 @@ const Shoppinglist = () => {
     if (accessToken) {
       findMemberCartApi(accessToken).then((productPromises) => {
         setProducts(productPromises)
+        productPromises.map((product) => {
+          setCount((count) => [...count, {
+            productCode: product.productCode,
+            count: product.cnt
+          }])
+        })
       })
     } else {
       let query = ""
@@ -122,7 +130,6 @@ const Shoppinglist = () => {
       }
     }
   }, []);
-
   const onProductCheckboxClicked = (productCode) => {
     if (checkedProductCodes.includes(productCode)) {
       setCheckedProductCodes(checkedProductCodes.filter(e => e !== productCode))
@@ -141,7 +148,25 @@ const Shoppinglist = () => {
         <ProductName>{products[idx].name}</ProductName>
         <Calculator>
           <MinusButton onClick={() => {
-            if (sessionStorage.getItem(products[idx].productCode) >= 1) {
+            if (accessToken) {
+              let productCode = products[idx].productCode
+              minusCountInCartApi({
+                productCode, accessToken
+              });
+              setCount(count.map((product) => {
+                if (product.productCode === products[idx].productCode) {
+                  return {
+                    productCode: product.productCode,
+                    count: product.count > 1 ? product.count - 1 : product.count
+                  };
+                } else {
+                  return {
+                    productCode: product.productCode,
+                    count: product.count
+                  };
+                }
+              }));
+            } else if (sessionStorage.getItem(products[idx].productCode) > 1) {
               sessionStorage.setItem(products[idx].productCode,
                   Number(sessionStorage.getItem(products[idx].productCode))
                   - 1);
@@ -166,24 +191,47 @@ const Shoppinglist = () => {
             }
           })}</Count>
           <PlusButton onClick={() => {
-            sessionStorage.setItem(products[idx].productCode,
-                Number(sessionStorage.getItem(products[idx].productCode)) + 1);
-            setCount(count.map((product) => {
-              if (product.productCode === products[idx].productCode) {
-                return {
-                  productCode: product.productCode,
-                  count: Number(product.count) + 1
-                };
-              } else {
-                return {
-                  productCode: product.productCode,
-                  count: product.count
-                };
-              }
-            }));
+            if (accessToken) {
+              let productCode = products[idx].productCode
+              plusCountInCartApi({
+                productCode, accessToken
+              });
+              setCount(count.map((product) => {
+                if (product.productCode === products[idx].productCode) {
+                  return {
+                    productCode: product.productCode,
+                    count: Number(product.count) + 1
+                  };
+                } else {
+                  return {
+                    productCode: product.productCode,
+                    count: product.count
+                  };
+                }
+              }));
+            } else {
+              sessionStorage.setItem(products[idx].productCode,
+                  Number(sessionStorage.getItem(products[idx].productCode))
+                  + 1);
+              setCount(count.map((product) => {
+                if (product.productCode === products[idx].productCode) {
+                  return {
+                    productCode: product.productCode,
+                    count: Number(product.count) + 1
+                  };
+                } else {
+                  return {
+                    productCode: product.productCode,
+                    count: product.count
+                  };
+                }
+              }));
+            }
           }}>+</PlusButton>
         </Calculator>
-        <Price>{count.map((product) => {
+        <Price>{accessToken ? products[idx].cnt * Math.floor(
+            products[idx].price * (1 - products[idx].discountPercent
+                / 100)) : count.map((product) => {
           if (product.productCode === products[idx].productCode) {
             return product.count * products[idx].price
           }
