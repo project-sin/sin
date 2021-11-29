@@ -12,8 +12,6 @@ import sin.sin.domain.member.MemberRepository;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductFrame;
-import sin.sin.dto.ProductListResponse;
-import sin.sin.dto.cart.CartRepositoryResponse;
 import sin.sin.dto.cart.CartRequest;
 import sin.sin.dto.cart.MemberCartResponse;
 import sin.sin.handler.exception.NoProductException;
@@ -49,7 +47,7 @@ public class CartService {
                     .build();
             cartRepository.save(newCart);
         } else {
-            ExistCart.get().setCount(cnt);
+            ExistCart.get().setCount(ExistCart.get().getCount() + cnt);
         }
     }
 
