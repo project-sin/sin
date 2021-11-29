@@ -4,6 +4,8 @@ import findProductListApi from "../api/product/FindProductListApi";
 import queryString from "query-string";
 import Sort from "./Sort";
 import Header from "../Header";
+import AddCartListModal from "./cartModal/AddCartListModal";
+import {ACCESS_TOKEN} from "../../constants/Sessionstorage";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -64,20 +66,49 @@ const ProductList = (props) => {
 
   const changeList = (List) => {
     setProductList(List.map((product) => {
-      return <Container>
-        <ProductImg src={product.imageUrl}/>
-        <ProductDetails>
-          <ProductName>{product.name}</ProductName>
-          <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-          <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
-              / 100))}원</ProductPrice>
-          <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-          <ProductSummary>{product.contentSummary ? product.contentSummary
-              : "상품요약정보"}</ProductSummary>
-        </ProductDetails>
-      </Container>;
-    }))
+    return <Container>
+      <ProductImg src={product.imageUrl}/>
+      <img
+          src="/cart2.png"
+          alt="my image"
+          style={{
+            borderRadius: "100px",
+            position: "absolute",
+            right: "6px",
+            bottom: "165px",
+            marginLeft: "-15px",
+            width: "45px",
+            height: "45px"
+          }
+          }
+          onClick={() => {
+            setOpenAddCartListModal(true)
+            setNameInModal(product.name)
+            setPriceInModal(product.price)
+            setProductCondeInModal(product.productCode)
+            setDiscountInModal(product.discountPercent)
+          }}
+      />
+      <ProductDetails>
+        <ProductName>{product.name}</ProductName>
+        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+            / 100))}원</ProductPrice>
+        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+        <ProductSummary>{product.contentSummary ? product.contentSummary
+            : "상품요약정보"}</ProductSummary>
+      </ProductDetails>
+    </Container>;
+  }))
   }
+
+  const [openAddCartListModal, setOpenAddCartListModal] = useState(false);
+  const [nameInModal, setNameInModal] = useState("");
+  const [priceInModal, setPriceInModal] = useState("");
+  const [productCondeInModal, setProductCondeInModal] = useState("");
+  const [discountInModal, setDiscountInModal] = useState("");
+
+  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
 
   useEffect(() => {
     setProducts(null)
@@ -143,6 +174,15 @@ const ProductList = (props) => {
               category={category}
               pageinfo={pageinfo}
               setPageinfo={setPageinfo}
+          />
+          <AddCartListModal
+              openAddCartListModal={openAddCartListModal}
+              setOpenAddCartListModal={setOpenAddCartListModal}
+              productName={nameInModal}
+              productPrice={priceInModal}
+              productCode={productCondeInModal}
+              discountInModal={discountInModal}
+              accessToken={accessToken ? accessToken : null}
           />
           {productList}
         </ProductsListWrap>
