@@ -59,28 +59,48 @@ const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
   const list = queryString.parse(props.location.search).list;
   const [products, setProducts] = useState(null);
+  const [pageinfo, setPageinfo] = useState(null);
+  const [productList, setProductList] = useState(null);
+
+  const changeList = (List)=>{
+    setProductList(List.map((product) => {
+      return <Container>
+        <ProductImg src={product.imageUrl}/>
+        <ProductDetails>
+          <ProductName>{product.name}</ProductName>
+          <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+          <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+              / 100))}원</ProductPrice>
+          <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          <ProductSummary>{product.contentSummary ? product.contentSummary
+              : "상품요약정보"}</ProductSummary>
+        </ProductDetails>
+      </Container>;
+    }))
+  }
 
   useEffect(() => {
     setProducts(null)
     findProductListApi(category, list).then(prodictPromises => {
       setProducts(prodictPromises)
+      changeList(prodictPromises);
     });
   }, [category, list]);
 
-  const productLists = products ? products.map((product) => {
-    return <Container>
-      <ProductImg src={product.imageUrl}/>
-      <ProductDetails>
-        <ProductName>{product.name}</ProductName>
-        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
-            / 100))}원</ProductPrice>
-        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-        <ProductSummary>{product.contentSummary ? product.contentSummary
-            : "상품요약정보"}</ProductSummary>
-      </ProductDetails>
-    </Container>;
-  }) : "";
+  useEffect(() => {
+    if (pageinfo === "낮은 가격순") {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return a.price - b.price;
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "높은 가격순") {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return b.price - a.price;
+      }))
+      changeList(products);
+    }
+  }, [pageinfo])
 
   return (
       <>
@@ -89,8 +109,10 @@ const ProductList = (props) => {
           <Sort
               products={products}
               category={category}
+              pageinfo={pageinfo}
+              setPageinfo={setPageinfo}
           />
-          {productLists}
+          {productList}
         </ProductsListWrap>
       </>
   );
