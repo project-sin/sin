@@ -61,23 +61,11 @@ const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
   const list = queryString.parse(props.location.search).list;
   const [products, setProducts] = useState(null);
+  const [pageinfo, setPageinfo] = useState(null);
+  const [productList, setProductList] = useState(null);
 
-  const [openAddCartListModal, setOpenAddCartListModal] = useState(false);
-  const [nameInModal, setNameInModal] = useState("");
-  const [priceInModal, setPriceInModal] = useState("");
-  const [productCondeInModal, setProductCondeInModal] = useState("");
-  const [discountInModal, setDiscountInModal] = useState("");
-
-  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
-
-  useEffect(() => {
-    setProducts(null)
-    findProductListApi(category, list).then(prodictPromises => {
-      setProducts(prodictPromises)
-    });
-  }, [category, list]);
-
-  const productLists = products ? products.map((product) => {
+  const changeList = (List) => {
+    setProductList(List.map((product) => {
     return <Container>
       <ProductImg src={product.imageUrl}/>
       <img
@@ -111,7 +99,71 @@ const ProductList = (props) => {
             : "상품요약정보"}</ProductSummary>
       </ProductDetails>
     </Container>;
-  }) : "";
+  }))
+  }
+
+  const [openAddCartListModal, setOpenAddCartListModal] = useState(false);
+  const [nameInModal, setNameInModal] = useState("");
+  const [priceInModal, setPriceInModal] = useState("");
+  const [productCondeInModal, setProductCondeInModal] = useState("");
+  const [discountInModal, setDiscountInModal] = useState("");
+
+  const accessToken = sessionStorage.getItem(ACCESS_TOKEN);
+
+  useEffect(() => {
+    setProducts(null)
+    findProductListApi(category, list).then(prodictPromises => {
+      setProducts(prodictPromises)
+      changeList(prodictPromises);
+    });
+  }, [category, list]);
+
+  useEffect(() => {
+    if (pageinfo === "혜택순" && products != null) {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return b.discountPercent - a.discountPercent;
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "추천순" && products != null) {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        if (b.reviewCount !== a.reviewCount) {
+          return b.reviewCount - a.reviewCount;
+        } else {
+          return b.price - a.price;
+        }
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "신상품순" && products != null) {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return new Date(b.createdDate) - new Date(a.createdDate);
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "인기상품순" && products != null) {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        if (b.reviewCount !== a.reviewCount) {
+          return b.reviewCount - a.reviewCount;
+        } else {
+          return b.price - a.price;
+        }
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "낮은 가격순") {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return a.price - b.price;
+      }))
+      changeList(products);
+    }
+    if (pageinfo === "높은 가격순") {
+      setProducts(products.sort(function compareNumbers(a, b) {
+        return b.price - a.price;
+      }))
+      changeList(products);
+    }
+  }, [pageinfo])
 
   return (
       <>
@@ -120,6 +172,8 @@ const ProductList = (props) => {
           <Sort
               products={products}
               category={category}
+              pageinfo={pageinfo}
+              setPageinfo={setPageinfo}
           />
           <AddCartListModal
               openAddCartListModal={openAddCartListModal}
@@ -130,7 +184,7 @@ const ProductList = (props) => {
               discountInModal={discountInModal}
               accessToken={accessToken ? accessToken : null}
           />
-          {productLists}
+          {productList}
         </ProductsListWrap>
       </>
   );
