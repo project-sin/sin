@@ -2,6 +2,8 @@ package sin.sin.domain.event;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventRepository extends JpaRepository<Event, Long> {
+import java.util.Optional;
 
+public interface EventRepository extends JpaRepository<Event, Long> {
+    Optional<Event> findByFileCode(String FileCode);
 }
