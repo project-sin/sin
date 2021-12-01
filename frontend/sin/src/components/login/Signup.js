@@ -47,25 +47,24 @@ const Signup = (props) => {
   const [checkDuplicatedId, setCheckDuplicatedId] = useState(false);
   const [checkDuplicatedEmail, setCheckDuplicatedEmail] = useState(false);
 
-  const [address, setAddress] = useState("dasdasdasdas");
-  const [detailedAddress, setDetailedAddress] = useState("dsadasdsa");
+  const [address, setAddress] = useState("");
+  const [detailedAddress, setDetailedAddress] = useState("");
 
   const signup = () => {
-    setAddress(document.getElementById(
-        "pInput").value)
-    setDetailedAddress(document.getElementById(
-        "pInput").value)
-    if (address && detailedAddress && id.length && password.length
-        && checkPassword.length && name.length
-        && email.length && phoneNumber.length && gender.length
-        && birthYear.length && birthMonth.length && birthDay.length) {
+    addressSetting();
+    if (document.getElementById("address").style.display !== 'none'
+        && id.length && password.length && checkPassword.length && name.length
+        && email.length && phoneNumber.length && gender.length && birthYear.length
+        && birthMonth.length && birthDay.length) {
       if (password === checkPassword) {
         if (birthYear >= 0 && birthMonth >= 1 && birthMonth <= 12 && birthDay
             >= 1 && birthDay <= 31) {
           if (checkDuplicatedId === true && checkDuplicatedEmail === true) {
             const birth = birthYear + birthMonth + birthDay;
             signUpApi(id, email, password, name, phoneNumber, gender, birth,
-                props.history);
+                address, detailedAddress, props.history
+            )
+            ;
           } else {
             alert("아이디, 이메일 중복체크를 확인해주세요");
           }
@@ -80,10 +79,16 @@ const Signup = (props) => {
     }
   };
 
-    useEffect(()=>{
-      document.getElementById("address").style.display ='none';
-      document.getElementById("detailedAddress").style.display ='none';
-    },[]);
+  const addressSetting = () => {
+    setAddress(document.getElementById(
+        "pInput").value)
+    setDetailedAddress(document.getElementById(
+        "pDetailedInput").value)
+  }
+  useEffect(() => {
+    document.getElementById("address").style.display = 'none';
+    document.getElementById("detailedAddress").style.display = 'none';
+  }, []);
 
   return (
       <>

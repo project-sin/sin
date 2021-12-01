@@ -2,14 +2,15 @@ import React from 'react';
 import axios from "axios";
 import {BACKEND_ADDRESS} from "../../../constants/ADDRESS";
 
-const signUpApi = (id, email, password, name, phoneNumber, gender, birth, history) => {
+const signUpApi = (id, email, password, name, phoneNumber, gender, birth,
+    address, detailedAddress, history) => {
   const body = {
     id: id,
     email: email,
     password: password,
     name: name,
     phone_number: phoneNumber,
-    address: "address",
+    address: address + ", " + detailedAddress,
     gender: gender,
     birth: birth
   };
@@ -18,6 +19,7 @@ const signUpApi = (id, email, password, name, phoneNumber, gender, birth, histor
   .then(response => {
     if (response.status === 200) {
       alert(response.data);
+      console.log(detailedAddress)
       history.push("/shop/member/login");
     }
   })
