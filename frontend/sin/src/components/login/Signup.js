@@ -14,7 +14,7 @@ const Table = styled.table`border-collapse: collapse; border-spacing: 0;`
 const Signuptitlewrap = styled.div`text-align: center; padding-top: 50px; padding-bottom:55px; border-bottom: 2px solid black;`
 const Signuptitle = styled.strong`font-size: 25px;`
 const Input = styled.input`width:330px; font-size: 14px; color: #333; box-sizing: border-box; padding: 0 14px; background: #fff; border: 1px solid #ccc; border-radius: 3px; height: 45px;`
-const Button = styled.button` margin-left: -140px; width:100px; font-size: 14px; color: rgb(112,48,160); border-box; background: #fff; border: 1px solid rgb(112,48,160); border-radius: 3px; height: 45px;`
+const Button = styled.button` cursor: pointer; margin-left: -140px; width:100px; font-size: 14px; color: rgb(112,48,160); border-box; background: #fff; border: 1px solid rgb(112,48,160); border-radius: 3px; height: 45px;`
 const Addressbtn = styled.button`width:330px; font-size: 14px; color: #5f0080; background: #fff; border: 1px solid #5f0080; border-radius: 3px; height: 45px; font-weight: bold; cursor: pointer;`
 const Th = styled.th`width:155px; font-size: 14px; text-align: left; padding: 30px 0px 20px 20px; color: #333333;`
 const Singupfooter = styled.div`padding-top: 40px;`
@@ -80,9 +80,6 @@ const Signup = (props) => {
     }
   };
 
-  const test = () => {
-
-  }
     useEffect(()=>{
       document.getElementById("address").style.display ='none';
       document.getElementById("detailedAddress").style.display ='none';
@@ -169,6 +166,13 @@ const Signup = (props) => {
                              onChange={e => setAddress(e.target.value)}
                              readOnly={true}
                   /></td>
+                  <td>
+                    <Button onClick={() => {
+                      window.name = "parentForm";
+                      window.open('/shop/address', 'childForm',
+                          'top=10, left=10, width=650, height=600, status=no, menubar=no, toolbar=no, resizable=no');
+                    }}>재검색</Button>
+                  </td>
                 </tr>
                 <tr id="detailedAddress">
                   <Th></Th>

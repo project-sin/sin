@@ -10,6 +10,7 @@ const ReWrite = styled.div`
   padding: 20px;
   font-size: 20px;
   border-bottom: 1px solid gray;
+  cursor: pointer;
 `;
 const Container = styled.div`
   width:100%;
