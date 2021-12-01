@@ -21,7 +21,7 @@ const Container = styled.div`
 const PopupPostCode = () => {
   // 우편번호 검색 후 주소 클릭 시 실행될 함수, data callback 용
   const [fullAddress, setFullAddress] = useState(null);
-  const [detailedAddress, setDetailedAddress] = useState();
+  const [detailedAddress, setDetailedAddress] = useState(null);
   const handlePostCode = (data) => {
     let extraAddress = '';
 
@@ -37,17 +37,21 @@ const PopupPostCode = () => {
     }
   }
   const setParentText = () => {
-    window.opener.document.getElementById(
-        "pInput").value = document.getElementById("cInput").value
-    window.opener.document.getElementById(
-        "pDetailedInput").value = document.getElementById("cDetailedInput").value
-    window.opener.document.getElementById(
-        "address").style.display = ''
-    window.opener.document.getElementById(
-        "detailedAddress").style.display = ''
-    window.opener.document.getElementById(
-        "search").style.display = 'none'
-    window.close()
+    if(detailedAddress){
+      window.opener.document.getElementById(
+          "pInput").value = document.getElementById("cInput").value
+      window.opener.document.getElementById(
+          "pDetailedInput").value = document.getElementById("cDetailedInput").value
+      window.opener.document.getElementById(
+          "address").style.display = ''
+      window.opener.document.getElementById(
+          "detailedAddress").style.display = ''
+      window.opener.document.getElementById(
+          "search").style.display = 'none'
+      window.close()
+    } else {
+     alert("빈칸을 채워주세요") 
+    }
   }
 
   const postCodeStyle = {

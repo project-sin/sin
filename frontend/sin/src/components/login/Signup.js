@@ -104,11 +104,14 @@ const Signup = (props) => {
                   <Th>아이디</Th>
                   <td><Input type='text'
                              value={id}
-                             onChange={e => setId(e.target.value)}
+                             onChange={e => {
+                               setId(e.target.value)
+                               setCheckDuplicatedId(false)
+                             }}
                              placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합"/></td>
                   <td>
                     <Button onClick={() => {
-                      checkIsDuplicateId(id).then(message => {
+                      checkIsDuplicateId(id, setCheckDuplicatedId).then(message => {
                         if (message != null) {
                           setCheckDuplicatedId(true);
                           alert(message);
@@ -143,12 +146,15 @@ const Signup = (props) => {
                   <Th>이메일</Th>
                   <td><Input type='text'
                              value={email}
-                             onChange={e => setEmail(e.target.value)}
+                             onChange={e => {
+                               setEmail(e.target.value)
+                               setCheckDuplicatedEmail(false)
+                             }}
                              placeholder="예: marketkurly@kurly.com"/>
                   </td>
                   <td>
                     <Button onClick={() => {
-                      checkIsDuplicateEmail(email).then(message => {
+                      checkIsDuplicateEmail(email, setCheckDuplicatedEmail).then(message => {
                         if (message != null) {
                           setCheckDuplicatedEmail(true);
                           alert(message);
