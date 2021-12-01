@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import loginApi from "./api/auth/LoginApi";
-import Header from "./Header";
+import loginApi from "../api/auth/LoginApi";
+import Header from "../Header";
 
 const Loginwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
