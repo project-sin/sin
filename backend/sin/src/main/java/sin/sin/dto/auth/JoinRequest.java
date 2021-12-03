@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class  JoinRequest {
+public class JoinRequest {
     @NotEmpty
     private String id;
     @NotEmpty
@@ -32,6 +32,11 @@ public class  JoinRequest {
     @NotEmpty
     private String birth;
     private Level level;
+    private boolean private_info;
+    private boolean ad_sms;
+    private boolean ad_email;
+    private String referral_id;
+    private String event;
 
     public Member toMemberEntity() {
         return Member.builder()
@@ -44,6 +49,9 @@ public class  JoinRequest {
                 .gender(gender)
                 .birth(birth)
                 .level(level)
+                .adSms(ad_sms)
+                .adEmail(ad_email)
+                .privateInfo(private_info)
                 .build();
     }
 }
