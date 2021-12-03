@@ -27,10 +27,10 @@ public class AuthController {
         log.info(String.valueOf(joinRequest));
         String referral_id = joinRequest.getReferral_id();
         String event = joinRequest.getEvent();
-        if (referral_id != null && !authService.existedReferralId(referral_id)) {
+        if (referral_id == null || !authService.existedReferralId(referral_id)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 추천인 아이디가 없습니다.");
 
-        } else if (joinRequest.getEvent() != null && !authService.existedEvent(event)) {
+        } else if (joinRequest.getEvent() == null || !authService.existedEvent(event)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 이벤트가 없습니다.");
         }
 
