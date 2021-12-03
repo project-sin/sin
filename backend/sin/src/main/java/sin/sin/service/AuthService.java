@@ -25,7 +25,6 @@ import sin.sin.handler.exception.AlreadyExistedIdException;
 import sin.sin.security.jwt.TokenProvider;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 //회원가입
@@ -98,12 +97,12 @@ public class AuthService {
     }
 
 
-    @Transactional(readOnly = true)
-    public List<Member> findMembers() {
-        return memberRepository.findAll();
-    }
+//    @Transactional(readOnly = true)
+//    public List<Member> findMembers() {
+//        return memberRepository.findAll();
+//    }
 
-    public Authentication matchIdAndPassword(LoginRequest loginRequest) {
+    private Authentication matchIdAndPassword(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getId(),
@@ -112,6 +111,7 @@ public class AuthService {
         return authentication;
     }
 
+    @Transactional(readOnly = true)
     public void isDuplicateId(String id) {
         Optional<Member> findMember = memberRepository.findBy_id(id);
         if (findMember.isPresent()) {
@@ -119,6 +119,7 @@ public class AuthService {
         }
     }
 
+    @Transactional(readOnly = true)
     public void isDuplicateEmail(String email) {
         Optional<Member> findMember = memberRepository.findByEmail(email);
         if (findMember.isPresent()) {
