@@ -6,7 +6,7 @@ import findUserApi from "./api/user/FIndUserApi";
 
 const Headerwrap = styled.div``
 const Container = styled.div`width: 1050px; margin: 0 auto;`
-const Row = styled.div``
+const Row = styled.div`margin-bottom: -20px;`
 
 
 const Usermenu = styled.div``
@@ -36,7 +36,8 @@ const Categoryitem = styled.li`float: left; font-size: 16px; line-height:33px; c
 const Search = styled.div`position: relative; width:250px; height:30px; background: #f7f7f7; border-radius: 18px; margin: 15px 30px`
 const Searchinput = styled.input`position: absolute; left: 5px; top: 8px; float: left; border: none; background: none;`
 const Serachsubmit = styled.button`position: absolute; right: 10px; top: 8px; float: left; border: none; background: none;`
-const Shoppinglist = styled(Link)`line-height:33px; margin: 15px 0px 15px 30px;`
+const Location = styled.div`line-height:33px; margin: 15px 0px 15px 30px;`
+const Shoppinglist = styled.div`line-height:33px; margin: 15px 0px 15px 30px;`
 
 const Header = (props) => {
     const history = useHistory()
@@ -134,9 +135,34 @@ const Header = (props) => {
                         </Category>
                         <Search className='clearfix'>
                             <Searchinput type='text' placeholder='건강 기원 새해맞이 보양식 레시피' />
-                            <Serachsubmit>button</Serachsubmit>
+                            <Serachsubmit><img
+                                src="/search.png"
+                                alt="my image"
+                                style={{
+                                    marginTop: "-3px",
+                                    width: "20px",
+                                    height: "20px"
+                                }}
+                            /></Serachsubmit>
                         </Search>
-                        <Shoppinglist><Link to='/shop/goods/goods_cart'>장바구니</Link></Shoppinglist>
+                        <Location><Link to='/'><img
+                            src="/location.png"
+                            alt="my image"
+                            style={{
+                                marginLeft: "-15px",
+                                width: "36px",
+                                height: "29px"
+                            }}
+                        /></Link></Location>
+                        <Shoppinglist><Link to='/shop/goods/goods_cart'><img
+                            src="/cart.png"
+                            alt="my image"
+                            style={{
+                                marginLeft: "8px",
+                                width: "28px",
+                                height: "28px"
+                            }}
+                        /></Link></Shoppinglist>
                     </Headernav>
                 </Row>
             </Container>
