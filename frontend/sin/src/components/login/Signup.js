@@ -51,7 +51,6 @@ const Signup = (props) => {
   const [detailedAddress, setDetailedAddress] = useState("");
 
   const signup = () => {
-    addressSetting();
     if (document.getElementById("address").style.display !== 'none'
         && id.length && password.length && checkPassword.length && name.length
         && email.length && phoneNumber.length && gender.length && birthYear.length
@@ -62,7 +61,9 @@ const Signup = (props) => {
           if (checkDuplicatedId === true && checkDuplicatedEmail === true) {
             const birth = birthYear + birthMonth + birthDay;
             signUpApi(id, email, password, name, phoneNumber, gender, birth,
-                address, detailedAddress, props.history
+                document.getElementById(
+                    "pInput").value, document.getElementById(
+                    "pDetailedInput").value, props.history
             )
             ;
           } else {
@@ -79,12 +80,6 @@ const Signup = (props) => {
     }
   };
 
-  const addressSetting = () => {
-    setAddress(document.getElementById(
-        "pInput").value)
-    setDetailedAddress(document.getElementById(
-        "pDetailedInput").value)
-  }
   useEffect(() => {
     document.getElementById("address").style.display = 'none';
     document.getElementById("detailedAddress").style.display = 'none';

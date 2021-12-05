@@ -24,7 +24,8 @@ const signUpApi = (id, email, password, name, phoneNumber, gender, birth,
     }
   })
   .catch(error => {
-    if (error.response.status === 401 || error.response.status === 400) {
+    if (error.response.status === 401 || error.response.status === 400
+        || error.response.status === 404) {
       alert("에러발생");
       return Promise.reject();
     }
