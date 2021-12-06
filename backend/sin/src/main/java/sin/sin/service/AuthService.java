@@ -57,13 +57,13 @@ public class AuthService {
         if (referral_id != null) {
             //from member, 1000
             Member referralMember = memberRepository.findBy_id(referral_id).get();
-            emoneyRepository.save(Emoney.builder().member(referralMember).content("추천인 적립금").point(1000).build());
+            emoneyRepository.save(emoneyBuilder(referralMember, "추천인 적립금", 1000));
 
             //to member, 1000
-            emoneyRepository.save(Emoney.builder().member(member).content("추천인 적립금").point(1000).build());
+            emoneyRepository.save(emoneyBuilder(member, "추천인 적립금", 1000));
 
         } else if (event != null) {
-            emoneyRepository.save(Emoney.builder().member(member).content("이벤트 적립금").point(1000).build());
+            emoneyRepository.save(emoneyBuilder(member, "이벤트 적립금", 1000));
         }
 
         return new JoinResponse(joinRequest.getName());
@@ -102,15 +102,6 @@ public class AuthService {
 //        return memberRepository.findAll();
 //    }
 
-    private Authentication matchIdAndPassword(LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getId(),
-                        loginRequest.getPassword()
-                ));
-        return authentication;
-    }
-
     @Transactional(readOnly = true)
     public void isDuplicateId(String id) {
         Optional<Member> findMember = memberRepository.findBy_id(id);
@@ -125,6 +116,19 @@ public class AuthService {
         if (findMember.isPresent()) {
             throw new AlreadyExistedEmailException("이미 사용중인 이메일입니다.");
         }
+    }
+
+    private Authentication matchIdAndPassword(LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getId(),
+                        loginRequest.getPassword()
+                ));
+        return authentication;
+    }
+
+    private Emoney emoneyBuilder(Member member, String content, int point) {
+        return Emoney.builder().member(member).content(content).point(point).build();
     }
 
 }
