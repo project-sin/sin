@@ -25,6 +25,7 @@ public class AuthController {
     public ResponseEntity signup(@RequestBody JoinRequest joinRequest) throws IOException {
         log.info("join");
         log.info(String.valueOf(joinRequest));
+/*
         String referral_id = joinRequest.getReferral_id();
         String event = joinRequest.getEvent();
         if (referral_id == null || !authService.existedReferralId(referral_id)) {
@@ -33,6 +34,7 @@ public class AuthController {
         } else if (joinRequest.getEvent() == null || !authService.existedEvent(event)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("일치하는 이벤트가 없습니다.");
         }
+*/
 
         JoinResponse join = authService.join(joinRequest);
 
