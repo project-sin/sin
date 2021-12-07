@@ -1,0 +1,3 @@
+### ProductCode으로 details 확인
+GET http://localhost:8080/shop/goods/goods-list/search?sword=토마토
+Content-Type: application/json

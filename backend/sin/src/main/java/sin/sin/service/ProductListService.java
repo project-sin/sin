@@ -57,6 +57,14 @@ public class ProductListService {
 
         return products;
     }
+
+    @Transactional(readOnly = true)
+    public List<ProductListResponse> searchProductList(String sword) {
+        List<ProductListResponse> products = searchProductRepository.findByName(sword);
+        imgUtil.updateImgUrlProducts(products);
+
+        return products;
+    }
 }
 
 
