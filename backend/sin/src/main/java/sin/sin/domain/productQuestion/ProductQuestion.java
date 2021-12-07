@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.product.Product;
+import sin.sin.domain.productQuestionReply.ProductQuestionReply;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -15,13 +16,13 @@ import java.sql.Timestamp;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude={"member", "product"})
+@ToString(exclude = {"product"})
 @Getter
 public class ProductQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_question_id", nullable = false)
+    @Column(name = "product_question_id", nullable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -37,6 +38,9 @@ public class ProductQuestion {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "product_id")
     private Product product;
+
+    @OneToOne(mappedBy = "productQuestion", fetch = FetchType.LAZY)
+    private ProductQuestionReply productQuestionReply;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "member_id")

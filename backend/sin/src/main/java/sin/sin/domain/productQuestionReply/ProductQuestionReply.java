@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "productQuestion")
 @Getter
 public class ProductQuestionReply {
 
