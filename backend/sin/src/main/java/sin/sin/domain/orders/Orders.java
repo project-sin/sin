@@ -71,4 +71,8 @@ public class Orders {
         this.orderStatus = orderStatus;
         this.orderedDate = orderedDate;
     }
+
+    public void addOrderProductList(OrderProductList orderProductList) {
+        this.orderProductLists.add(orderProductList);
+    }
 }
