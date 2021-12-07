@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
+import sin.sin.dto.ProductDetails.ProductQnaResponse;
 import sin.sin.service.FindProductDetailsService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/goods/goods_view")
@@ -20,7 +23,7 @@ public class FindProductDetailsController {
     public ResponseEntity<ProductDetailsResponse> findProductDetails(@RequestParam("goodsno") String goodsNo) {
 
         return ResponseEntity.ok()
-            .body(findProductDetailsService.findProductDetailsService(goodsNo));
+                .body(findProductDetailsService.findProductDetailsService(goodsNo));
     }
 
     @GetMapping("/desc")
@@ -35,5 +38,12 @@ public class FindProductDetailsController {
 
         return ResponseEntity.ok()
                 .body(findProductDetailsService.findProductDetailsInfo(goodsNo));
+    }
+
+    @GetMapping("/qna")
+    public ResponseEntity<List<ProductQnaResponse>> findProductDetailsQna(@RequestParam("goodsno") String goodsNo) {
+
+        return ResponseEntity.ok()
+                .body(findProductDetailsService.findProductDetailsQna(goodsNo));
     }
 }

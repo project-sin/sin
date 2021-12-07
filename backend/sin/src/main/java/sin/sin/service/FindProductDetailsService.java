@@ -8,9 +8,11 @@ import sin.sin.aws.S3Util;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductDetails;
 import sin.sin.domain.product.ProductRepository;
-import sin.sin.dto.ProductDetails.ProductDetailsResponse;
-import sin.sin.dto.ProductDetails.ProductInformationResponse;
+import sin.sin.domain.productQuestion.ProductQuestion;
+import sin.sin.dto.ProductDetails.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -54,6 +56,42 @@ public class FindProductDetailsService {
         }
         return getDescAndInfoImgUrl(Classification.info, name);
     }
+
+    @Transactional
+    public List<ProductQnaResponse> findProductDetailsQna(String goodsNo) {
+        Product product = productRepository.findProductByProductCode(goodsNo)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
+
+        List<ProductQnaResponse> productQuestions = new ArrayList<>();
+        for (ProductQuestion productQuestion :
+                product.getProductQuestion()) {
+            ProductQnaResponse qna = qnaBuilder(productQuestion);
+            productQuestions.add(qna);
+        }
+
+        return productQuestions;
+    }
+
+    private ProductQnaResponse qnaBuilder(ProductQuestion productQuestion) {
+        ProductQuestionResponse question = ProductQuestionResponse.builder()
+                .title(productQuestion.getTitle())
+                .content(productQuestion.getContent())
+                .name(productQuestion.getMember().getName())
+                .createdDate(productQuestion.getCreatedDate())
+                .secret(productQuestion.getSecret()).build();
+
+        ProductQuestionReplyResponse reply = ProductQuestionReplyResponse.builder()
+                .content(productQuestion.getProductQuestionReply().getContent())
+                .createdDate(productQuestion.getProductQuestionReply().getCreatedDate())
+                .build();
+
+        return ProductQnaResponse.builder()
+                .productQuestionResponse(question)
+                .productQuestionReply(reply)
+                .build();
+    }
+
 
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
         String thumbnailUrl = getImageUrl(
