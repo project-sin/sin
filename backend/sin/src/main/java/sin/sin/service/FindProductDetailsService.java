@@ -42,6 +42,19 @@ public class FindProductDetailsService {
         return getDescAndInfoImgUrl(Classification.desc, name);
     }
 
+    @Transactional
+    public String findProductDetailsInfo(String goodsNo) {
+        productRepository.findProductByProductCode(goodsNo)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
+
+        String name = "1";
+        if (Integer.parseInt(goodsNo) % 2 == 0) {
+            name = "2";
+        }
+        return getDescAndInfoImgUrl(Classification.info, name);
+    }
+
     private ProductDetailsResponse buildProductDetailsResponse(Product product) {
         String thumbnailUrl = getImageUrl(
                 product.getProductCategory().getMainCategory(),

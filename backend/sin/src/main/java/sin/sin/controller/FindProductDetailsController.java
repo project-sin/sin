@@ -30,4 +30,10 @@ public class FindProductDetailsController {
                 .body(findProductDetailsService.findProductDetailsDesc(goodsNo));
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<String> findProductDetailsInformation(@RequestParam("goodsno") String goodsNo) {
+
+        return ResponseEntity.ok()
+                .body(findProductDetailsService.findProductDetailsInfo(goodsNo));
+    }
 }
