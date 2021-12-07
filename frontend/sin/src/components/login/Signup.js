@@ -211,7 +211,7 @@ const Signup = (props) => {
                     <Sexradio type='radio'
                               name='sex'
                               value={gender}
-                              onChange={e => setGender('FeMale')}
+                              onChange={e => setGender('Female')}
                               id='sex2'/>
                     <Sexlabel htmlFor='sex2'>여자</Sexlabel>
                   </td>
