@@ -1,14 +1,17 @@
 package sin.sin.service;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
+import sin.sin.dto.ProductDetails.ProductQnaResponse;
+
+import javax.transaction.Transactional;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -24,16 +27,30 @@ public class findProductDetailsServiceTest {
     void findProductDetailsService() {
         //given   import.sql로 생성된 product를 가져옴
         Product product = productRepository.findById(1L)
-            .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
         //when
         ProductDetailsResponse productDetails = findProductDetailsService
-            .findProductDetailsService(product.getProductCode());
+                .findProductDetailsService(product.getProductCode());
 
         //then
         assertThat(productDetails.getProductName()).isEqualTo(product.getName());
         assertThat(productDetails.getProductInformationResponse().getSaleUnit()).isEqualTo(
-            product.getProductDetails().getSaleUnit());
+                product.getProductDetails().getSaleUnit());
         assertThat(productDetails.getProductInformationResponse().getAllergicReaction()).isNull();
         System.out.println(productDetails);
+    }
+
+    @Test
+    void 상품_qna() {
+        //given
+        Product product = productRepository.findById(2L)
+                .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
+
+        //when
+        List<ProductQnaResponse> qna = findProductDetailsService
+                .findProductDetailsQna(product.getProductCode());
+
+        //then
+        assertThat(qna.size()).isEqualTo(product.getProductQuestion().size());
     }
 }
