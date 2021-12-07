@@ -36,12 +36,11 @@ public class Orders {
     @JoinColumn(nullable = false, name = "member_id")
     private Member member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false, name = "order_list_id")
-    private OrderList orderList;
-
     @Column(nullable = false)
     private String address;
+
+    @Column(nullable = false)
+    private int totalPrice;
 
     @OneToMany(mappedBy = "orders")
     private List<OrderProductList> orderProductLists = new ArrayList<>();
@@ -50,21 +49,26 @@ public class Orders {
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private DeliveryStatus deliveryStatus;
 
+    @Column(nullable = false, name = "order_status")
+    @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
+    private OrderStatus orderStatus;
+
     @CreationTimestamp
     private Timestamp orderedDate;
 
     @Builder
-    public Orders(Long id, Member member, OrderList orderList, String address,
+    public Orders(Long id, Member member, String address, int totalPrice,
         List<OrderProductList> orderProductLists, DeliveryStatus deliveryStatus,
-        Timestamp orderedDate) {
+        OrderStatus orderStatus, Timestamp orderedDate) {
         this.id = id;
         this.member = member;
-        this.orderList = orderList;
         this.address = address;
+        this.totalPrice = totalPrice;
         if (Objects.nonNull(orderProductLists)) {
             this.orderProductLists = orderProductLists;
         }
         this.deliveryStatus = deliveryStatus;
+        this.orderStatus = orderStatus;
         this.orderedDate = orderedDate;
     }
 }

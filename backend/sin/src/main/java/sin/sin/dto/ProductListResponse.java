@@ -2,14 +2,10 @@ package sin.sin.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import sin.sin.domain.product.Status;
 import sin.sin.domain.productCategory.ProductCategory;
-import sin.sin.dto.cart.MemberCartResponse;
 
 import java.sql.Timestamp;
-import java.util.List;
-
 
 @Getter
 @NoArgsConstructor
