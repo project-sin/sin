@@ -22,4 +22,12 @@ public class FindProductDetailsController {
         return ResponseEntity.ok()
             .body(findProductDetailsService.findProductDetailsService(goodsNo));
     }
+
+    @GetMapping("/desc")
+    public ResponseEntity<String> findProductDetailsDescription(@RequestParam("goodsno") String goodsNo) {
+
+        return ResponseEntity.ok()
+                .body(findProductDetailsService.findProductDetailsDesc(goodsNo));
+    }
+
 }
