@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.productCategory.ProductCategory;
+import sin.sin.domain.productQuestion.ProductQuestion;
 import sin.sin.domain.productReview.ProductReview;
 
 import javax.persistence.*;
@@ -50,6 +51,9 @@ public class Product {
 
     @OneToMany(mappedBy="product", fetch=FetchType.LAZY)
     private List<ProductReview> productReview = new ArrayList<>();
+
+    @OneToMany(mappedBy="product", fetch=FetchType.LAZY)
+    private List<ProductQuestion> productQuestion = new ArrayList<>();
 
     @NotNull
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장

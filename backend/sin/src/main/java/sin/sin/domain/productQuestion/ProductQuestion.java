@@ -1,27 +1,21 @@
 package sin.sin.domain.productQuestion;
 
 import com.sun.istack.NotNull;
-import java.sql.Timestamp;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
+import sin.sin.domain.product.Product;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude={"member", "product"})
 @Getter
 public class ProductQuestion {
 
@@ -39,6 +33,10 @@ public class ProductQuestion {
 
     @CreationTimestamp
     private Timestamp createdDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false, name = "product_id")
+    private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "member_id")

@@ -1,24 +1,19 @@
 package sin.sin.domain.productQuestionReply;
 
-import java.sql.Timestamp;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.productQuestion.ProductQuestion;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 public class ProductQuestionReply {
 
