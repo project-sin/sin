@@ -1,8 +1,7 @@
 package sin.sin.dto.ProductDetails;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.*;
 
 @Builder
 @Getter
@@ -10,4 +9,10 @@ import lombok.ToString;
 public class ProductQnaResponse {
     ProductQuestionResponse productQuestionResponse;
     ProductQuestionReplyResponse productQuestionReply;
+
+    @QueryProjection
+    public ProductQnaResponse(ProductQuestionResponse productQuestionResponse, ProductQuestionReplyResponse productQuestionReply) {
+        this.productQuestionResponse = productQuestionResponse;
+        this.productQuestionReply = productQuestionReply;
+    }
 }

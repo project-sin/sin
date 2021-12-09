@@ -1,6 +1,7 @@
 package sin.sin.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
 import sin.sin.dto.ProductDetails.ProductQnaResponse;
 import sin.sin.service.FindProductDetailsService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/goods/goods_view")
@@ -41,9 +40,10 @@ public class FindProductDetailsController {
     }
 
     @GetMapping("/qna")
-    public ResponseEntity<List<ProductQnaResponse>> findProductDetailsQna(@RequestParam("goodsno") String goodsNo) {
+    public ResponseEntity<Page<ProductQnaResponse>> findProductDetailsQna(@RequestParam("goodsno") String goodsNo, @RequestParam(value = "page", defaultValue = "1") int page) {
 
         return ResponseEntity.ok()
-                .body(findProductDetailsService.findProductDetailsQna(goodsNo));
+                .body(findProductDetailsService.findProductDetailsQna(goodsNo, page));
     }
+
 }

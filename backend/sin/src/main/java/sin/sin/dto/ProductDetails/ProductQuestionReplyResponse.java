@@ -1,8 +1,7 @@
 package sin.sin.dto.ProductDetails;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -12,4 +11,10 @@ import java.sql.Timestamp;
 public class ProductQuestionReplyResponse {
     String content;
     Timestamp createdDate;
+
+    @QueryProjection
+    public ProductQuestionReplyResponse(String content, Timestamp createdDate) {
+        this.content = content;
+        this.createdDate = createdDate;
+    }
 }

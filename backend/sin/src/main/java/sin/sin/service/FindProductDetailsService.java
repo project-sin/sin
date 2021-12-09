@@ -1,6 +1,9 @@
 package sin.sin.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sin.sin.aws.AwsS3Config;
@@ -9,10 +12,9 @@ import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductDetails;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.domain.productQuestion.ProductQuestion;
+import sin.sin.domain.productQuestion.SearchProductQuestionRepository;
 import sin.sin.dto.ProductDetails.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -20,6 +22,7 @@ import java.util.Objects;
 public class FindProductDetailsService {
 
     private final ProductRepository productRepository;
+    private final SearchProductQuestionRepository searchProductQuestionRepository;
     private final AwsS3Config awsS3Config;
 
     @Transactional
@@ -33,9 +36,7 @@ public class FindProductDetailsService {
 
     @Transactional
     public String findProductDetailsDesc(String goodsNo) {
-        productRepository.findProductByProductCode(goodsNo)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
+        notExistedGoodsNoException(goodsNo);
 
         String name = "1";
         if (Integer.parseInt(goodsNo) % 2 == 0) {
@@ -46,9 +47,7 @@ public class FindProductDetailsService {
 
     @Transactional
     public String findProductDetailsInfo(String goodsNo) {
-        productRepository.findProductByProductCode(goodsNo)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
+        notExistedGoodsNoException(goodsNo);
 
         String name = "1";
         if (Integer.parseInt(goodsNo) % 2 == 0) {
@@ -57,20 +56,21 @@ public class FindProductDetailsService {
         return getDescAndInfoImgUrl(Classification.info, name);
     }
 
+
     @Transactional
-    public List<ProductQnaResponse> findProductDetailsQna(String goodsNo) {
+    public Page<ProductQnaResponse> findProductDetailsQna(String goodsNo, int page) {
+        notExistedGoodsNoException(goodsNo);
+
+        PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("createdDate").descending());
+
+        return searchProductQuestionRepository.findByProductCode(goodsNo, pageable);
+    }
+
+    private Product notExistedGoodsNoException(String goodsNo) {
         Product product = productRepository.findProductByProductCode(goodsNo)
                 .orElseThrow(() ->
                         new IllegalArgumentException("goodsNo가 " + goodsNo + "에 해당되는 Product가 존재하지 않습니다."));
-
-        List<ProductQnaResponse> productQuestions = new ArrayList<>();
-        for (ProductQuestion productQuestion :
-                product.getProductQuestion()) {
-            ProductQnaResponse qna = qnaBuilder(productQuestion);
-            productQuestions.add(qna);
-        }
-
-        return productQuestions;
+        return product;
     }
 
     private ProductQnaResponse qnaBuilder(ProductQuestion productQuestion) {
