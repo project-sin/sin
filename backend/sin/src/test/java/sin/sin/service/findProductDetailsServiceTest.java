@@ -3,13 +3,13 @@ package sin.sin.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
 import sin.sin.dto.ProductDetails.ProductQnaResponse;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -47,10 +47,10 @@ public class findProductDetailsServiceTest {
                 .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
 
         //when
-        List<ProductQnaResponse> qna = findProductDetailsService
-                .findProductDetailsQna(product.getProductCode());
+        Page<ProductQnaResponse> qna = findProductDetailsService
+                .findProductDetailsQna(product.getProductCode(), 1);
 
         //then
-        assertThat(qna.size()).isEqualTo(product.getProductQuestion().size());
+        assertThat(qna.getTotalElements()).isEqualTo(product.getProductQuestion().size());
     }
 }
