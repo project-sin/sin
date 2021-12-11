@@ -40,8 +40,8 @@ public class Member {
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Gender gender;
 
-    @Column(nullable = false)
-    private String address;
+    @Embedded
+    private Address address;
 
     @Column(nullable = false)
     private String birth;

@@ -152,8 +152,8 @@ INSERT INTO PRODUCT (NAME, PRICE, STATUS, DISCOUNT_PERCENT, CREATED_DATE, PRODUC
 
 -- product_review 기본 설정
 INSERT INTO LEVEL (SALE_PERCENT) VALUES('20');
-INSERT INTO Member (LOGIN_ID, PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ADDRESS, BIRTH, LEVEL_ID, private_info, ad_sms, ad_email) VALUES('a', '$2a$10$KdMcrhifvyv9DVUIKGWbYu6IquPdWyNpaKTXj8JMEjn2jR8cD5uK2', '글쓴이1','이메일1','폰번호1','Male','집주소1','생일1', '1', false, false, false);
-INSERT INTO Member (LOGIN_ID, PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ADDRESS, BIRTH, LEVEL_ID, private_info, ad_sms, ad_email) VALUES('b', '$2a$10$.vrxEGpYWQXTDBROjpon8e9VkLXoQ1SnrPtLJr7iKttG80ivIz8.G', '글쓴이2','이메일2','폰번호2','Female','집주소2','생일2', '1', false, false, false);
+INSERT INTO Member (LOGIN_ID, PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ORIGIN_ADDRESS, SELECTED_ADDRESS, BIRTH, LEVEL_ID, private_info, ad_sms, ad_email) VALUES('a', '$2a$10$KdMcrhifvyv9DVUIKGWbYu6IquPdWyNpaKTXj8JMEjn2jR8cD5uK2', '글쓴이1','이메일1','폰번호1','Male','집주소1','집주소1','생일1', '1', false, false, false);
+INSERT INTO Member (LOGIN_ID, PASSWORD, NAME, EMAIL, PHONE_NUMBER, GENDER, ORIGIN_ADDRESS, SELECTED_ADDRESS, BIRTH, LEVEL_ID, private_info, ad_sms, ad_email) VALUES('b', '$2a$10$.vrxEGpYWQXTDBROjpon8e9VkLXoQ1SnrPtLJr7iKttG80ivIz8.G', '글쓴이2','이메일2','폰번호2','Female','집주소2','집주소2','생일2', '1', false, false, false);
 INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목1','내용1', '1', '1');
 INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목2','내용2', '1', '1');
 --INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES('제목3','내용3', '1', '1');
