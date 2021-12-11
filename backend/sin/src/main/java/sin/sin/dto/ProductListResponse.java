@@ -27,5 +27,4 @@ public class ProductListResponse extends ProductFrame{
         this.status = status;
         this.reviewCount = reviewCount;
     }
-
 }
