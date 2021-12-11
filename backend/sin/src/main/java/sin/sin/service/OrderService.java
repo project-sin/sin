@@ -1,3 +1,4 @@
+/*
 package sin.sin.service;
 
 import java.util.List;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.orders.Orders;
-import sin.sin.domain.orders.OrdersRepository;
 import sin.sin.domain.product.Product;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.util.ImgUtil;
@@ -16,7 +16,7 @@ import sin.sin.util.ImgUtil;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private final OrdersRepository ordersRepository;
+    private final Orders2Repository ordersRepository;
 
     private final ImgUtil imgUtil;
 
@@ -40,3 +40,4 @@ public class OrderService {
             .collect(Collectors.toList());
     }
 }
+*/

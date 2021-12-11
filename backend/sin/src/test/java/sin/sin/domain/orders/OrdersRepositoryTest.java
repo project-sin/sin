@@ -1,46 +1,86 @@
 package sin.sin.domain.orders;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import sin.sin.domain.RepositoryTest;
 import sin.sin.domain.member.Member;
+import sin.sin.domain.orderProductList.OrderProductList;
 import sin.sin.domain.product.Product;
+import sin.sin.dto.order.OrdersResponse;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static sin.sin.domain.SetUpMethods.persistOrderProductList;
-import static sin.sin.domain.SetUpMethods.persistOrders;
 
-class OrdersRepositoryTest extends RepositoryTest {
+@Transactional
+@SpringBootTest
+class OrdersRepositoryTest {
 
     @Autowired
     private OrdersRepository ordersRepository;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Test
     @Transactional
     void findAllByMemberId() {
         //given
-        Member member = testEntityManager.find(Member.class, 1L);
-        Product product = testEntityManager.find(Product.class, 1L);
-        Orders orders = persistOrders(testEntityManager, member);
-        persistOrderProductList(testEntityManager, orders, product);
-        testEntityManager.flush();
-        testEntityManager.clear();
+        Member member = entityManager.find(Member.class, 1L);
+        Product product1 = entityManager.find(Product.class, 1L);
+        Product product2 = entityManager.find(Product.class, 2L);
+        //주문리스트1
+        Orders orders = Orders.builder()
+            .member(member)
+            .address("주소")
+            .deliveryStatus(DeliveryStatus.Ready)
+            .orderStatus(OrderStatus.Complete)
+            .totalPrice(10000).build();
+        entityManager.persist(orders);
+
+        OrderProductList orderProductList1 = OrderProductList.builder()
+            .orders(orders)
+            .product(product1)
+            .count(10).build();
+        entityManager.persist(orderProductList1);
+
+        OrderProductList orderProductList2 = OrderProductList.builder()
+            .orders(orders)
+            .product(product2)
+            .count(10).build();
+        entityManager.persist(orderProductList2);
+
+        //주문리스트2
+        Orders orders2 = Orders.builder()
+            .member(member)
+            .address("주소")
+            .deliveryStatus(DeliveryStatus.Ready)
+            .orderStatus(OrderStatus.Complete)
+            .totalPrice(10000).build();
+        entityManager.persist(orders2);
+
+        OrderProductList orderProductList3 = OrderProductList.builder()
+            .orders(orders2)
+            .product(product1)
+            .count(10).build();
+        entityManager.persist(orderProductList3);
+
+        entityManager.flush();
+        entityManager.clear();
 
         //when
-        List<Orders> ordersList = ordersRepository.findAllByMemberId(member.getId());
+        List<OrdersResponse> ordersList = ordersRepository.findOrdersByMemberId(member.getId());
 
         //then
-        assertThat(ordersList.size()).isEqualTo(1);
-        // join fetch 로 추가적인 db 조회 x
-        assertThat(ordersList.get(0).getOrderProductLists().size()).isEqualTo(1);
-        // product를 찾기 위해 추가적인 db 조회 1회
-        assertThat(ordersList.get(0).getOrderProductLists().get(0).getProduct()
-            .getProductCode()).isEqualTo(product.getProductCode());
-        // productCategory를 찾기 위해 추가적인 db 조회 1회
-        // todo : db 조회 횟수를 줄여야 함
-        System.out.println(ordersList.get(0).getOrderProductLists().get(0)
-            .getProduct().getProductCategory().getMainCategory());
+        assertThat(ordersList.get(0).getOrdersId()).isEqualTo(
+            orders2.getId());
+        assertThat(ordersList.get(0).getProductName()).isEqualTo(
+            product1.getName());
+        assertThat(ordersList.get(1).getProductName()).isEqualTo(
+            product2.getName());
+        System.out.println(ordersList.get(0).getImageUrl());
+        System.out.println(ordersList.get(1).getImageUrl());
     }
 }
