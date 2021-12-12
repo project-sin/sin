@@ -8,11 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.address.Address;
 import sin.sin.domain.address.AddressRepository;
 import sin.sin.domain.member.Member;
-import sin.sin.dto.AddressResponse;
+import sin.sin.domain.member.MemberRepository;
+import sin.sin.dto.address.AddressRequest;
+import sin.sin.dto.address.AddressResponse;
 
 @Service
 @RequiredArgsConstructor
 public class AddressService {
+
+    private final MemberRepository memberRepository;
 
     private final AddressRepository addressRepository;
 
@@ -31,4 +35,17 @@ public class AddressService {
                 ))
             .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void addAddress(Member member, AddressRequest addressRequest) {
+            member.addAddress(Address.builder()
+                .address(addressRequest.getAddress())
+                .member(member)
+                .original(addressRequest.isOriginal())
+                .selected(false)
+                .build());
+        memberRepository.save(member);
+    }
+
+
 }

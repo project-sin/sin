@@ -1,4 +1,4 @@
-package sin.sin.dto;
+package sin.sin.dto.address;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

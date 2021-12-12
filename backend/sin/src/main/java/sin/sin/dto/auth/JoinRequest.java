@@ -54,15 +54,14 @@ public class JoinRequest {
             .adEmail(ad_email)
             .privateInfo(private_info)
             .build();
-        Address addressTest = Address.builder()
+        member.addAddress(Address.builder()
             .address(address)
             .member(member)
             .recipient(name)
             .recipientPhoneNumber(phone_number)
             .original(true)
             .selected(true)
-            .build();
-        member.addAddress(addressTest);
+            .build());
 
         return member;
     }

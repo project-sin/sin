@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.config.auth.CurrentUser;
 import sin.sin.config.auth.PrincipalDetails;
-import sin.sin.domain.address.Address;
-import sin.sin.dto.AddressResponse;
+import sin.sin.dto.address.AddressRequest;
+import sin.sin.dto.address.AddressResponse;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
@@ -53,5 +54,13 @@ public class MyPageController {
         List<AddressResponse> addresses = addressService.findAddresses(userDetails.getMember());
 
         return ResponseEntity.ok().body(addresses);
+    }
+
+    @PostMapping("/destination")
+    public ResponseEntity<Void> addAddress(@RequestBody AddressRequest addressRequest,
+        @CurrentUser PrincipalDetails userDetails) {
+        addressService.addAddress(userDetails.getMember(), addressRequest);
+
+        return ResponseEntity.noContent().build();
     }
 }
