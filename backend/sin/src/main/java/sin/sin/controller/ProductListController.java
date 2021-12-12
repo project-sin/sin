@@ -1,13 +1,11 @@
 package sin.sin.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sin.sin.domain.product.Product;
 import sin.sin.dto.ProductListResponse;
 import sin.sin.service.ProductListService;
 
@@ -20,8 +18,8 @@ public class ProductListController {
     private final ProductListService productListService;
 
     @GetMapping
-    public ResponseEntity<?> newBestList(@RequestParam(value = "category", required = false) String category,
-                                         @RequestParam(value = "list", required = false) String list) {
+    public ResponseEntity<List<ProductListResponse>> newBestList(@RequestParam(value = "category", required = false) String category,
+                                                                 @RequestParam(value = "list", required = false) String list) {
 
         //신상품 //이번달 출시 상품 & 가장 최근 등록 상품순 조회
         if ("038".equals(category)) {
@@ -30,7 +28,7 @@ public class ProductListController {
         }
 
         //베스트상품 //후기 많은 상품순 조회
-        else if("029".equals(category)){
+        else if ("029".equals(category)) {
             List<ProductListResponse> bestProducts = productListService.bestProductList();
             return ResponseEntity.ok().body(bestProducts);
         }
@@ -42,11 +40,16 @@ public class ProductListController {
         }
 
         //카테고리별 조회
-        else{
+        else {
             List<ProductListResponse> categoryProducts = productListService.categoryProductList(category);
             return ResponseEntity.ok().body(categoryProducts);
         }
 
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductListResponse>> searchProduct(@RequestParam(value = "sword", required = true) String sword){
+        return ResponseEntity.ok().body(productListService.searchProductList(sword));
     }
 
 }

@@ -48,7 +48,15 @@ public class SearchProductRepository {
         return results;
     }
 
-    JPAQuery<ProductListResponse> selectFromJoin() {
+    public List<ProductListResponse> findByName(String sword) {
+        List<ProductListResponse> results = selectFromJoin()
+                .where(product.name.contains(sword))
+                .groupBy(product, product.name).orderBy(product.createdDate.desc(), product.id.asc()).limit(90).fetch();
+
+        return results;
+    }
+
+    private JPAQuery<ProductListResponse> selectFromJoin() {
         return queryFactory.select(new QProductListResponse(
                         product.name, product.productCode, product.price, product.productCategory, product.discountPercent,
                         product.contentSummary, product.createdDate, product.status, productReview.count().intValue().as("reviewCount")))
