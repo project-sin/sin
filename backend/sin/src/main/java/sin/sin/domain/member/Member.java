@@ -1,18 +1,20 @@
 package sin.sin.domain.member;
 
 import com.sun.istack.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import sin.sin.domain.address.Address;
 import sin.sin.domain.level.Level;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
 @ToString
 public class Member {
 
@@ -40,8 +42,8 @@ public class Member {
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Gender gender;
 
-    @Embedded
-    private Address address;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
     @Column(nullable = false)
     private String birth;
@@ -65,4 +67,32 @@ public class Member {
 
     @Column(nullable = false)
     private boolean adEmail;
+
+    @Builder
+    public Member(Long id, String _id, String password, String name, String email,
+        String phoneNumber, Gender gender, List<Address> addresses, String birth,
+        Level level, Role role, Timestamp createdDate, boolean privateInfo, boolean adSms,
+        boolean adEmail) {
+        this.id = id;
+        this._id = _id;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
+        if (Objects.nonNull(addresses)) {
+            this.addresses = addresses;
+        }
+        this.birth = birth;
+        this.level = level;
+        this.role = role;
+        this.createdDate = createdDate;
+        this.privateInfo = privateInfo;
+        this.adSms = adSms;
+        this.adEmail = adEmail;
+    }
+
+    public void addAddress(Address address){
+        this.addresses.add(address);
+    }
 }
