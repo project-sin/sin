@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @ToString
 public class ProductReviewResponse {
-    Long no;
+    Long id;
     String title;
     String memberName;
     Timestamp createdDate;

@@ -1,15 +1,12 @@
 package sin.sin.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
-import sin.sin.dto.ProductDetails.ProductQnaResponse;
-import sin.sin.dto.ProductDetails.ProductReviewResponse;
 import sin.sin.service.FindProductDetailsService;
 
 @RestController
@@ -39,19 +36,4 @@ public class FindProductDetailsController {
         return ResponseEntity.ok()
                 .body(findProductDetailsService.findProductDetailsInfo(goodsNo));
     }
-
-    @GetMapping("/qna")
-    public ResponseEntity<Page<ProductQnaResponse>> findProductDetailsQna(@RequestParam("goodsno") String goodsNo, @RequestParam(value = "page", defaultValue = "1") int page) {
-
-        return ResponseEntity.ok()
-                .body(findProductDetailsService.findProductDetailsQna(goodsNo, page));
-    }
-
-    @GetMapping("/review")
-    public ResponseEntity<Page<ProductReviewResponse>> findProductDetailsReview(@RequestParam("goodsno") String goodsNo, @RequestParam(value = "page", defaultValue = "1") int page) {
-
-        return ResponseEntity.ok()
-                .body(findProductDetailsService.findProductDetailsReview(goodsNo, page));
-    }
-
 }

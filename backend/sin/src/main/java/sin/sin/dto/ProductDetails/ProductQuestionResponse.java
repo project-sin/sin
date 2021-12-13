@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 @Builder
 @ToString
 public class ProductQuestionResponse {
+    Long id;
     String title;
     String content;
     String name;
@@ -17,7 +18,8 @@ public class ProductQuestionResponse {
     Timestamp createdDate;
 
     @QueryProjection
-    public ProductQuestionResponse(String title, String content, String name, Secret secret, Timestamp createdDate) {
+    public ProductQuestionResponse(Long id, String title, String content, String name, Secret secret, Timestamp createdDate) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.name = name;

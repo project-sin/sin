@@ -9,11 +9,13 @@ import java.sql.Timestamp;
 @Builder
 @ToString
 public class ProductQuestionReplyResponse {
+    Long id;
     String content;
     Timestamp createdDate;
 
     @QueryProjection
-    public ProductQuestionReplyResponse(String content, Timestamp createdDate) {
+    public ProductQuestionReplyResponse(Long id, String content, Timestamp createdDate) {
+        this.id=id;
         this.content = content;
         this.createdDate = createdDate;
     }

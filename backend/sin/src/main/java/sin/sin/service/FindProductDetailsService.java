@@ -1,9 +1,6 @@
 package sin.sin.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sin.sin.aws.AwsS3Config;
@@ -54,24 +51,6 @@ public class FindProductDetailsService {
             name = "2";
         }
         return getDescAndInfoImgUrl(Classification.info, name);
-    }
-
-    @Transactional
-    public Page<ProductQnaResponse> findProductDetailsQna(String goodsNo, int page) {
-        notExistedGoodsNoException(goodsNo);
-
-        PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("createdDate").descending());
-
-        return searchProductQuestionRepository.findProductQnaByProductCode(goodsNo, pageable);
-    }
-
-    @Transactional
-    public Page<ProductReviewResponse> findProductDetailsReview(String goodsNo, int page) {
-        Product product = notExistedGoodsNoException(goodsNo);
-
-        PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("createdDate").descending());
-
-        return searchProductQuestionRepository.findProductReviewByProductCode(goodsNo, pageable);
     }
 
     private Product notExistedGoodsNoException(String goodsNo) {

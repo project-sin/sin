@@ -3,12 +3,9 @@ package sin.sin.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
-import sin.sin.dto.ProductDetails.ProductQnaResponse;
-import sin.sin.dto.ProductDetails.ProductReviewResponse;
 
 import javax.transaction.Transactional;
 
@@ -39,33 +36,5 @@ public class findProductDetailsServiceTest {
                 product.getProductDetails().getSaleUnit());
         assertThat(productDetails.getProductInformationResponse().getAllergicReaction()).isNull();
         System.out.println(productDetails);
-    }
-
-    @Test
-    void 상품_qna() {
-        //given
-        Product product = productRepository.findById(2L)
-                .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
-
-        //when
-        Page<ProductQnaResponse> qna = findProductDetailsService
-                .findProductDetailsQna(product.getProductCode(), 1);
-
-        //then
-        assertThat(qna.getTotalElements()).isEqualTo(product.getProductQuestion().size());
-    }
-
-    @Test
-    void 상품_리뷰(){
-        //given
-        Product product = productRepository.findById(1L)
-                .orElseThrow(() -> new IllegalArgumentException("해당되는 Product가 없습니다."));
-
-        //when
-        Page<ProductReviewResponse> review = findProductDetailsService
-                .findProductDetailsReview(product.getProductCode(), 1);
-
-        //then
-        assertThat(review.getTotalElements()).isEqualTo(product.getProductReview().size());
     }
 }
