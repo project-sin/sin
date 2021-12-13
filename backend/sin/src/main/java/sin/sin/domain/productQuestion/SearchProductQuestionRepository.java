@@ -13,10 +13,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import sin.sin.domain.member.QMember;
 import sin.sin.domain.productQuestionReply.QProductQuestionReply;
-import sin.sin.dto.productQna.ProductQnaResponse;
 import sin.sin.dto.ProductDetails.QProductQnaResponse;
 import sin.sin.dto.ProductDetails.QProductQuestionReplyResponse;
 import sin.sin.dto.ProductDetails.QProductQuestionResponse;
+import sin.sin.dto.productQna.ProductQnaResponse;
 
 import java.util.List;
 
@@ -40,7 +40,6 @@ public class SearchProductQuestionRepository {
                 .where(productQuestion.product.productCode.eq(productCode))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize());
-
         //정렬 쿼리
         for (Sort.Order o : pageable.getSort()) {
             PathBuilder pathBuilder = new PathBuilder(productQuestion.getType(), productQuestion.getMetadata());

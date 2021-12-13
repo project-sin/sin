@@ -1,10 +1,7 @@
 package sin.sin.domain.productQuestion;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.member.Member;
 import sin.sin.domain.product.Product;
@@ -17,6 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"product"})
+@Builder
 @Getter
 public class ProductQuestion {
 
@@ -39,7 +37,7 @@ public class ProductQuestion {
     @JoinColumn(nullable = false, name = "product_id")
     private Product product;
 
-    @OneToOne(mappedBy = "productQuestion", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "productQuestion", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProductQuestionReply productQuestionReply;
 
     @ManyToOne(fetch = FetchType.LAZY)
