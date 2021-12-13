@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
-import sin.sin.dto.ProductReviewResponse;
+import sin.sin.dto.productReview.ProductReviewResponse;
 
 import javax.transaction.Transactional;
 

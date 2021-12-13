@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.domain.productReview.SearchProductReviewRepository;
-import sin.sin.dto.ProductReviewResponse;
+import sin.sin.dto.productReview.ProductReviewResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +17,7 @@ public class ProductReviewService {
     private final ProductRepository productRepository;
     private final SearchProductReviewRepository searchProductReviewRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Page<ProductReviewResponse> findProductReview(String goodsNo, int page) {
         Product product = notExistedGoodsNoException(goodsNo);
 
