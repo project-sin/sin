@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.dto.ProductDetails.ProductDetailsResponse;
 import sin.sin.dto.ProductDetails.ProductQnaResponse;
+import sin.sin.dto.ProductDetails.ProductReviewResponse;
 import sin.sin.service.FindProductDetailsService;
 
 @RestController
@@ -44,6 +45,13 @@ public class FindProductDetailsController {
 
         return ResponseEntity.ok()
                 .body(findProductDetailsService.findProductDetailsQna(goodsNo, page));
+    }
+
+    @GetMapping("/review")
+    public ResponseEntity<Page<ProductReviewResponse>> findProductDetailsReview(@RequestParam("goodsno") String goodsNo, @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        return ResponseEntity.ok()
+                .body(findProductDetailsService.findProductDetailsReview(goodsNo, page));
     }
 
 }

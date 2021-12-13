@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import sin.sin.aws.AwsS3Config;
 import sin.sin.aws.S3Util;
 import sin.sin.dto.ProductFrame;
-import sin.sin.dto.cart.MemberCartResponse;
 
 import java.util.List;
 
@@ -21,10 +20,19 @@ public class ImgUtil {
     }
 
     public String imgUrl(String mainCategory, String subCategory, String productCode) {
-        String fileName = "product/" + mainCategory + "/" + subCategory + "/" + productCode + ".jpg";
+        String fullName = "product/" + mainCategory + "/" + subCategory + "/" + productCode + ".jpg";
 
         S3Util s3Util = new S3Util(awsS3Config.amazonS3Client(), awsS3Config.getBucket());
-        String imageUrl = s3Util.getFileURL(fileName);
+        String imageUrl = s3Util.getFileURL(fullName);
+
+        return imageUrl;
+    }
+
+    public String imgUrl(String filePath, String fileName) {
+        String fullName = filePath + "/" + fileName;
+
+        S3Util s3Util = new S3Util(awsS3Config.amazonS3Client(), awsS3Config.getBucket());
+        String imageUrl = s3Util.getFileURL(fullName);
 
         return imageUrl;
     }

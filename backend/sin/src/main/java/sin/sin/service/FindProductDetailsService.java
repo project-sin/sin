@@ -56,14 +56,22 @@ public class FindProductDetailsService {
         return getDescAndInfoImgUrl(Classification.info, name);
     }
 
-
     @Transactional
     public Page<ProductQnaResponse> findProductDetailsQna(String goodsNo, int page) {
         notExistedGoodsNoException(goodsNo);
 
         PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("createdDate").descending());
 
-        return searchProductQuestionRepository.findByProductCode(goodsNo, pageable);
+        return searchProductQuestionRepository.findProductQnaByProductCode(goodsNo, pageable);
+    }
+
+    @Transactional
+    public Page<ProductReviewResponse> findProductDetailsReview(String goodsNo, int page) {
+        Product product = notExistedGoodsNoException(goodsNo);
+
+        PageRequest pageable = PageRequest.of(page - 1, 10, Sort.by("createdDate").descending());
+
+        return searchProductQuestionRepository.findProductReviewByProductCode(goodsNo, pageable);
     }
 
     private Product notExistedGoodsNoException(String goodsNo) {

@@ -1,19 +1,18 @@
 package sin.sin.domain.productReviewImg;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import sin.sin.domain.productReview.ProductReview;
+
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@ToString(exclude = "productReview")
 public class ProductReviewImg {
 
     @Id
@@ -27,4 +26,9 @@ public class ProductReviewImg {
     @Lob
     @Column(nullable = false)
     private String filePath;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false, name = "product_review_id")
+    private ProductReview productReview;
+
 }

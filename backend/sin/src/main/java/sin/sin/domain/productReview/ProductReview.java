@@ -17,12 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString(exclude = {"product"})
 @Builder
 public class ProductReview {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="product_review_id", nullable = false)
+    @Column(name = "product_review_id", nullable = false)
     private Long id;
 
     @Column(nullable = false)
@@ -40,6 +41,10 @@ public class ProductReview {
     @JoinColumn(nullable = false, name = "member_id")
     private Member member;
 
+    @Column(nullable = false)
+    @ColumnDefault("0")
+    private int likeCnt;
+
     @CreationTimestamp
     private Timestamp createdDate;
 
@@ -47,7 +52,6 @@ public class ProductReview {
     @ColumnDefault("0")
     private int views;
 
-    @OneToMany
-    @JoinColumn(name= "product_review_img_id")
+    @OneToMany(mappedBy = "productReview")
     private List<ProductReviewImg> productReviewImgList = new ArrayList<>();
 }
