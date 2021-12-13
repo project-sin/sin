@@ -13,7 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import sin.sin.domain.member.QMember;
 import sin.sin.domain.productQuestionReply.QProductQuestionReply;
-import sin.sin.dto.ProductDetails.ProductQnaResponse;
+import sin.sin.dto.productQna.ProductQnaResponse;
 import sin.sin.dto.ProductDetails.QProductQnaResponse;
 import sin.sin.dto.ProductDetails.QProductQuestionReplyResponse;
 import sin.sin.dto.ProductDetails.QProductQuestionResponse;

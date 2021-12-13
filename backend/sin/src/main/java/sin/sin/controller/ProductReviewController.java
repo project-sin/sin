@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sin.sin.dto.ProductDetails.ProductReviewResponse;
+import sin.sin.dto.ProductReviewResponse;
 import sin.sin.service.ProductReviewService;
 
 @RestController

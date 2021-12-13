@@ -10,7 +10,7 @@ import sin.sin.domain.member.QMember;
 import sin.sin.domain.product.QProduct;
 import sin.sin.domain.productReviewImg.ProductReviewImg;
 import sin.sin.domain.productReviewImg.QProductReviewImg;
-import sin.sin.dto.ProductDetails.ProductReviewResponse;
+import sin.sin.dto.ProductReviewResponse;
 import sin.sin.util.ImgUtil;
 
 import java.util.List;

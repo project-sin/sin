@@ -11,6 +11,9 @@ import sin.sin.domain.product.ProductRepository;
 import sin.sin.domain.productQuestion.ProductQuestion;
 import sin.sin.domain.productQuestion.SearchProductQuestionRepository;
 import sin.sin.dto.ProductDetails.*;
+import sin.sin.dto.productQna.ProductQnaResponse;
+import sin.sin.dto.productQna.ProductQuestionReplyResponse;
+import sin.sin.dto.productQna.ProductQuestionResponse;
 
 import java.util.Objects;
 

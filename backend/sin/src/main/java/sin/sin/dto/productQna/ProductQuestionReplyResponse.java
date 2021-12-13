@@ -1,4 +1,4 @@
-package sin.sin.dto.ProductDetails;
+package sin.sin.dto.productQna;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;

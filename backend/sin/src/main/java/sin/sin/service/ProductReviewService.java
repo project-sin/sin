@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.product.Product;
 import sin.sin.domain.product.ProductRepository;
 import sin.sin.domain.productReview.SearchProductReviewRepository;
-import sin.sin.dto.ProductDetails.ProductReviewResponse;
+import sin.sin.dto.ProductReviewResponse;
 
 @Service
 @RequiredArgsConstructor

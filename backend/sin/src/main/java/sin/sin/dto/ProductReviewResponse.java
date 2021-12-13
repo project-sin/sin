@@ -1,4 +1,4 @@
-package sin.sin.dto.ProductDetails;
+package sin.sin.dto;
 
 import lombok.Builder;
 import lombok.Getter;
