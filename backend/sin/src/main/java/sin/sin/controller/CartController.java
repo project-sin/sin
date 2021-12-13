@@ -8,7 +8,6 @@ import sin.sin.config.auth.PrincipalDetails;
 import sin.sin.dto.ProductFrame;
 import sin.sin.dto.cart.CartRequest;
 import sin.sin.dto.cart.MemberCartResponse;
-import sin.sin.handler.exception.RequestLoginException;
 import sin.sin.service.CartService;
 
 import java.util.List;
@@ -18,16 +17,18 @@ import java.util.List;
 @RequestMapping("/goods")
 public class CartController {
 
-    @PostMapping("/cart")         //덮어씌우기 기능
+    private final CartService cartService;
+
+    @PostMapping("/cart")
     ResponseEntity<String> addCart(@RequestBody CartRequest cartRequest, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         Long id = principalDetails.getMember().getId();
+//        System.out.println(principalDetails.getMember());
+//        System.out.println(principalDetails.getMember().getPassword());
 
         cartService.add(id, cartRequest);
 
         return ResponseEntity.ok("장바구니 내역을 저장했습니다.");
     }
-
-    private final CartService cartService;
 
     //리스트 삭제 가능
     @DeleteMapping("/cart")
