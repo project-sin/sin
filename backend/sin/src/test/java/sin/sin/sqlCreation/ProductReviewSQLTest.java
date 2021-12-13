@@ -21,8 +21,8 @@ public class ProductReviewSQLTest {
             else if (7 < i && i <= 10) productId = 3;
             else if (10 < i) productId = 4;
 
-            System.out.print("INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES");
-            System.out.println("('제목" + i + "','내용" + i + "', " + productId + ", '1');");
+            System.out.print("INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID, CREATED_DATE) VALUES");
+            System.out.println("('제목" + i + "','내용" + i + "', " + productId + ", '1'"+", TO_CHAR(SYSTIMESTAMP-" + i + ", 'YYYY-MM-DD HH:MI:SS.FF3'));");
         }
 
         productId = 5;
@@ -31,8 +31,8 @@ public class ProductReviewSQLTest {
             else if (17 < i && i <= 20) productId = 7;
             else if (20 < i) productId = 8;
 
-            System.out.print("INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID) VALUES");
-            System.out.println("('제목" + i + "','내용" + i + "', " + productId + ", '2');");
+            System.out.print("INSERT INTO PRODUCT_REVIEW (TITLE, CONTENT, PRODUCT_ID, MEMBER_ID, CREATED_DATE) VALUES");
+            System.out.println("('제목" + i + "','내용" + i + "', " + productId + ", '2'"+", TO_CHAR(SYSTIMESTAMP-" + i + ", 'YYYY-MM-DD HH:MI:SS.FF3'));");
         }
 
 
