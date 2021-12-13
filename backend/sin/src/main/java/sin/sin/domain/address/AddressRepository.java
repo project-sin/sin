@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-    Address findByOriginalTrueAndMemberId(Long memberId);
+    Optional<Address> findBySelectedTrueAndMemberId(Long memberId);
+
+    Optional<Address> findByOriginalTrueAndMemberId(Long memberId);
 
     Optional<Address> findByIdAndMemberId(Long addressId, Long memberId);
 

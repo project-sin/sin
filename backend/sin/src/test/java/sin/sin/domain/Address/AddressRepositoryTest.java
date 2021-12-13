@@ -11,6 +11,7 @@ import sin.sin.domain.JPARepositoryTest;
 import sin.sin.domain.address.Address;
 import sin.sin.domain.address.AddressRepository;
 import sin.sin.domain.member.Member;
+import sin.sin.handler.exception.NotExistsAddressException;
 
 public class AddressRepositoryTest extends JPARepositoryTest {
 
@@ -22,7 +23,7 @@ public class AddressRepositoryTest extends JPARepositoryTest {
     Address address2;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         member = testEntityManager.find(Member.class, 1L);
         address1 = Address.builder()
             .address("주소")
@@ -48,7 +49,7 @@ public class AddressRepositoryTest extends JPARepositoryTest {
 
     @Test
     @Transactional
-    void findAllByMemberId(){
+    void findAllByMemberId() {
         //when
         List<Address> addresses = addressRepository.findAllByMemberId(member.getId());
 
@@ -84,11 +85,23 @@ public class AddressRepositoryTest extends JPARepositoryTest {
 
     @Test
     @Transactional
-    void findByOriginalTrue(){
+    void findByOriginalTrue() {
         //when
-        Address originalAddress = addressRepository.findByOriginalTrueAndMemberId(member.getId());
+        Address originalAddress = addressRepository.findByOriginalTrueAndMemberId(member.getId())
+            .orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
 
         //then
         assertThat(originalAddress.getId()).isEqualTo(address1.getId());
+    }
+
+    @Test
+    @Transactional
+    void findBySelectedTrueAndMemberId() {
+        //when
+        Address selectedAddress = addressRepository.findBySelectedTrueAndMemberId(member.getId())
+            .orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
+
+        //then
+        assertThat(selectedAddress.getId()).isEqualTo(address1.getId());
     }
 }

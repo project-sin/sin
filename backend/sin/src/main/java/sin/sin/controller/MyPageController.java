@@ -16,6 +16,7 @@ import sin.sin.config.auth.PrincipalDetails;
 import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
 import sin.sin.dto.address.EditAddressRequest;
+import sin.sin.dto.address.AddressIdRequest;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
@@ -66,9 +67,9 @@ public class MyPageController {
     }
 
     @DeleteMapping("/destination")
-    public ResponseEntity<Void> removeAddress(
-        @CurrentUser PrincipalDetails userDetails, Long addressId) {
-        addressService.deleteAddress(userDetails.getMember(), addressId);
+    public ResponseEntity<Void> removeAddress(@RequestBody AddressIdRequest request,
+        @CurrentUser PrincipalDetails userDetails) {
+        addressService.deleteAddress(userDetails.getMember(), request.getAddressId());
 
         return ResponseEntity.noContent().build();
     }
@@ -79,5 +80,13 @@ public class MyPageController {
         addressService.editAddress(userDetails.getMember(), Request);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/destination/select")
+    public ResponseEntity<String> changeSelectedAddress(@RequestBody AddressIdRequest request,
+        @CurrentUser PrincipalDetails userDetails) {
+        addressService.changeSelectedAddress(userDetails.getMember(), request.getAddressId());
+
+        return ResponseEntity.ok().body("배송지 선택이 완료되었습니다");
     }
 }

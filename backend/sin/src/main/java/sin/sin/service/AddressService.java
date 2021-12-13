@@ -43,7 +43,7 @@ public class AddressService {
     public void addAddress(Member member, AddressRequest addressRequest) {
         if (addressRequest.isOriginal()) {
             Address originalAddress = addressRepository.findByOriginalTrueAndMemberId(
-                member.getId());
+                member.getId()).orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
             originalAddress.setOriginal(false);
         }
         member.addAddress(Address.builder()
@@ -82,9 +82,19 @@ public class AddressService {
         // 기본 주소 설정을 하면 true 를 입력받을 예정
         if (Objects.nonNull(request.isOriginal()) && request.isOriginal()) {
             Address originalAddress = addressRepository.findByOriginalTrueAndMemberId(
-                member.getId());
+                member.getId()).orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
             originalAddress.setOriginal(false);
             address.setOriginal(true);
         }
+    }
+
+    @Transactional
+    public void changeSelectedAddress(Member member, Long addressId) {
+        Address changeAddress = addressRepository.findByIdAndMemberId(addressId,
+            member.getId()).orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
+        Address selectedAddress = addressRepository.findBySelectedTrueAndMemberId(
+            member.getId()).orElseThrow(() -> new NotExistsAddressException("해당되는 주소가 없습니다."));
+        selectedAddress.setSelected(false);
+        changeAddress.setSelected(true);
     }
 }

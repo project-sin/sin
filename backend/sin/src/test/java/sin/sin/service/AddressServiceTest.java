@@ -28,6 +28,9 @@ public class AddressServiceTest {
     @Mock
     private AddressRepository addressRepository;
 
+    @Mock
+    private MemberRepository memberRepository;
+
     @InjectMocks
     private AddressService addressService;
 
@@ -83,7 +86,8 @@ public class AddressServiceTest {
     void addAddress() {
         //given
         AddressRequest addressRequest = new AddressRequest("새 주소", true);
-        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(address1);
+        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(
+            java.util.Optional.ofNullable(address1));
 
         //then   service 실행 이전
         assertThat(member.getAddresses().size()).isEqualTo(0);
@@ -106,7 +110,8 @@ public class AddressServiceTest {
             .original(true)
             .build();
 
-        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(address1);
+        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(
+            java.util.Optional.ofNullable(address1));
         given(addressRepository.findByIdAndMemberId(address2.getId(), member.getId())).willReturn(
             java.util.Optional.ofNullable(address2));
 
@@ -121,5 +126,21 @@ public class AddressServiceTest {
         assertThat(address2.getAddress()).isEqualTo(last);
         assertThat(address2.isOriginal()).isTrue();
         assertThat(address1.isOriginal()).isFalse();
+    }
+
+    @Test
+    void changeSelectedAddress(){
+        //given
+        given(addressRepository.findBySelectedTrueAndMemberId(member.getId())).willReturn(
+            java.util.Optional.ofNullable(address1));
+        given(addressRepository.findByIdAndMemberId(address2.getId(), member.getId())).willReturn(
+            java.util.Optional.ofNullable(address2));
+
+        //when
+        addressService.changeSelectedAddress(member, address2.getId());
+
+        //then
+        assertThat(address1.isSelected()).isFalse();
+        assertThat(address2.isSelected()).isTrue();
     }
 }
