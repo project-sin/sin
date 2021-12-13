@@ -3,6 +3,7 @@ package sin.sin.domain.Address;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,14 @@ public class AddressRepositoryTest extends JPARepositoryTest {
     @Autowired
     private AddressRepository addressRepository;
 
-    @Test
-    @Transactional
-    void findAllByMemberId(){
-        //given
-        Member member = testEntityManager.find(Member.class, 1L);
-        Address address1 = Address.builder()
+    Member member;
+    Address address1;
+    Address address2;
+
+    @BeforeEach
+    void setup(){
+        member = testEntityManager.find(Member.class, 1L);
+        address1 = Address.builder()
             .address("주소")
             .member(member)
             .recipient("하하하핳")
@@ -29,7 +32,7 @@ public class AddressRepositoryTest extends JPARepositoryTest {
             .original(true)
             .selected(true)
             .build();
-        Address address2 = Address.builder()
+        address2 = Address.builder()
             .address("주소")
             .member(member)
             .original(false)
@@ -41,11 +44,41 @@ public class AddressRepositoryTest extends JPARepositoryTest {
         testEntityManager.persist(member);
         testEntityManager.flush();
         testEntityManager.clear();
+    }
 
+    @Test
+    @Transactional
+    void findAllByMemberId(){
         //when
         List<Address> addresses = addressRepository.findAllByMemberId(member.getId());
 
         //then
         assertThat(addresses.size()).isEqualTo(2);
+    }
+
+    @Test
+    @Transactional
+    void existsByIdAndMemberId() {
+        //given
+        Member other = testEntityManager.find(Member.class, 2L);
+        Address address3 = Address.builder()
+            .address("주소")
+            .member(other)
+            .original(false)
+            .selected(false)
+            .build();
+        other.addAddress(address3);
+
+        testEntityManager.persist(other);
+        testEntityManager.flush();
+        testEntityManager.clear();
+
+        //when && then
+        assertThat(addressRepository.existsByIdAndMemberId(
+            address1.getId(), member.getId())).isEqualTo(true);
+        assertThat(addressRepository.existsByIdAndMemberId(
+            address1.getId(), other.getId())).isEqualTo(false);
+        assertThat(addressRepository.existsByIdAndMemberId(
+            address3.getId(), member.getId())).isEqualTo(false);
     }
 }

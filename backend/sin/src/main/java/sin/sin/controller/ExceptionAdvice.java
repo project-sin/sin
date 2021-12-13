@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import sin.sin.dto.ErrorResponse;
 import sin.sin.handler.exception.AlreadyExistedEmailException;
 import sin.sin.handler.exception.AlreadyExistedIdException;
+import sin.sin.handler.exception.NotExistsAddressException;
 import sin.sin.handler.exception.NotExistsMemberException;
 
 @RestControllerAdvice
@@ -31,6 +32,14 @@ public class ExceptionAdvice {
     @ExceptionHandler(NotExistsMemberException.class)
     public ResponseEntity<ErrorResponse> handleNotExistsMemberException(
         NotExistsMemberException e) {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(new ErrorResponse(e.getMessage()));
+    }
+
+    @ExceptionHandler(NotExistsAddressException.class)
+    public ResponseEntity<ErrorResponse> handleNotExistsAddressException(
+        NotExistsAddressException e) {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(new ErrorResponse(e.getMessage()));

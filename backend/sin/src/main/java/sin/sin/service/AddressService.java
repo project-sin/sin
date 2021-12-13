@@ -11,6 +11,7 @@ import sin.sin.domain.member.Member;
 import sin.sin.domain.member.MemberRepository;
 import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
+import sin.sin.handler.exception.NotExistsAddressException;
 
 @Service
 @RequiredArgsConstructor
@@ -25,27 +26,34 @@ public class AddressService {
         List<Address> addresses = addressRepository.findAllByMemberId(member.getId());
 
         return addresses.stream()
-            .map((address)-> new AddressResponse(
+            .map((address) -> new AddressResponse(
                 address.getId(),
                 address.getAddress(),
                 address.getRecipient(),
                 address.getRecipientPhoneNumber(),
                 address.isSelected(),
                 address.isOriginal()
-                ))
+            ))
             .collect(Collectors.toList());
     }
 
     @Transactional
     public void addAddress(Member member, AddressRequest addressRequest) {
-            member.addAddress(Address.builder()
-                .address(addressRequest.getAddress())
-                .member(member)
-                .original(addressRequest.isOriginal())
-                .selected(false)
-                .build());
+        member.addAddress(Address.builder()
+            .address(addressRequest.getAddress())
+            .member(member)
+            .original(addressRequest.isOriginal())
+            .selected(false)
+            .build());
         memberRepository.save(member);
     }
 
+    @Transactional
+    public void deleteAddress(Member member, Long addressId) {
 
+        if (!addressRepository.existsByIdAndMemberId(addressId, member.getId())) {
+            throw new NotExistsAddressException("회원께서 가지고계신 주소가 아닙니다");
+        }
+        addressRepository.deleteById(addressId);
+    }
 }

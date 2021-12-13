@@ -63,4 +63,12 @@ public class MyPageController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/destination")
+    public ResponseEntity<Void> removeAddress(
+        @CurrentUser PrincipalDetails userDetails, Long addressId) {
+        addressService.deleteAddress(userDetails.getMember(), addressId);
+
+        return ResponseEntity.noContent().build();
+    }
 }
