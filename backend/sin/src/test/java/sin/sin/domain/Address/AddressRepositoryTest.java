@@ -81,4 +81,14 @@ public class AddressRepositoryTest extends JPARepositoryTest {
         assertThat(addressRepository.existsByIdAndMemberId(
             address3.getId(), member.getId())).isEqualTo(false);
     }
+
+    @Test
+    @Transactional
+    void findByOriginalTrue(){
+        //when
+        Address originalAddress = addressRepository.findByOriginalTrueAndMemberId(member.getId());
+
+        //then
+        assertThat(originalAddress.getId()).isEqualTo(address1.getId());
+    }
 }

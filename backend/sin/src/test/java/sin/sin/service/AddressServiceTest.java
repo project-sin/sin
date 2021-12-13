@@ -19,6 +19,7 @@ import sin.sin.domain.member.Member;
 import sin.sin.domain.member.MemberRepository;
 import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
+import sin.sin.dto.address.EditAddressRequest;
 
 @ExtendWith(MockitoExtension.class)
 @Transactional
@@ -26,9 +27,6 @@ public class AddressServiceTest {
 
     @Mock
     private AddressRepository addressRepository;
-
-    @Mock
-    private MemberRepository memberRepository;
 
     @InjectMocks
     private AddressService addressService;
@@ -57,7 +55,7 @@ public class AddressServiceTest {
             .selected(true)
             .build();
         address2 = Address.builder()
-            .address("주소")
+            .address("주소,previous")
             .member(member)
             .original(false)
             .selected(false)
@@ -84,7 +82,8 @@ public class AddressServiceTest {
     @Test
     void addAddress() {
         //given
-        AddressRequest addressRequest = new AddressRequest("새 주소", false);
+        AddressRequest addressRequest = new AddressRequest("새 주소", true);
+        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(address1);
 
         //then   service 실행 이전
         assertThat(member.getAddresses().size()).isEqualTo(0);
@@ -94,5 +93,33 @@ public class AddressServiceTest {
 
         //then service 실행 이후
         assertThat(member.getAddresses().size()).isEqualTo(1);
+        assertThat(address1.isOriginal()).isFalse();  // 새 주소가 기본주소가 돼서 원래 기본 주소가 취소
+    }
+
+    @Test
+    void edidAddress() {
+        //given
+        EditAddressRequest request1 = EditAddressRequest.builder().addressId(address2.getId())
+            .build();
+        EditAddressRequest request2 = EditAddressRequest.builder().addressId(address2.getId())
+            .address("last")
+            .original(true)
+            .build();
+
+        given(addressRepository.findByOriginalTrueAndMemberId(member.getId())).willReturn(address1);
+        given(addressRepository.findByIdAndMemberId(address2.getId(), member.getId())).willReturn(
+            java.util.Optional.ofNullable(address2));
+
+        //when & then
+        addressService.editAddress(member, request1);
+        assertThat(address2).isEqualTo(address2);
+
+        //when & then
+        addressService.editAddress(member, request2);
+        // 원래 주소는 주소,previous
+        String last = "주소,last";
+        assertThat(address2.getAddress()).isEqualTo(last);
+        assertThat(address2.isOriginal()).isTrue();
+        assertThat(address1.isOriginal()).isFalse();
     }
 }

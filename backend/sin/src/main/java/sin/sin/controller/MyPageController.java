@@ -15,6 +15,7 @@ import sin.sin.config.auth.CurrentUser;
 import sin.sin.config.auth.PrincipalDetails;
 import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
+import sin.sin.dto.address.EditAddressRequest;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
@@ -68,6 +69,14 @@ public class MyPageController {
     public ResponseEntity<Void> removeAddress(
         @CurrentUser PrincipalDetails userDetails, Long addressId) {
         addressService.deleteAddress(userDetails.getMember(), addressId);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/destination")
+    public ResponseEntity<Void> editAddress(@RequestBody EditAddressRequest Request,
+        @CurrentUser PrincipalDetails userDetails) {
+        addressService.editAddress(userDetails.getMember(), Request);
 
         return ResponseEntity.noContent().build();
     }
