@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sin.sin.config.auth.CurrentUser;
 import sin.sin.config.auth.PrincipalDetails;
+import sin.sin.dto.EmoneyResponse;
 import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
 import sin.sin.dto.address.EditAddressRequest;
@@ -20,6 +21,7 @@ import sin.sin.dto.address.AddressIdRequest;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
+import sin.sin.service.EmoneyService;
 import sin.sin.service.OrdersService;
 
 @RestController
@@ -30,6 +32,8 @@ public class MyPageController {
     private final OrdersService ordersService;
 
     private final AddressService addressService;
+
+    private final EmoneyService emoneyService;
 
     @GetMapping("/orderList")
     public ResponseEntity<List<OrdersResponse>> findOrdersIds(
@@ -88,5 +92,12 @@ public class MyPageController {
         addressService.changeSelectedAddress(userDetails.getMember(), request.getAddressId());
 
         return ResponseEntity.ok().body("배송지 선택이 완료되었습니다");
+    }
+
+    @GetMapping("/emoney")
+    public ResponseEntity<List<EmoneyResponse>> findEmoneyList(
+        @CurrentUser PrincipalDetails userDetails) {
+
+        return ResponseEntity.ok().body(emoneyService.findEmoneyList(userDetails.getMember()));
     }
 }
