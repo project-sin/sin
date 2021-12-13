@@ -29,6 +29,7 @@ public class ProductQuestionSQLTest {
         }
 
         for (int i = 1; i <= 45; i++) { //전체 product_question 개수 45개
+            if (i % 3 == 0) continue;
             System.out.print("INSERT INTO PRODUCT_QUESTION_REPLY (CONTENT, PRODUCT_QUESTION_ID, CREATED_DATE) VALUES");
             System.out.println("('답변" + i + "', '" + i + "', TO_CHAR(SYSTIMESTAMP-" + 0 + ", 'YYYY-MM-DD HH:MI:SS.FF3'));");
 
