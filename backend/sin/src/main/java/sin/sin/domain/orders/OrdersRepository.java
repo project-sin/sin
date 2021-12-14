@@ -26,7 +26,6 @@ import sin.sin.util.ImgUtil;
 public class OrdersRepository {
 
     private final JPAQueryFactory queryFactory;
-    private final ImgUtil imgUtil;
 
     private QOrders orders = QOrders.orders;
     private QOrderProductList orderProductList = QOrderProductList.orderProductList;
@@ -61,62 +60,19 @@ public class OrdersRepository {
         return responses;
     }
 
-    public List<OrdersResponse> findOrdersByMemberId(Long id) {
-        List<OrdersProductDto> productDtoList = findOrdersThumbnailProduct(id);
-        List<OrdersDto> ordersDtoList = findOrdersInfo(id);
-
-        return makeOrdersResponse(productDtoList, ordersDtoList);
-    }
-
-    private List<OrdersProductDto> findOrdersThumbnailProduct(Long memberId) {
-        return queryFactory.select(new QOrdersProductDto(
-                product.id,
-                product.productCode,
-                product.name,
-                product.productCategory.mainCategory,
-                product.productCategory.subCategory
-            )).from(orders)
-            .join(orders.orderProductLists, orderProductList)
-            .join(orderProductList.product, product)
-            .where(orders.member.id.eq(memberId).and(
-                orderProductList.id.in(JPAExpressions.select(orderProductList.id.max()).from(orders)
-                    .join(orders.orderProductLists, orderProductList)
-                    .where(orders.member.id.eq(memberId)).groupBy(orders.id))))
-            .orderBy(orders.id.desc())
-            .fetch();
-    }
-
-    private List<OrdersDto> findOrdersInfo(Long memberId) {
-        return queryFactory.selectDistinct(new QOrdersDto(
-                orders.id,
-                orders.totalPrice,
-                orders.orderStatus,
-                orders.count()
-            ))
+    public List<Orders> findOrdersByMemberId(Long id) {
+        List<Orders> orderList = queryFactory.selectDistinct(orders)
             .from(orders)
-            .where(orders.member.id.eq(memberId))
-            .groupBy(orders.id)
+            .join(orders.orderProductLists, orderProductList)
+            .fetchJoin()
+            .join(orderProductList.product, product)
+            .fetchJoin()
+            .join(product.productCategory, productCategory)
+            .fetchJoin()
+            .where(orders.member.id.eq(id))
             .orderBy(orders.id.desc())
             .fetch();
-    }
 
-    private List<OrdersResponse> makeOrdersResponse(List<OrdersProductDto> productDtoList,
-        List<OrdersDto> ordersDtoList) {
-        List<OrdersResponse> ordersResponses = new ArrayList<>();
-        for (int i = 0; i < ordersDtoList.size(); i++) {
-            ordersResponses.add(new OrdersResponse(
-                ordersDtoList.get(i).getOrdersId(),
-                ordersDtoList.get(i).getTotalPrice(),
-                ordersDtoList.get(i).getOrderStatus(),
-                productDtoList.get(i).getProductName(),
-                ordersDtoList.get(i).getCount(),
-                imgUtil.imgUrl(
-                    productDtoList.get(i).getMainCategory(),
-                    productDtoList.get(i).getSubCategory(),
-                    productDtoList.get(i).getProductCode())
-            ));
-        }
-
-        return ordersResponses;
+        return orderList;
     }
 }

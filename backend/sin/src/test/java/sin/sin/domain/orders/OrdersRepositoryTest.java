@@ -84,17 +84,12 @@ class OrdersRepositoryTest {
         entityManager.clear();
 
         //when
-        List<OrdersResponse> ordersList = ordersRepository.findOrdersByMemberId(member.getId());
+        List<Orders> ordersList = ordersRepository.findOrdersByMemberId(member.getId());
 
         //then
-        assertThat(ordersList.get(0).getOrdersId()).isEqualTo(
+        assertThat(ordersList.get(0).getId()).isEqualTo(
             orders2.getId());
-        assertThat(ordersList.get(0).getProductName()).isEqualTo(
-            product1.getName());
-        assertThat(ordersList.get(1).getProductName()).isEqualTo(
-            product2.getName());
-        System.out.println(ordersList.get(0).getImageUrl());
-        System.out.println(ordersList.get(1).getImageUrl());
+
     }
 
     @Test
