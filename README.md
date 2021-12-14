@@ -3,6 +3,6 @@
 
 
 ## 팀원
--최정민: https://github.com/JMine97
--김해담솔: https://github.com/khdscor
--조대형(중도하차): https://github.com/compass-97
+- 최정민: https://github.com/JMine97
+- 김해담솔: https://github.com/khdscor
+- 조대형(중도하차): https://github.com/compass-97
