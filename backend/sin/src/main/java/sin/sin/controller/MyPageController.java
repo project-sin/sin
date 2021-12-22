@@ -18,9 +18,11 @@ import sin.sin.dto.address.AddressRequest;
 import sin.sin.dto.address.AddressResponse;
 import sin.sin.dto.address.EditAddressRequest;
 import sin.sin.dto.address.AddressIdRequest;
+import sin.sin.dto.coupon.CouponCodeRequest;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
+import sin.sin.service.CouponService;
 import sin.sin.service.EmoneyService;
 import sin.sin.service.OrdersService;
 
@@ -34,6 +36,8 @@ public class MyPageController {
     private final AddressService addressService;
 
     private final EmoneyService emoneyService;
+
+    private final CouponService couponService;
 
     @GetMapping("/orderList")
     public ResponseEntity<List<OrdersResponse>> findOrdersIds(
@@ -99,5 +103,13 @@ public class MyPageController {
         @CurrentUser PrincipalDetails userDetails) {
 
         return ResponseEntity.ok().body(emoneyService.findEmoneyList(userDetails.getMember()));
+    }
+
+    @PostMapping("/coupon")
+    public ResponseEntity<String> addCoupon(@RequestBody CouponCodeRequest request,
+        @CurrentUser PrincipalDetails userDetails) {
+        couponService.addCoupon(userDetails.getMember(), request.getCode());
+
+        return ResponseEntity.ok().body("쿠폰이 등록되었습니다.");
     }
 }

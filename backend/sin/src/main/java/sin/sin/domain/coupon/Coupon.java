@@ -32,7 +32,7 @@ public class Coupon {
     private Timestamp expirationDate;
 
     @Column(nullable = false)
-    private float discountPercent;
+    private int discountPercent;
 
     @Column(nullable = false)
     private int discountAmount;

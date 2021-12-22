@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sin.sin.domain.coupon.Coupon;
@@ -21,6 +22,7 @@ import sin.sin.domain.member.Member;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class CouponList {
 
     @Id
@@ -39,4 +41,12 @@ public class CouponList {
     @NotNull
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Status status;
+
+    public void addCoupon(Coupon coupon){
+        if(this.coupon !=null){
+            this.coupon.getCouponLists().remove(this);
+        }
+        this.coupon = coupon;
+        coupon.getCouponLists().add(this);
+    }
 }
