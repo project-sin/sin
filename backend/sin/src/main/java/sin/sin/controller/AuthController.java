@@ -5,10 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sin.sin.config.auth.CurrentUser;
+import sin.sin.config.auth.PrincipalDetails;
 import sin.sin.dto.auth.JoinRequest;
 import sin.sin.dto.auth.JoinResponse;
 import sin.sin.dto.auth.LoginRequest;
 import sin.sin.dto.auth.TokenDto;
+import sin.sin.dto.auth.UpdateAuthRequest;
 import sin.sin.service.AuthService;
 
 import javax.validation.Valid;
@@ -19,6 +22,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/member")
 public class AuthController {
+
     private final AuthService authService;
 
     @PostMapping("/join")
@@ -66,6 +70,14 @@ public class AuthController {
     @PostMapping("/myinfo")
     public ResponseEntity<Void> checkPassword(@Valid @RequestBody LoginRequest loginRequest) {
         authService.checkPassword(loginRequest);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/myinfo")
+    public ResponseEntity<Void> updateAuth(@RequestBody UpdateAuthRequest request,
+        @CurrentUser PrincipalDetails userDetails) {
+        authService.updateAuth(userDetails.getMember(), request);
 
         return ResponseEntity.noContent().build();
     }

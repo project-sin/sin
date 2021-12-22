@@ -1,5 +1,6 @@
 package sin.sin.service;
 
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,8 +21,10 @@ import sin.sin.domain.member.MemberRepository;
 import sin.sin.dto.auth.JoinRequest;
 import sin.sin.dto.auth.JoinResponse;
 import sin.sin.dto.auth.LoginRequest;
+import sin.sin.dto.auth.UpdateAuthRequest;
 import sin.sin.handler.exception.AlreadyExistedEmailException;
 import sin.sin.handler.exception.AlreadyExistedIdException;
+import sin.sin.handler.exception.NotExistsMemberException;
 import sin.sin.security.jwt.TokenProvider;
 
 import java.io.IOException;
@@ -135,5 +138,29 @@ public class AuthService {
     public void checkPassword(LoginRequest loginRequest) {
 
         matchIdAndPassword(loginRequest);
+    }
+
+    @Transactional
+    public void updateAuth(Member member, UpdateAuthRequest request) {
+        Member foundMember = memberRepository.findById(member.getId())
+            .orElseThrow(() -> new NotExistsMemberException("해당하는 회원이 존재하지 않습니다"));
+        if (Objects.nonNull(request.getPassword()) && !request.getPassword().isEmpty()) {
+            foundMember.updatePassword(passwordEncoder.encode(request.getPassword()));
+        }
+        if (Objects.nonNull(request.getName()) && !request.getName().isEmpty()) {
+            foundMember.updateName(request.getName());
+        }
+        if (Objects.nonNull(request.getEmail()) && !request.getEmail().isEmpty()) {
+            foundMember.updateEmail(request.getEmail());
+        }
+        if (Objects.nonNull(request.getPhoneNumber()) && !request.getPhoneNumber().isEmpty()) {
+            foundMember.updatePhoneNumber(request.getPhoneNumber());
+        }
+        if (Objects.nonNull(request.getBirth()) && !request.getBirth().isEmpty()) {
+            foundMember.updateBirth(request.getBirth());
+        }
+        if (Objects.nonNull(request.getGender())) {
+            foundMember.updateGender(request.getGender());
+        }
     }
 }
