@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity signin(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity signIn(@Valid @RequestBody LoginRequest loginRequest) {
         String token = authService.login(loginRequest);
 
         return ResponseEntity.ok(new TokenDto(token));
@@ -63,4 +63,10 @@ public class AuthController {
         return ResponseEntity.ok("사용가능한 이메일입니다");
     }
 
+    @PostMapping("/myinfo")
+    public ResponseEntity<Void> checkPassword(@Valid @RequestBody LoginRequest loginRequest) {
+        authService.checkPassword(loginRequest);
+
+        return ResponseEntity.noContent().build();
+    }
 }

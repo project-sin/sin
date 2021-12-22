@@ -32,6 +32,7 @@ import java.util.Optional;
 @Log4j2
 @RequiredArgsConstructor
 public class AuthService {
+
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -96,7 +97,6 @@ public class AuthService {
         return tokenProvider.createToken(authentication);
     }
 
-
 //    @Transactional(readOnly = true)
 //    public List<Member> findMembers() {
 //        return memberRepository.findAll();
@@ -120,10 +120,10 @@ public class AuthService {
 
     private Authentication matchIdAndPassword(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getId(),
-                        loginRequest.getPassword()
-                ));
+            new UsernamePasswordAuthenticationToken(
+                loginRequest.getId(),
+                loginRequest.getPassword()
+            ));
         return authentication;
     }
 
@@ -131,4 +131,9 @@ public class AuthService {
         return Emoney.builder().member(member).content(content).point(point).build();
     }
 
+    @Transactional(readOnly = true)
+    public void checkPassword(LoginRequest loginRequest) {
+
+        matchIdAndPassword(loginRequest);
+    }
 }
