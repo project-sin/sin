@@ -6,6 +6,7 @@ import Sort from "./Sort";
 import Header from "../Header";
 import AddCartListModal from "./cartModal/AddCartListModal";
 import {ACCESS_TOKEN} from "../../constants/Sessionstorage";
+import searchProductApi from "../api/product/SearchProductApi";
 
 const ProductsListWrap = styled.div`
   width: 1050px;
@@ -59,6 +60,8 @@ const ProductSummary = styled.div`
 
 const ProductList = (props) => {
   const category = queryString.parse(props.location.search).category;
+  const searched = queryString.parse(props.location.search).searched;
+  const sword = queryString.parse(props.location.search).sword;
   const list = queryString.parse(props.location.search).list;
   const [products, setProducts] = useState(null);
   const [pageinfo, setPageinfo] = useState(null);
@@ -66,40 +69,40 @@ const ProductList = (props) => {
 
   const changeList = (List) => {
     setProductList(List.map((product) => {
-    return <Container>
-      <ProductImg src={product.imageUrl}/>
-      <img
-          src="/cart2.png"
-          alt="my image"
-          style={{
-            borderRadius: "100px",
-            position: "absolute",
-            right: "6px",
-            bottom: "165px",
-            marginLeft: "-15px",
-            width: "45px",
-            height: "45px"
-          }
-          }
-          onClick={() => {
-            setOpenAddCartListModal(true)
-            setNameInModal(product.name)
-            setPriceInModal(product.price)
-            setProductCondeInModal(product.productCode)
-            setDiscountInModal(product.discountPercent)
-          }}
-      />
-      <ProductDetails>
-        <ProductName>{product.name}</ProductName>
-        <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
-        <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
-            / 100))}원</ProductPrice>
-        <ProductPrevPrice>{product.price}원</ProductPrevPrice>
-        <ProductSummary>{product.contentSummary ? product.contentSummary
-            : "상품요약정보"}</ProductSummary>
-      </ProductDetails>
-    </Container>;
-  }))
+      return <Container>
+        <ProductImg src={product.imageUrl}/>
+        <img
+            src="/cart2.png"
+            alt="my image"
+            style={{
+              borderRadius: "100px",
+              position: "absolute",
+              right: "6px",
+              bottom: "165px",
+              marginLeft: "-15px",
+              width: "45px",
+              height: "45px"
+            }
+            }
+            onClick={() => {
+              setOpenAddCartListModal(true)
+              setNameInModal(product.name)
+              setPriceInModal(product.price)
+              setProductCondeInModal(product.productCode)
+              setDiscountInModal(product.discountPercent)
+            }}
+        />
+        <ProductDetails>
+          <ProductName>{product.name}</ProductName>
+          <ProductDiscountPercent>{product.discountPercent}%</ProductDiscountPercent>
+          <ProductPrice>{Math.floor(product.price * (1 - product.discountPercent
+              / 100))}원</ProductPrice>
+          <ProductPrevPrice>{product.price}원</ProductPrevPrice>
+          <ProductSummary>{product.contentSummary ? product.contentSummary
+              : "상품요약정보"}</ProductSummary>
+        </ProductDetails>
+      </Container>;
+    }))
   }
 
   const [openAddCartListModal, setOpenAddCartListModal] = useState(false);
@@ -112,10 +115,18 @@ const ProductList = (props) => {
 
   useEffect(() => {
     setProducts(null)
-    findProductListApi(category, list).then(prodictPromises => {
-      setProducts(prodictPromises)
-      changeList(prodictPromises);
-    });
+
+    if (searched == 'Y') {
+      searchProductApi(sword).then(productPromises => {
+        setProducts(productPromises)
+        changeList(productPromises);
+      })
+    } else {
+      findProductListApi(category, list).then(productPromises => {
+        setProducts(productPromises)
+        changeList(productPromises);
+      });
+    }
   }, [category, list]);
 
   useEffect(() => {
