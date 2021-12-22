@@ -19,6 +19,7 @@ import sin.sin.dto.address.AddressResponse;
 import sin.sin.dto.address.EditAddressRequest;
 import sin.sin.dto.address.AddressIdRequest;
 import sin.sin.dto.coupon.CouponCodeRequest;
+import sin.sin.dto.coupon.CouponResponse;
 import sin.sin.dto.order.OrderProductsResponse;
 import sin.sin.dto.order.OrdersResponse;
 import sin.sin.service.AddressService;
@@ -111,5 +112,12 @@ public class MyPageController {
         couponService.addCoupon(userDetails.getMember(), request.getCode());
 
         return ResponseEntity.ok().body("쿠폰이 등록되었습니다.");
+    }
+
+    @GetMapping("/coupon")
+    public ResponseEntity<List<CouponResponse>> findCoupons(
+        @CurrentUser PrincipalDetails userDetails) {
+
+        return ResponseEntity.ok().body(couponService.findCouponList(userDetails.getMember()));
     }
 }

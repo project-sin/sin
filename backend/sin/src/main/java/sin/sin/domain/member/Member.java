@@ -7,6 +7,7 @@ import java.util.Objects;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import sin.sin.domain.address.Address;
+import sin.sin.domain.couponList.CouponList;
 import sin.sin.domain.level.Level;
 
 import javax.persistence.*;
@@ -44,6 +45,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "coupon")
+    private List<CouponList> couponLists = new ArrayList<>();
 
     @Column(nullable = false)
     private String birth;

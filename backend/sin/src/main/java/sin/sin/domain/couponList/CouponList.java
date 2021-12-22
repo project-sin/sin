@@ -42,11 +42,11 @@ public class CouponList {
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private Status status;
 
-    public void addCoupon(Coupon coupon){
-        if(this.coupon !=null){
-            this.coupon.getCouponLists().remove(this);
+    public void addMember(Member member){
+        if(this.member !=null){
+            this.member.getCouponLists().remove(this);
         }
-        this.coupon = coupon;
-        coupon.getCouponLists().add(this);
+        this.member = member;
+        member.getCouponLists().add(this);
     }
 }

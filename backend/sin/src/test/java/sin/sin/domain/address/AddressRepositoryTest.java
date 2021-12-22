@@ -1,4 +1,4 @@
-package sin.sin.domain.Address;
+package sin.sin.domain.address;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import sin.sin.domain.JPARepositoryTest;
-import sin.sin.domain.address.Address;
-import sin.sin.domain.address.AddressRepository;
 import sin.sin.domain.member.Member;
 import sin.sin.handler.exception.NotExistsAddressException;
 

@@ -39,7 +39,4 @@ public class Coupon {
 
     @Column(nullable = false)
     private String code;
-
-    @OneToMany(mappedBy = "coupon")
-    private List<CouponList> couponLists = new ArrayList<>();
 }
