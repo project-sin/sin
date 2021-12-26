@@ -61,6 +61,12 @@ const Header = () => {
           "/shop/goods/goods_list?searched=Y&sword=" + sword)
     }
   }
+  const enterKey = () => {
+    if (window.event.keyCode == 13) {
+
+      search();
+    }
+  }
 
   useEffect(() => {
     if (!accessToken) {
@@ -178,7 +184,8 @@ const Header = () => {
                 <Searchinput type='text'
                              value={sword}
                              onChange={e => setSword(e.target.value.trim())}
-                             placeholder='건강 기원 새해맞이 보양식 레시피'/>
+                             onKeyUp={enterKey}
+                />
                 <Serachsubmit><img
                     src="/search.png"
                     alt="my image"

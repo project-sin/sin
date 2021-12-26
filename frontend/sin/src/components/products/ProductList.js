@@ -127,7 +127,7 @@ const ProductList = (props) => {
         changeList(productPromises);
       });
     }
-  }, [category, list]);
+  }, [category, list, sword]);
 
   useEffect(() => {
     if (pageinfo === "혜택순" && products != null) {
