@@ -32,3 +32,12 @@ Content-Type: application/json
   "id": "a",
   "password": "a"
 }
+
+### 비밀번호 재확인
+POST http://localhost:8080/shop/member/myinfo
+Content-Type: application/json
+
+{
+  "id": "a",
+  "password": "a"
+}

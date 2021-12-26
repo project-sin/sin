@@ -72,6 +72,28 @@ public class Member {
     @Column(nullable = false)
     private boolean adEmail;
 
+    public void updatePassword(String password){
+        this.password = password;
+    }
+
+    public void updateName(String name){
+        this.name = name;
+    }
+
+    public void updateEmail(String email){
+        this.email = email;
+    }
+
+    public void updatePhoneNumber(String phoneNumber){
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void updateGender(Gender gender){
+        this.gender = gender;
+    }
+
+    public void updateBirth(String birth){
+        this.birth = birth;
     @Builder
     public Member(Long id, String _id, String password, String name, String email,
         String phoneNumber, Gender gender, List<Address> addresses, String birth,
