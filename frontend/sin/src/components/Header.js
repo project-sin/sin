@@ -63,7 +63,6 @@ const Header = () => {
   }
   const enterKey = () => {
     if (window.event.keyCode == 13) {
-
       search();
     }
   }
