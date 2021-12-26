@@ -1,4 +1,4 @@
-package sin.sin.dto;
+package sin.sin.dto.address;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,10 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Getter
-public class MemberResponse {
-
-    private Long memberId;
-    private String loginId;
-    private String name;
-    private int levelSalePercent;
+public class AddressRequest {
+    private String address;
+    private boolean original;
 }

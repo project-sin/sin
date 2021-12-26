@@ -1,6 +1,7 @@
 package sin.sin.service;
 
 import java.util.Objects;
+import java.sql.Timestamp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -131,7 +132,13 @@ public class AuthService {
     }
 
     private Emoney emoneyBuilder(Member member, String content, int point) {
-        return Emoney.builder().member(member).content(content).point(point).build();
+        Timestamp stamp = new Timestamp(System.currentTimeMillis());
+        stamp.setYear(stamp.getYear() + 2);
+        return Emoney.builder()
+            .member(member)
+            .content(content)
+            .point(point)
+            .expirationDate(stamp).build();
     }
 
     @Transactional(readOnly = true)

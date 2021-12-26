@@ -35,4 +35,6 @@ public class Emoney {
     @CreationTimestamp
     private Timestamp createdDate;
 
+    @Column(nullable = false)
+    private Timestamp expirationDate;
 }

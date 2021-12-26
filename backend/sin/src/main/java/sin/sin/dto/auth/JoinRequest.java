@@ -2,6 +2,7 @@ package sin.sin.dto.auth;
 
 import lombok.*;
 import sin.sin.domain.level.Level;
+import sin.sin.domain.address.Address;
 import sin.sin.domain.member.Gender;
 import sin.sin.domain.member.Member;
 
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JoinRequest {
+
     @NotEmpty
     private String id;
     @NotEmpty
@@ -39,19 +41,28 @@ public class JoinRequest {
     private String event;
 
     public Member toMemberEntity() {
-        return Member.builder()
-                ._id(id)
-                .password(password)
-                .name(name)
-                .email(email)
-                .phoneNumber(phone_number)
-                .address(address)
-                .gender(gender)
-                .birth(birth)
-                .level(level)
-                .adSms(ad_sms)
-                .adEmail(ad_email)
-                .privateInfo(private_info)
-                .build();
+        Member member = Member.builder()
+            ._id(id)
+            .password(password)
+            .name(name)
+            .email(email)
+            .phoneNumber(phone_number)
+            .gender(gender)
+            .birth(birth)
+            .level(level)
+            .adSms(ad_sms)
+            .adEmail(ad_email)
+            .privateInfo(private_info)
+            .build();
+        member.addAddress(Address.builder()
+            .address(address)
+            .member(member)
+            .recipient(name)
+            .recipientPhoneNumber(phone_number)
+            .original(true)
+            .selected(true)
+            .build());
+
+        return member;
     }
 }
