@@ -1,5 +1,6 @@
 package sin.sin.service;
 
+import java.sql.Timestamp;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,6 +33,7 @@ import java.util.Optional;
 @Log4j2
 @RequiredArgsConstructor
 public class AuthService {
+
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
@@ -96,7 +98,6 @@ public class AuthService {
         return tokenProvider.createToken(authentication);
     }
 
-
 //    @Transactional(readOnly = true)
 //    public List<Member> findMembers() {
 //        return memberRepository.findAll();
@@ -120,15 +121,20 @@ public class AuthService {
 
     private Authentication matchIdAndPassword(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getId(),
-                        loginRequest.getPassword()
-                ));
+            new UsernamePasswordAuthenticationToken(
+                loginRequest.getId(),
+                loginRequest.getPassword()
+            ));
         return authentication;
     }
 
     private Emoney emoneyBuilder(Member member, String content, int point) {
-        return Emoney.builder().member(member).content(content).point(point).build();
+        Timestamp stamp = new Timestamp(System.currentTimeMillis());
+        stamp.setYear(stamp.getYear() + 2);
+        return Emoney.builder()
+            .member(member)
+            .content(content)
+            .point(point)
+            .expirationDate(stamp).build();
     }
-
 }

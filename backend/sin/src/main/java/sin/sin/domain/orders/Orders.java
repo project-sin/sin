@@ -1,7 +1,9 @@
 package sin.sin.domain.orders;
 
-import com.sun.istack.NotNull;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,23 +14,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
+import javax.persistence.OneToMany;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import sin.sin.domain.coupon.Coupon;
-import sin.sin.domain.member.Gender;
 import sin.sin.domain.member.Member;
+import sin.sin.domain.orderProductList.OrderProductList;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="orders_id", nullable = false)
+    @Column(name = "orders_id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,10 +39,40 @@ public class Orders {
     @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
+    private int totalPrice;
+
+    @OneToMany(mappedBy = "orders")
+    private List<OrderProductList> orderProductLists = new ArrayList<>();
+
     @Column(nullable = false, name = "delivery_status")
     @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
     private DeliveryStatus deliveryStatus;
 
+    @Column(nullable = false, name = "order_status")
+    @Enumerated(EnumType.STRING) // 이넘 이름을 DB에 저장
+    private OrderStatus orderStatus;
+
     @CreationTimestamp
     private Timestamp orderedDate;
+
+    @Builder
+    public Orders(Long id, Member member, String address, int totalPrice,
+        List<OrderProductList> orderProductLists, DeliveryStatus deliveryStatus,
+        OrderStatus orderStatus, Timestamp orderedDate) {
+        this.id = id;
+        this.member = member;
+        this.address = address;
+        this.totalPrice = totalPrice;
+        if (Objects.nonNull(orderProductLists)) {
+            this.orderProductLists = orderProductLists;
+        }
+        this.deliveryStatus = deliveryStatus;
+        this.orderStatus = orderStatus;
+        this.orderedDate = orderedDate;
+    }
+
+    public void addOrderProductList(OrderProductList orderProductList) {
+        this.orderProductLists.add(orderProductList);
+    }
 }

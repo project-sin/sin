@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sin.sin.domain.orders.Orders;
@@ -18,6 +19,7 @@ import sin.sin.domain.product.Product;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Builder
 public class OrderProductList {
 
     @Id
