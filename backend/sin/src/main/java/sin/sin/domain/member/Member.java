@@ -92,8 +92,10 @@ public class Member {
         this.gender = gender;
     }
 
-    public void updateBirth(String birth){
+    public void updateBirth(String birth) {
         this.birth = birth;
+    }
+
     @Builder
     public Member(Long id, String _id, String password, String name, String email,
         String phoneNumber, Gender gender, List<Address> addresses, String birth,
